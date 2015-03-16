@@ -1,0 +1,39 @@
+/* Welcome to Compass. Use this file to define print styles.
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/print.css" media="print" rel="stylesheet" type="text/css" /> */
+/* line 4, ../sass/print.scss */
+#content {
+  width: 100% !important;
+}
+
+/* line 9, ../sass/print.scss */
+#sidebar {
+  display: none !important;
+}
+
+/* line 14, ../sass/print.scss */
+#MathContainer {
+  width: 100% !important;
+  display: none !important;
+}
+
+/* line 20, ../sass/print.scss */
+nav {
+  display: none;
+}
+
+/* line 25, ../sass/print.scss */
+input {
+  display: none;
+}
+
+/* line 30, ../sass/print.scss */
+.form {
+  display: none;
+  visibility: hidden;
+}
+
+/* line 36, ../sass/print.scss */
+.myButton {
+  visibility: hidden;
+}
