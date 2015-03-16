@@ -111,7 +111,7 @@ var PrintListComponent = React.createClass({
 			<div id="anchor" className="list">
 				Задачи:
 				{problems}
-
+				<br />
 				Отговори:
 				{problems}
 			</div>
