@@ -94,17 +94,25 @@ var KaТeXitem = React.createClass({
 	}
 })
 
-var ProblemListComonent = React.createClass({
+var PrintListComponent = React.createClass({
 	render: function () {
 		problems = this.props.res.map(function(result,iter){
 			//console.log(result)
 			return (<div className="items"><span className="num">{iter+1}</span><KaТeXitem problem={result.problem} /></div>)
 		})
 
+		solution = this.props.res.map(function(result,iter){
+			//console.log(result)
+			return (<div className="items"><span className="num">{iter+1}</span><KaТeXitem problem={result.solution} /></div>)
+		})
+
 		return (
 
 			<div id="anchor" className="list">
 				Задачи:
+				{problems}
+
+				Отговори:
 				{problems}
 			</div>
 		)
@@ -113,16 +121,12 @@ var ProblemListComonent = React.createClass({
 
 var SolutionListComonent = React.createClass({
 	render: function () {
-		problems = this.props.res.map(function(result,iter){
-			//console.log(result)
-			return (<div className="items"><span className="num">{iter+1}</span><KaТeXitem problem={result.solution} /></div>)
-		})
+
 
 		return (
 
 			<div className="list">
-				Отговори:
-				{problems}
+
 			</div>
 		)
 	}
@@ -217,10 +221,7 @@ var App = React.createClass({
 					<InputComponent model={model}/>
 				</div>
 
-				<ProblemListComonent res={this.state.list}/>
-				<SolutionListComonent res={this.state.list}/>
-
-
+				<PrintListComponent res={this.state.list}/>
 
 				</div>
 			</div>
