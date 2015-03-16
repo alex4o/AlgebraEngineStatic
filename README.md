@@ -1,5 +1,5 @@
 AlgebraEngineWebUI
 ==================
 
-used compass to compile sass
+Used compass to compile sass and scss
 MathJax used for displaying math expressions
