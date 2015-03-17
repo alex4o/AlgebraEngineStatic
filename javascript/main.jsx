@@ -137,7 +137,7 @@ var SolutionListComonent = React.createClass({
 var MenuList = React.createClass({
 	getInitialState: function () {
 	    return {
-	        selected: (model.view_id + 1)
+	        selected: (model.view_id - 1)
 	    };
 	},
 	change: function(index){
