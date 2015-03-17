@@ -9,6 +9,7 @@ var data = {
 }
 */
 var model = {
+	view_id: 0,
 	data: {
 
 	},
@@ -65,6 +66,7 @@ var InputComponent = React.createClass({
 	changeView: function(id){
 		if(id < this.views.length){
 			this.setState({view: this.views[id]})
+			model.view_id = id;
 		}
 	},
 	render: function () {
@@ -135,7 +137,7 @@ var SolutionListComonent = React.createClass({
 var MenuList = React.createClass({
 	getInitialState: function () {
 	    return {
-	        selected: 0  
+	        selected: (model.view_id + 1)
 	    };
 	},
 	change: function(index){
