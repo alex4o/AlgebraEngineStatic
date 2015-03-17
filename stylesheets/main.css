@@ -1,24 +1,24 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu);
-/* line 9, ../sass/main.sass */
+/* line 11, ../sass/main.sass */
 h1 {
   font-family: "Roboto Slab", ff-tisa-web-pro, Georgia, Arial, sans-serif;
   font-size: 175%;
 }
 
-/* line 13, ../sass/main.sass */
+/* line 15, ../sass/main.sass */
 body {
   font-family: "Ubuntu", sans-serif;
   margin: 0px;
   padding: 0px;
   background-color: white;
 }
-/* line 18, ../sass/main.sass */
+/* line 20, ../sass/main.sass */
 body nav {
   color: white;
   background-color: #4a4d50;
 }
 
-/* line 22, ../sass/main.sass */
+/* line 24, ../sass/main.sass */
 #content {
   width: 1000px;
   margin-left: auto;
@@ -26,7 +26,7 @@ body nav {
   background-color: white;
   height: auto;
 }
-/* line 28, ../sass/main.sass */
+/* line 30, ../sass/main.sass */
 #content #sidebar {
   width: 205px;
   display: inline-block;
@@ -36,16 +36,16 @@ body nav {
   padding-bottom: 10px;
   background: #CCC;
 }
-/* line 39, ../sass/main.sass */
+/* line 41, ../sass/main.sass */
 #content #sidebar .item span {
   margin: 10px;
   display: block;
 }
-/* line 43, ../sass/main.sass */
+/* line 45, ../sass/main.sass */
 #content #sidebar .item div .selected {
   background-color: #DDD;
 }
-/* line 46, ../sass/main.sass */
+/* line 48, ../sass/main.sass */
 #content #sidebar .item div a {
   text-align: center;
   vertical-align: center;
@@ -60,12 +60,12 @@ body nav {
   padding-bottom: 4px;
   text-decoration: none;
 }
-/* line 60, ../sass/main.sass */
+/* line 62, ../sass/main.sass */
 #content #sidebar .item div a:hover {
   color: #009AFD;
   background-color: #EEE;
 }
-/* line 65, ../sass/main.sass */
+/* line 67, ../sass/main.sass */
 #content #inner-content {
   display: inline-block;
   margin-top: 40px;
@@ -73,12 +73,12 @@ body nav {
   padding-top: 0px;
   width: 700px;
 }
-/* line 71, ../sass/main.sass */
+/* line 73, ../sass/main.sass */
 #content #inner-content h1 {
   text-align: center;
 }
 
-/* line 74, ../sass/main.sass */
+/* line 76, ../sass/main.sass */
 #MathContainer {
   border: 1px balck;
   text-align: center;
@@ -86,9 +86,12 @@ body nav {
   height: 70px;
   margin-top: 30px;
   padding: 2em;
-  background-color: #ccc;
+  background-color: #ecf0f1;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
 }
-/* line 82, ../sass/main.sass */
+/* line 86, ../sass/main.sass */
 #MathContainer #result {
   font-family: "Roboto Slab", ff-tisa-web-pro, Georgia, Arial, sans-serif;
   display: block;
@@ -96,21 +99,21 @@ body nav {
   height: 50px;
 }
 
-/* line 88, ../sass/main.sass */
+/* line 92, ../sass/main.sass */
 #select {
   height: 60px;
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
-/* line 95, ../sass/main.sass */
+/* line 99, ../sass/main.sass */
 #select logo {
   line-height: 60px;
   height: 60px;
   margin-left: 15px;
   font-size: 21px;
 }
-/* line 100, ../sass/main.sass */
+/* line 104, ../sass/main.sass */
 #select #user {
   float: right;
   height: 60px;
@@ -119,24 +122,24 @@ body nav {
   display: inline-block;
   margin-right: 15px;
 }
-/* line 108, ../sass/main.sass */
+/* line 112, ../sass/main.sass */
 #select #user input {
   margin-right: 10px;
 }
-/* line 110, ../sass/main.sass */
+/* line 114, ../sass/main.sass */
 #select #user span {
   margin-right: 10px;
 }
-/* line 112, ../sass/main.sass */
+/* line 116, ../sass/main.sass */
 #select #user .myButton {
   margin-right: 10px;
 }
-/* line 115, ../sass/main.sass */
+/* line 119, ../sass/main.sass */
 #select #user button:active {
   position: relative;
 }
 
-/* line 118, ../sass/main.sass */
+/* line 122, ../sass/main.sass */
 .minInput {
   margin-right: 0px;
   padding-right: 0px;
@@ -146,7 +149,7 @@ body nav {
   border-radius: 5px 0px 0px 5px !important;
 }
 
-/* line 126, ../sass/main.sass */
+/* line 130, ../sass/main.sass */
 .maxInput {
   padding-left: 0px;
   margin-left: 0px;
@@ -154,19 +157,19 @@ body nav {
   border-radius: 0px 5px 5px 0px !important;
 }
 
-/* line 135, ../sass/main.sass */
+/* line 139, ../sass/main.sass */
 .column {
   display: inline-block;
   width: 49%;
   text-align: center;
 }
 
-/* line 140, ../sass/main.sass */
+/* line 144, ../sass/main.sass */
 .hide {
   max-height: 0px;
 }
 
-/* line 143, ../sass/main.sass */
+/* line 147, ../sass/main.sass */
 .popup {
   top: 50%;
   left: 50%;
@@ -178,7 +181,7 @@ body nav {
   background-color: #DDD;
   z-index: 10;
 }
-/* line 153, ../sass/main.sass */
+/* line 157, ../sass/main.sass */
 .popup input {
   margin-left: auto !important;
   margin-right: auto !important;
@@ -186,7 +189,7 @@ body nav {
   display: block;
   margin-top: 5px;
 }
-/* line 159, ../sass/main.sass */
+/* line 163, ../sass/main.sass */
 .popup .myButton {
   margin-left: auto !important;
   margin-right: auto !important;
@@ -195,27 +198,27 @@ body nav {
   margin-top: 5px;
 }
 
-/* line 166, ../sass/main.sass */
+/* line 170, ../sass/main.sass */
 .form .row label {
   width: 80%;
   display: inline-block;
 }
 
-/* line 171, ../sass/main.sass */
+/* line 175, ../sass/main.sass */
 .sform {
   padding-left: 10px;
   padding-right: 10px;
 }
 
-/* line 175, ../sass/main.sass */
+/* line 179, ../sass/main.sass */
 .form {
   width: 100%;
 }
-/* line 177, ../sass/main.sass */
+/* line 181, ../sass/main.sass */
 .form .scol {
   text-align: center;
 }
-/* line 180, ../sass/main.sass */
+/* line 184, ../sass/main.sass */
 .form .row {
   position: relative;
   display: inline-block;
@@ -226,14 +229,14 @@ body nav {
   margin-top: 6px;
   margin-bottom: 6px;
 }
-/* line 190, ../sass/main.sass */
+/* line 194, ../sass/main.sass */
 .form .row .col {
   padding: 5px;
   width: 48%;
   display: inline-block;
   text-align: center;
 }
-/* line 196, ../sass/main.sass */
+/* line 200, ../sass/main.sass */
 .form .row::before {
   text-align: left;
   position: absolute;
@@ -244,20 +247,20 @@ body nav {
   box-sizing: border-box;
   text-indent: 15px;
   padding: 5px;
-  background-color: #E1E1E8;
+  background-color: mc_color;
 }
 
-/* line 210, ../sass/main.sass */
+/* line 214, ../sass/main.sass */
 .poput_visable {
   visibility: visible;
 }
 
-/* line 213, ../sass/main.sass */
+/* line 217, ../sass/main.sass */
 .popup_hidden {
   visibility: hidden;
 }
 
-/* line 216, ../sass/main.sass */
+/* line 220, ../sass/main.sass */
 input[type=date],
 input[type=datetime-local],
 input[type=email],
@@ -271,7 +274,7 @@ input[type=url] {
   border-radius: 2px;
 }
 
-/* line 228, ../sass/main.sass */
+/* line 232, ../sass/main.sass */
 .myButton {
   -moz-box-shadow: inset, 0px, 1px, 0px, 0px, #ffffff;
   -webkit-box-shadow: inset, 0px, 1px, 0px, 0px, #ffffff;
@@ -298,7 +301,7 @@ input[type=url] {
   text-align: center;
 }
 
-/* line 244, ../sass/main.sass */
+/* line 248, ../sass/main.sass */
 .myButton:hover {
   background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSI1JSIgc3RvcC1jb2xvcj0iI2Y2ZjZmNiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
   background-size: 100%;
@@ -309,13 +312,13 @@ input[type=url] {
   color: #009AFD;
 }
 
-/* line 251, ../sass/main.sass */
+/* line 255, ../sass/main.sass */
 .alert_show {
   visibility: visible !important;
   opacity: 1 !important;
 }
 
-/* line 256, ../sass/main.sass */
+/* line 260, ../sass/main.sass */
 .alert {
   -moz-transition: opacity, 0.5s, linear;
   -o-transition: opacity, 0.5s, linear;
@@ -335,22 +338,22 @@ input[type=url] {
   top: 0px;
 }
 
-/* line 269, ../sass/main.sass */
+/* line 273, ../sass/main.sass */
 .list {
   font: 400 1.21em KaTeX_Main;
 }
-/* line 271, ../sass/main.sass */
+/* line 275, ../sass/main.sass */
 .list .items {
   display: block;
   width: 100%;
   margin: 10px;
 }
-/* line 276, ../sass/main.sass */
+/* line 280, ../sass/main.sass */
 .list .num {
   font-size: 21px;
   margin: 5px;
 }
-/* line 280, ../sass/main.sass */
+/* line 284, ../sass/main.sass */
 .list .num:after {
   content: ".";
 }
