@@ -42,6 +42,10 @@ body nav {
   display: block;
 }
 /* line 43, ../sass/main.sass */
+#content #sidebar .item div .selected {
+  background-color: #DDD;
+}
+/* line 46, ../sass/main.sass */
 #content #sidebar .item div a {
   text-align: center;
   vertical-align: center;
@@ -56,12 +60,12 @@ body nav {
   padding-bottom: 4px;
   text-decoration: none;
 }
-/* line 57, ../sass/main.sass */
+/* line 60, ../sass/main.sass */
 #content #sidebar .item div a:hover {
   color: #009AFD;
   background-color: #EEE;
 }
-/* line 62, ../sass/main.sass */
+/* line 65, ../sass/main.sass */
 #content #inner-content {
   display: inline-block;
   margin-top: 40px;
@@ -69,12 +73,12 @@ body nav {
   padding-top: 0px;
   width: 700px;
 }
-/* line 68, ../sass/main.sass */
+/* line 71, ../sass/main.sass */
 #content #inner-content h1 {
   text-align: center;
 }
 
-/* line 71, ../sass/main.sass */
+/* line 74, ../sass/main.sass */
 #MathContainer {
   border: 1px balck;
   text-align: center;
@@ -84,7 +88,7 @@ body nav {
   padding: 2em;
   background-color: #ccc;
 }
-/* line 79, ../sass/main.sass */
+/* line 82, ../sass/main.sass */
 #MathContainer #result {
   font-family: "Roboto Slab", ff-tisa-web-pro, Georgia, Arial, sans-serif;
   display: block;
@@ -92,21 +96,21 @@ body nav {
   height: 50px;
 }
 
-/* line 85, ../sass/main.sass */
+/* line 88, ../sass/main.sass */
 #select {
   height: 60px;
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
-/* line 92, ../sass/main.sass */
+/* line 95, ../sass/main.sass */
 #select logo {
   line-height: 60px;
   height: 60px;
   margin-left: 15px;
   font-size: 21px;
 }
-/* line 97, ../sass/main.sass */
+/* line 100, ../sass/main.sass */
 #select #user {
   float: right;
   height: 60px;
@@ -115,24 +119,24 @@ body nav {
   display: inline-block;
   margin-right: 15px;
 }
-/* line 105, ../sass/main.sass */
+/* line 108, ../sass/main.sass */
 #select #user input {
   margin-right: 10px;
 }
-/* line 107, ../sass/main.sass */
+/* line 110, ../sass/main.sass */
 #select #user span {
   margin-right: 10px;
 }
-/* line 109, ../sass/main.sass */
+/* line 112, ../sass/main.sass */
 #select #user .myButton {
   margin-right: 10px;
 }
-/* line 117, ../sass/main.sass */
+/* line 120, ../sass/main.sass */
 #select #user button:active {
   position: relative;
 }
 
-/* line 120, ../sass/main.sass */
+/* line 123, ../sass/main.sass */
 .minInput {
   margin-right: 0px;
   padding-right: 0px;
@@ -142,7 +146,7 @@ body nav {
   border-radius: 5px 0px 0px 5px !important;
 }
 
-/* line 128, ../sass/main.sass */
+/* line 131, ../sass/main.sass */
 .maxInput {
   padding-left: 0px;
   margin-left: 0px;
@@ -150,19 +154,19 @@ body nav {
   border-radius: 0px 5px 5px 0px !important;
 }
 
-/* line 137, ../sass/main.sass */
+/* line 140, ../sass/main.sass */
 .column {
   display: inline-block;
   width: 49%;
   text-align: center;
 }
 
-/* line 142, ../sass/main.sass */
+/* line 145, ../sass/main.sass */
 .hide {
   max-height: 0px;
 }
 
-/* line 145, ../sass/main.sass */
+/* line 148, ../sass/main.sass */
 .popup {
   top: 50%;
   left: 50%;
@@ -174,7 +178,7 @@ body nav {
   background-color: #DDD;
   z-index: 10;
 }
-/* line 155, ../sass/main.sass */
+/* line 158, ../sass/main.sass */
 .popup input {
   margin-left: auto !important;
   margin-right: auto !important;
@@ -182,7 +186,7 @@ body nav {
   display: block;
   margin-top: 5px;
 }
-/* line 161, ../sass/main.sass */
+/* line 164, ../sass/main.sass */
 .popup .myButton {
   margin-left: auto !important;
   margin-right: auto !important;
@@ -191,27 +195,27 @@ body nav {
   margin-top: 5px;
 }
 
-/* line 168, ../sass/main.sass */
+/* line 171, ../sass/main.sass */
 .form .row label {
   width: 80%;
   display: inline-block;
 }
 
-/* line 173, ../sass/main.sass */
+/* line 176, ../sass/main.sass */
 .sform {
   padding-left: 10px;
   padding-right: 10px;
 }
 
-/* line 177, ../sass/main.sass */
+/* line 180, ../sass/main.sass */
 .form {
   width: 100%;
 }
-/* line 179, ../sass/main.sass */
+/* line 182, ../sass/main.sass */
 .form .scol {
   text-align: center;
 }
-/* line 182, ../sass/main.sass */
+/* line 185, ../sass/main.sass */
 .form .row {
   position: relative;
   display: inline-block;
@@ -222,14 +226,14 @@ body nav {
   margin-top: 6px;
   margin-bottom: 6px;
 }
-/* line 192, ../sass/main.sass */
+/* line 195, ../sass/main.sass */
 .form .row .col {
   padding: 5px;
   width: 48%;
   display: inline-block;
   text-align: center;
 }
-/* line 198, ../sass/main.sass */
+/* line 201, ../sass/main.sass */
 .form .row::before {
   text-align: left;
   position: absolute;
@@ -243,17 +247,17 @@ body nav {
   background-color: #E1E1E8;
 }
 
-/* line 212, ../sass/main.sass */
+/* line 215, ../sass/main.sass */
 .poput_visable {
   visibility: visible;
 }
 
-/* line 215, ../sass/main.sass */
+/* line 218, ../sass/main.sass */
 .popup_hidden {
   visibility: hidden;
 }
 
-/* line 218, ../sass/main.sass */
+/* line 221, ../sass/main.sass */
 input[type=date],
 input[type=datetime-local],
 input[type=email],
@@ -267,7 +271,7 @@ input[type=url] {
   border-radius: 2px;
 }
 
-/* line 230, ../sass/main.sass */
+/* line 233, ../sass/main.sass */
 .myButton {
   -moz-box-shadow: inset, 0px, 1px, 0px, 0px, #ffffff;
   -webkit-box-shadow: inset, 0px, 1px, 0px, 0px, #ffffff;
@@ -294,7 +298,7 @@ input[type=url] {
   text-align: center;
 }
 
-/* line 246, ../sass/main.sass */
+/* line 249, ../sass/main.sass */
 .myButton:hover {
   background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSI1JSIgc3RvcC1jb2xvcj0iI2Y2ZjZmNiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
   background-size: 100%;
@@ -305,13 +309,13 @@ input[type=url] {
   color: #009AFD;
 }
 
-/* line 253, ../sass/main.sass */
+/* line 256, ../sass/main.sass */
 .alert_show {
   visibility: visible !important;
   opacity: 1 !important;
 }
 
-/* line 257, ../sass/main.sass */
+/* line 260, ../sass/main.sass */
 .alert {
   -moz-transition: opacity, 0.5s, linear;
   -o-transition: opacity, 0.5s, linear;
@@ -331,22 +335,22 @@ input[type=url] {
   top: 0px;
 }
 
-/* line 270, ../sass/main.sass */
+/* line 273, ../sass/main.sass */
 .list {
   font: 400 1.21em KaTeX_Main;
 }
-/* line 272, ../sass/main.sass */
+/* line 275, ../sass/main.sass */
 .list .items {
   display: block;
   width: 100%;
   margin: 10px;
 }
-/* line 277, ../sass/main.sass */
+/* line 280, ../sass/main.sass */
 .list .num {
   font-size: 21px;
   margin: 5px;
 }
-/* line 281, ../sass/main.sass */
+/* line 284, ../sass/main.sass */
 .list .num:after {
   content: ".";
 }

@@ -132,6 +132,29 @@ var SolutionListComonent = React.createClass({
 	}
 });
 
+var MenuList = React.createClass({
+	getInitialState: function () {
+	    return {
+	        selected: 0  
+	    };
+	},
+	change: function(index){
+		console.log(index)
+		this.setState({selected: index})
+	},
+	render: function(){
+		var self = this;
+		var list = this.props.items.map(function(item,index){
+			var style = ""
+			if(self.state.selected == index){
+				style = "selected"
+			}
+			return <a className={style} href={item.href} onClick={self.change.bind(self,index)}>{item.text}</a>
+		})
+		return (<div>{list}</div>)
+	}
+}) 
+
 var App = React.createClass({
 	getInitialState: function(){
 		return {
@@ -198,14 +221,10 @@ var App = React.createClass({
 
 					<div className="item">
 						<span>7 клас</span>
-						<div>
-							<a href="#problems/type/1">Tъждествени изрази</a>
-							<a href="#problems/type/2">Уравнения</a>
-
-
-
-
-						</div>
+						<MenuList items={[
+							{href: "#problems/type/1", text:"Tъждествени изрази"},
+							{href: "#problems/type/2", text:"Уравнения"}
+							]} />
 					</div>
 			</div>
 

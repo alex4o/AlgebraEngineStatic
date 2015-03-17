@@ -40,6 +40,9 @@ body
 				margin: 10px
 				display: block
 			div
+				.selected
+					background-color: #DDD
+
 				a
 					text-align: center
 					vertical-align: center
@@ -108,11 +111,6 @@ body
 			margin-right: 10px 
 		.myButton
 			margin-right: 10px 
-
-		button
-			
-		button:hover
-			
 
 		button:active
 			position: relative
@@ -253,6 +251,7 @@ input[type=url]
 .alert_show
 	visibility: visible !important
 	opacity: 1 !important
+
 
 .alert
 	@include transition(opacity,0.5s,linear)
