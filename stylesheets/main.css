@@ -131,12 +131,12 @@ body nav {
 #select #user .myButton {
   margin-right: 10px;
 }
-/* line 120, ../sass/main.sass */
+/* line 115, ../sass/main.sass */
 #select #user button:active {
   position: relative;
 }
 
-/* line 123, ../sass/main.sass */
+/* line 118, ../sass/main.sass */
 .minInput {
   margin-right: 0px;
   padding-right: 0px;
@@ -146,7 +146,7 @@ body nav {
   border-radius: 5px 0px 0px 5px !important;
 }
 
-/* line 131, ../sass/main.sass */
+/* line 126, ../sass/main.sass */
 .maxInput {
   padding-left: 0px;
   margin-left: 0px;
@@ -154,19 +154,19 @@ body nav {
   border-radius: 0px 5px 5px 0px !important;
 }
 
-/* line 140, ../sass/main.sass */
+/* line 135, ../sass/main.sass */
 .column {
   display: inline-block;
   width: 49%;
   text-align: center;
 }
 
-/* line 145, ../sass/main.sass */
+/* line 140, ../sass/main.sass */
 .hide {
   max-height: 0px;
 }
 
-/* line 148, ../sass/main.sass */
+/* line 143, ../sass/main.sass */
 .popup {
   top: 50%;
   left: 50%;
@@ -178,7 +178,7 @@ body nav {
   background-color: #DDD;
   z-index: 10;
 }
-/* line 158, ../sass/main.sass */
+/* line 153, ../sass/main.sass */
 .popup input {
   margin-left: auto !important;
   margin-right: auto !important;
@@ -186,7 +186,7 @@ body nav {
   display: block;
   margin-top: 5px;
 }
-/* line 164, ../sass/main.sass */
+/* line 159, ../sass/main.sass */
 .popup .myButton {
   margin-left: auto !important;
   margin-right: auto !important;
@@ -195,27 +195,27 @@ body nav {
   margin-top: 5px;
 }
 
-/* line 171, ../sass/main.sass */
+/* line 166, ../sass/main.sass */
 .form .row label {
   width: 80%;
   display: inline-block;
 }
 
-/* line 176, ../sass/main.sass */
+/* line 171, ../sass/main.sass */
 .sform {
   padding-left: 10px;
   padding-right: 10px;
 }
 
-/* line 180, ../sass/main.sass */
+/* line 175, ../sass/main.sass */
 .form {
   width: 100%;
 }
-/* line 182, ../sass/main.sass */
+/* line 177, ../sass/main.sass */
 .form .scol {
   text-align: center;
 }
-/* line 185, ../sass/main.sass */
+/* line 180, ../sass/main.sass */
 .form .row {
   position: relative;
   display: inline-block;
@@ -226,14 +226,14 @@ body nav {
   margin-top: 6px;
   margin-bottom: 6px;
 }
-/* line 195, ../sass/main.sass */
+/* line 190, ../sass/main.sass */
 .form .row .col {
   padding: 5px;
   width: 48%;
   display: inline-block;
   text-align: center;
 }
-/* line 201, ../sass/main.sass */
+/* line 196, ../sass/main.sass */
 .form .row::before {
   text-align: left;
   position: absolute;
@@ -247,17 +247,17 @@ body nav {
   background-color: #E1E1E8;
 }
 
-/* line 215, ../sass/main.sass */
+/* line 210, ../sass/main.sass */
 .poput_visable {
   visibility: visible;
 }
 
-/* line 218, ../sass/main.sass */
+/* line 213, ../sass/main.sass */
 .popup_hidden {
   visibility: hidden;
 }
 
-/* line 221, ../sass/main.sass */
+/* line 216, ../sass/main.sass */
 input[type=date],
 input[type=datetime-local],
 input[type=email],
@@ -271,7 +271,7 @@ input[type=url] {
   border-radius: 2px;
 }
 
-/* line 233, ../sass/main.sass */
+/* line 228, ../sass/main.sass */
 .myButton {
   -moz-box-shadow: inset, 0px, 1px, 0px, 0px, #ffffff;
   -webkit-box-shadow: inset, 0px, 1px, 0px, 0px, #ffffff;
@@ -298,7 +298,7 @@ input[type=url] {
   text-align: center;
 }
 
-/* line 249, ../sass/main.sass */
+/* line 244, ../sass/main.sass */
 .myButton:hover {
   background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSI1JSIgc3RvcC1jb2xvcj0iI2Y2ZjZmNiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
   background-size: 100%;
@@ -309,13 +309,13 @@ input[type=url] {
   color: #009AFD;
 }
 
-/* line 256, ../sass/main.sass */
+/* line 251, ../sass/main.sass */
 .alert_show {
   visibility: visible !important;
   opacity: 1 !important;
 }
 
-/* line 260, ../sass/main.sass */
+/* line 256, ../sass/main.sass */
 .alert {
   -moz-transition: opacity, 0.5s, linear;
   -o-transition: opacity, 0.5s, linear;
@@ -335,22 +335,22 @@ input[type=url] {
   top: 0px;
 }
 
-/* line 273, ../sass/main.sass */
+/* line 269, ../sass/main.sass */
 .list {
   font: 400 1.21em KaTeX_Main;
 }
-/* line 275, ../sass/main.sass */
+/* line 271, ../sass/main.sass */
 .list .items {
   display: block;
   width: 100%;
   margin: 10px;
 }
-/* line 280, ../sass/main.sass */
+/* line 276, ../sass/main.sass */
 .list .num {
   font-size: 21px;
   margin: 5px;
 }
-/* line 284, ../sass/main.sass */
+/* line 280, ../sass/main.sass */
 .list .num:after {
   content: ".";
 }

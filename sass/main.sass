@@ -6,6 +6,8 @@
 
 $menu_heigth:	60px
 $nav_color: #4a4d50
+$mc_color: #ecf0f1
+
 h1
 	font-family: 'Roboto Slab', ff-tisa-web-pro, Georgia, Arial, sans-serif
 	font-size: 175%
@@ -78,7 +80,9 @@ body
 	height: 70px
 	margin-top: 30px
 	padding: 2em
-	background-color: #ccc
+	background-color: $mc_color
+	@include border-radius(10px)
+
 	#result
 		font-family: 'Roboto Slab', ff-tisa-web-pro, Georgia, Arial, sans-serif
 		display: block
@@ -203,7 +207,7 @@ body
 		box-sizing: border-box
 		text-indent: 15px
 		padding: 5px
-		background-color: #E1E1E8
+		background-color: mc_color
 
 
 
