@@ -66,7 +66,7 @@ var InputComponent = React.createClass({
 	changeView: function(id){
 		if(id < this.views.length){
 			this.setState({view: this.views[id]})
-			model.view_id = id;
+			model.view_id = id | 0;
 		}
 	},
 	render: function () {
