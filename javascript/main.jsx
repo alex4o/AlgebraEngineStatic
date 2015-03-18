@@ -55,7 +55,7 @@ var MathComponent = React.createClass({
 
 
 var InputComponent = React.createClass({
-	views: [QuadraticEquation,EquivalentExpressions,Equation],
+	views: [EquivalentExpressions,Equation,QuadraticEquation],
 	getInitialState: function(){
 		return {view: "div"}
 	},
@@ -137,7 +137,7 @@ var SolutionListComonent = React.createClass({
 var MenuList = React.createClass({
 	getInitialState: function () {
 	    return {
-	        selected: (model.view_id - 1)
+	        selected: model.view_id
 	    };
 	},
 	change: function(index){
@@ -224,8 +224,8 @@ var App = React.createClass({
 					<div className="item">
 						<span>7 клас</span>
 						<MenuList items={[
-							{href: "#problems/type/1", text:"Tъждествени изрази"},
-							{href: "#problems/type/2", text:"Уравнения"}
+							{href: "#problems/type/0", text:"Tъждествени изрази"},
+							{href: "#problems/type/1", text:"Уравнения"}
 							]} />
 					</div>
 			</div>
