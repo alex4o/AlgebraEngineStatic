@@ -121,19 +121,6 @@ var PrintListComponent = React.createClass({
 	}
 });
 
-var SolutionListComonent = React.createClass({
-	render: function () {
-
-
-		return (
-
-			<div className="list">
-
-			</div>
-		)
-	}
-});
-
 var MenuList = React.createClass({
 	getInitialState: function () {
 	    return {
