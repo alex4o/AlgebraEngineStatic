@@ -1,5 +1,7 @@
 AlgebraEngineWebUI
 ==================
 
+React.js as views
+Supaeragent for easyer ajax
 Used compass to compile sass and scss
-MathJax used for displaying math expressions
+KaTeX used for displaying math expressions
