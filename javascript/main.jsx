@@ -121,6 +121,7 @@ var PrintListComponent = React.createClass({
 	}
 });
 
+
 var MenuList = React.createClass({
 	getInitialState: function () {
 	    return {
@@ -143,6 +144,15 @@ var MenuList = React.createClass({
 		return (<div>{list}</div>)
 	}
 }) 
+
+var ViewChanger = React.createClass({
+
+    render: function () {
+        return (
+            return (React.createElement(this.props.views[this.props.id],{model:model}));
+        );
+    }
+});
 
 var App = React.createClass({
 	getInitialState: function(){
@@ -206,8 +216,9 @@ var App = React.createClass({
 			<div>
 
 			<MathComponent math={this.state.math} solutionVisable={this.state.sv}/>
-				<div id="sidebar">
+			<div >
 
+			<div id="sidebar">
 					<div className="item">
 						<span>7 клас</span>
 						<MenuList items={[
@@ -219,17 +230,17 @@ var App = React.createClass({
 
 			<div id="inner-content" >
 				
-				<div id="app">
+				<div>
 
-				<input type="button" className="myButton" value="Генерирай" onClick={this.submit}/>
-				<input type="button" className="myButton" value="Генерирай 10" onClick={this.submit_more}/>
-				<input type="button" className="myButton" value="Покажи/скрий отговор" onClick={this.show}/>
+					<input type="button" className="myButton" value="Генерирай" onClick={this.submit}/>
+					<input type="button" className="myButton" value="Генерирай 10" onClick={this.submit_more}/>
+					<input type="button" className="myButton" value="Покажи/скрий отговор" onClick={this.show}/>
 
-				<div id="InputContainer">
-					<InputComponent model={model}/>
-				</div>
+					<div id="InputContainer">
+						<InputComponent model={model}/>
+					</div>
 
-				<PrintListComponent res={this.state.list}/>
+					<PrintListComponent res={this.state.list}/>
 
 				</div>
 			</div>

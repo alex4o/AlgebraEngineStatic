@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"vie",
+				"view_id"
+			],
+			[
+				"comp",
+				"componentDidMount	Life Cycle Method"
+			],
+			[
+				"com",
+				"componentWillUnmount	Life Cycle Method"
+			],
+			[
 				"Re",
 				"React"
 			],
@@ -131,31 +143,7 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 2057,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "sass/main.sass",
-			"settings":
-			{
-				"buffer_size": 2347,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "javascript/main.jsx",
-			"settings":
-			{
-				"buffer_size": 3284,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/home/alex4o/Projects/React/index.html",
-			"settings":
-			{
-				"buffer_size": 2060,
+				"buffer_size": 1926,
 				"line_ending": "Unix"
 			}
 		},
@@ -166,14 +154,147 @@
 				"buffer_size": 152,
 				"line_ending": "Unix"
 			}
+		},
+		{
+			"file": "lib/react-with-addons.js",
+			"settings":
+			{
+				"buffer_size": 659449,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": ".git/hooks/post-commit",
+			"settings":
+			{
+				"buffer_size": 168,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "sass/main.sass",
+			"settings":
+			{
+				"buffer_size": 4716,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "javascript/user.jsx",
+			"settings":
+			{
+				"buffer_size": 3216,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 177,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "\n/*\nvar data = {\n	fraction    : 50,\n	natural		: 50,\n	irrational	: 0,\n	up	: {low:1 ,high:10},\n	down: {low:1 ,high:10}\n}\n*/\nvar model = {\n	view_id: 0,\n	data: {\n\n	},\n	addres: \"\",\n	user: {\n		name: \"\",\n		pass: \"\"\n	},\n	res :{\n\n	}\n}\n\nfunction checkStorageForDataOrReturnDefault(def){\n	if(localStorage[model.addres] != null && localStorage[model.addres] != \"\"){\n		return JSON.parse(localStorage[model.addres]);\n	}else{\n		return def\n	}\n}\n\n/** @jsx React.DOM */\nvar MathComponent = React.createClass({\n	componentDidUpdate:function(prevProps, prevState){\n\n		var problem = this.refs.problem.getDOMNode()\n		var solution = this.refs.solution.getDOMNode()\n		katex.render(this.props.math[0].problem,problem)\n		katex.render(this.props.math[0].solution,solution)\n		\n	},\n	componentDidMount: function() {\n		this.refs.problem.getDOMNode().innerHTML = \"За да създадете задача натиснете генерирай\"\n	},\n	render: function(){\n		return (\n			<div id=\"MathContainer\">\n				<span id=\"result\" ref=\"problem\"></span>\n				<span style={{display:this.props.solutionVisable ? \"block\" : \"none\"}} ref=\"solution\"></span>\n			</div>)\n	}\n})\n\n\nvar InputComponent = React.createClass({\n	views: [EquivalentExpressions,Equation,QuadraticEquation],\n	getInitialState: function(){\n		return {view: \"div\"}\n	},\n	componentDidMount: function(){\n		console.log(this.views)\n		routie('problems/type/:id', this.changeView);\n	},\n	changeView: function(id){\n		if(id < this.views.length){\n			this.setState({view: this.views[id]})\n			model.view_id = id | 0;\n		}\n	},\n	render: function () {\n		var data = this.props.model.data\n		return (React.createElement(this.state.view,{model:model}));\n	}\n});\n\nvar KaТeXitem = React.createClass({\n	componentDidMount:  function(){\n\n		//console.log(this.props.problem)\n\n		var shit = this.refs.shit.getDOMNode()\n		katex.render(this.props.problem,shit)\n\n\n	},\n	componentDidUpdate: function(prevProps, prevState){\n		//console.log(this.props.problem)\n\n		var shit = this.refs.shit.getDOMNode()\n		katex.render(this.props.problem,shit)\n	},\n	render: function(){\n		return(<span  ref=\"shit\"></span>)\n	}\n})\n\nvar PrintListComponent = React.createClass({\n	render: function () {\n		problems = this.props.res.map(function(result,iter){\n			//console.log(result)\n			return (<div className=\"items\"><span className=\"num\">{iter+1}</span><KaТeXitem problem={result.problem} /></div>)\n		})\n\n		solution = this.props.res.map(function(result,iter){\n			//console.log(result)\n			return (<div className=\"items\"><span className=\"num\">{iter+1}</span><KaТeXitem problem={result.solution} /></div>)\n		})\n\n		return (\n\n			<div id=\"anchor\" className=\"list\">\n				Задачи:\n				{problems}\n				<br />\n				Отговори:\n				{problems}\n			</div>\n		)\n	}\n});\n\n\nvar MenuList = React.createClass({\n	getInitialState: function () {\n	    return {\n	        selected: model.view_id\n	    };\n	},\n	change: function(index){\n		console.log(index)\n		this.setState({selected: index})\n	},\n	render: function(){\n		var self = this;\n		var list = this.props.items.map(function(item,index){\n			var style = \"\"\n			if(self.state.selected == index){\n				style = \"selected\"\n			}\n			return <a className={style} href={item.href} onClick={self.change.bind(self,index)}>{item.text}</a>\n		})\n		return (<div>{list}</div>)\n	}\n}) \n\nvar App = React.createClass({\n	getInitialState: function(){\n		return {\n			math: [{problem: \"\", solution: \"\"}],\n			sv: false,\n			list: []\n		}\n	},\n	submit: function(){\n		self = this\n		localStorage[model.addres] = JSON.stringify(model.data)\n		superagent.post(\"/api\" + model.addres).send(model.data).send({cor:1}).end(function(res){\n			if(res.status == 200){\n				model.res = JSON.parse(res.text)\n				self.setState({math: model.res})\n\n			}else{\n				self.setState({math: {problem: \"error\",solution:\" --- \"} })\n\n				//katex.render(\"error\",problem)\n\n\n			}\n		});\n		//alert(math)\n		//console.log(math)\n		\n		//this.setState({math: math})\n	},\n	submit_more: function(){\n		self = this\n		localStorage[model.addres] = JSON.stringify(model.data)\n		ofset = document.getElementById(\"anchor\").offsetTop;\n		\n		superagent.post(\"/api\" + model.addres).send(model.data).send({cor:10}).end(function(res){\n			if(res.status == 200){\n				model.res = JSON.parse(res.text)\n				console.log(model.res)\n\n				self.setState({list: model.res})\n				console.log(ofset)\n				scrollTo(0,ofset)\n\n			}else{\n				//katex.render(\"error\",problem)\n\n\n			}\n		});\n\n\n		//alert(math)\n		//console.log(math)\n	},\n	show: function(){\n		this.setState({sv: !this.state.sv});\n	},\n	render: function () {\n		return (\n			<div>\n\n			<MathComponent math={this.state.math} solutionVisable={this.state.sv}/>\n				<div id=\"sidebar\">\n\n					<div className=\"item\">\n						<span>7 клас</span>\n						<MenuList items={[\n							{href: \"#problems/type/0\", text:\"Tъждествени изрази\"},\n							{href: \"#problems/type/1\", text:\"Уравнения\"}\n							]} />\n					</div>\n			</div>\n\n			<div id=\"inner-content\" >\n				\n				<div id=\"app\">\n\n				<input type=\"button\" className=\"myButton\" value=\"Генерирай\" onClick={this.submit}/>\n				<input type=\"button\" className=\"myButton\" value=\"Генерирай 10\" onClick={this.submit_more}/>\n				<input type=\"button\" className=\"myButton\" value=\"Покажи/скрий отговор\" onClick={this.show}/>\n\n				<div id=\"InputContainer\">\n					<InputComponent model={model}/>\n				</div>\n\n				<PrintListComponent res={this.state.list}/>\n\n				</div>\n			</div>\n\n				\n\n				\n			</div>\n		);\n	}\n});\n\nReact.render(<App/>,document.getElementById(\"content\"))\nReact.render(<UserForm data={model.user}/>,document.getElementById(\"user\"))\n\n\n",
+			"file": "javascript/main.jsx",
+			"file_size": 5575,
+			"file_write_time": 130711914991476758,
+			"settings":
+			{
+				"buffer_size": 5457,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Package Control Messages\n========================\n\nTheme - Gravity:\n---------------\n\n  \n  Thanks for using the Gravity theme!\n  You \"may\" need to restart Sublime Text for it to display correctly.\n  \n  Feel free to contact me if you have any questions, or need to report any issues via:\n  \n  GitHub Issues\n  https://github.com/frankyonnetti/gravity-sublime-theme/issues\n  \n  or Twitter\n  @dh_Frank\n  \n  \n  --------------------------------\n  \n  To activate the theme for ST3, add or replace your current theme settings with the code below.\n  \n  For dark theme:\n  \n  {\n      \"theme\": \"Gravity.sublime-theme\",\n      \"color_scheme\": \"Packages/Theme - Gravity/Monokai Gravity (SL).tmTheme\"\n  }\n  \n  For light theme:\n  \n  {\n      \"theme\": \"Reverse Gravity.sublime-theme\",\n      \"color_scheme\": \"Packages/Theme - Gravity/Monokai Gravity (SL).tmTheme\"\n  }\n  \n  For file tab height option use:\n  \n  \"tab_height_short\": true\n      - or -\n  \"tab_height_tall\": true\n  \n  \n  --------------------------------\n  \n  \n  Changes in 2.0.8\n  \n  - Replaced Monokai with Monokai Extended. Biggest change I made to it was the background color to match the Gravity theme.\n  \n  \n  Changes in 2.0.7\n  \n  - Minor color change.\n  \n  \n  Changes in 2.0.5 / 2.0.6\n  \n  - Changed back color to jSON strings.\n  - Added color to 'this' keyword for JS. \n      - Thanks again giltig https://github.com/giltig\n  \n  \n  Changes in 2.0.4\n  \n  - Added a fix for a bug that caused the file tab font descenders to get cut off (g, y, etc.) on Linux and Windows. Macs are not effected.\n  https://github.com/jamiewilson/predawn/issues/35#issuecomment-51838224\n      - Thanks giltig https://github.com/giltig\n  - To apply the fix, add this setting to your \"Settings - User\" file.\n      \"tab_font_small\": true\n  \n  \n  Changes in 2.0.3\n  \n  - Changed the style and color of the close indicators.\n      - Thanks pentag0 - http://www.reddit.com/user/pentag0\n  \n  \n  Changes in v2.0.2\n  \n  - Fixed the double border issue on file tabs.\n      - Thanks pickx - https://github.com/pickx\n  - Fixed the display issue with the overlay scrollbars.\n  \n  \n  Changes in v2.0.1\n  \n  - Added height option for the file tabs. In your settings add:\n      \"tab_height_short\": true\n          - or -\n      \"tab_height_tall\": true\n      (Tip: resize window or type \"Super + F\" to automatically adjust the tab display after saving settings)\n      - Thanks Gagan Janjua - https://github.com/gj1118\n  \n  - Added more contrast to the auto-complete pop-up\n      - Thanks Jasper Jorna - https://github.com/Twiebie\n      - & Alex Whitman - https://github.com/alexwhitman\n  \n  \n  Changes in v2.0.0\n  \n  - Introducing a new light theme called \"Reverse Gravity\"!\n  - Updated all sidebar icons to more consistent with OSX.\n  - Updated the Gravity tabs so the active tab is brighter then the inactive tabs.\n  - The Gravity theme value was lighten slightly overall.\n  - Many other UI tweaks and cleanups.\n  \n  \n  Credit to those who have helped me discover issues in v1.x.x\n  \n  Jesse Leite - https://github.com/JerseyMilker\n  Nico Hoffmann - https://github.com/distantnative\n  Nicolás Santángelo - https://github.com/NicoSantangelo\n  \n  ",
+			"settings":
+			{
+				"buffer_size": 3154,
+				"line_ending": "Unix",
+				"name": "Package Control Messages",
+				"scratch": true
+			}
 		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 227.0,
+		"height": 155.0,
 		"selected_items":
 		[
+			[
+				"upda",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"qc",
+				"Git: Quick Commit"
+			],
+			[
+				"push",
+				"Git: Push"
+			],
+			[
+				"quick c",
+				"Git: Quick Commit"
+			],
+			[
+				"commit",
+				"Git: Commit"
+			],
+			[
+				"add",
+				"Git: Add Current File"
+			],
+			[
+				"com",
+				"Git: Commit"
+			],
+			[
+				"git co",
+				"Git: Amend Commit"
+			],
+			[
+				"git push",
+				"Git: Push"
+			],
+			[
+				"git com	",
+				"Git: Commit"
+			],
+			[
+				"git add ",
+				"Git: Add Current File"
+			],
+			[
+				"git commi",
+				"Git: Commit"
+			],
+			[
+				"ictt",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"com	",
+				"Git: Commit"
+			],
+			[
+				"comm",
+				"Git: Commit"
+			],
+			[
+				"pcrp",
+				"Package Control: Remove Package"
+			],
+			[
+				"git",
+				"Gitk"
+			],
+			[
+				"jsx",
+				"Set Syntax: JSX"
+			],
 			[
 				"install",
 				"Package Control: Install Package"
@@ -225,14 +346,22 @@
 	},
 	"expanded_folders":
 	[
-		"/usr/share/nginx/html",
-		"/usr/share/nginx/html/javascript",
-		"/usr/share/nginx/html/lib",
-		"/usr/share/nginx/html/sass",
-		"/usr/share/nginx/html/stylesheets"
+		"/home/alex4o/Projects/aestatic",
+		"/home/alex4o/Projects/aestatic/javascript",
+		"/home/alex4o/Projects/aestatic/lib",
+		"/home/alex4o/Projects/aestatic/sass"
 	],
 	"file_history":
 	[
+		"/home/alex4o/Projects/aestatic/javascript/input.jsx",
+		"/home/alex4o/.config/sublime-text-3/Packages/SublimeGit/SublimeGit.sublime-settings",
+		"/home/alex4o/Projects/aestatic/lib/react-with-addons.js",
+		"/home/alex4o/Projects/aestatic/lib/JSXTransformer.js",
+		"/home/alex4o/Projects/aestatic/.git/hooks/pre-commit.sample",
+		"/home/alex4o/Projects/aestatic/.git/hooks/pre-commit",
+		"/home/alex4o/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/alex4o/Projects/React/index.html",
+		"/home/alex4o/Projects/aestatic/web_math.sublime-project",
 		"/usr/share/nginx/html/web_math.sublime-project",
 		"/usr/share/nginx/html/javascript/main.jsx",
 		"/usr/share/nginx/html/javascript/MathJax/jax/output/HTML-CSS/config.js",
@@ -284,7 +413,6 @@
 		"/home/alex4o/Projects/c+c/main.cpp",
 		"/home/alex4o/Projects/c+c/main.c",
 		"/home/alex4o/Projects/VM-AL/VM-Interpreter/fst1.c",
-		"/home/alex4o/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 		"/home/alex4o/Projects/simple-c-clang/main.c",
 		"/home/alex4o/Downloads/x86_64-linux/GNAT GPL 2014/gnatgpl/gnat-gpl-2014-x86_64-linux-bin/doinstall",
 		"/home/alex4o/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
@@ -312,6 +440,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"\").\n",
+			"bind",
+			"item",
 			"sessionStorage",
 			"session",
 			"math",
@@ -380,7 +511,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -389,15 +520,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2057,
+						"buffer_size": 1926,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								593,
-								593
+								922,
+								922
 							]
 						],
 						"settings":
@@ -406,104 +537,14 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 126.0,
+						"translation.y": 42.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "sass/main.sass",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2347,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1731,
-								1731
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Sass/Syntaxes/Sass.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 589.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "javascript/main.jsx",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3284,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1278,
-								1278
-							]
-						],
-						"settings":
-						{
-							"history_list_is_closing": true,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 252.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "/home/alex4o/Projects/React/index.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2060,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								18,
-								18
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
 					"file": "/home/alex4o/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 					"semi_transient": false,
 					"settings":
@@ -515,7 +556,7 @@
 						"selection":
 						[
 							[
-								127,
+								134,
 								134
 							]
 						],
@@ -527,7 +568,211 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "lib/react-with-addons.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 659449,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								374765,
+								374781
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 170300.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": ".git/hooks/post-commit",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 168,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								54,
+								54
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "sass/main.sass",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4716,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3696,
+								3696
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Sass/Syntaxes/Sass.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2352.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "javascript/user.jsx",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 3216,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 177,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								84,
+								84
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "javascript/main.jsx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5457,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2676,
+								2676
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
+							"syntax": "Packages/JSX/JSX.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1386.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3154,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3154,
+								3154
+							]
+						],
+						"settings":
+						{
+							"auto_indent": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"word_wrap": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
 					"type": "text"
 				}
 			]
@@ -539,7 +784,7 @@
 	},
 	"input":
 	{
-		"height": 31.0
+		"height": 49.0
 	},
 	"layout":
 	{
@@ -571,6 +816,14 @@
 	"output.find_results":
 	{
 		"height": 0.0
+	},
+	"output.git-commit":
+	{
+		"height": 106.0
+	},
+	"output.git-push":
+	{
+		"height": 106.0
 	},
 	"project": "web_math.sublime-project",
 	"replace":
