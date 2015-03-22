@@ -215,7 +215,6 @@ var App = React.createClass({
 			<div>
 
 			<MathComponent math={this.state.math} solutionVisable={this.state.sv}/>
-			<div >
 
 			<div id="sidebar">
 					<div className="item">
@@ -243,11 +242,10 @@ var App = React.createClass({
 
 				</div>
 			</div>
-
-				
-
-				
+			
 			</div>
+
+			
 		);
 	}
 });
