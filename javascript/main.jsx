@@ -124,9 +124,9 @@ var PrintListComponent = React.createClass({
 
 var MenuList = React.createClass({
 	getInitialState: function () {
-	    return {
-	        selected: model.view_id
-	    };
+		return {
+			selected: model.view_id
+		};
 	},
 	change: function(index){
 		console.log(index)
@@ -147,11 +147,10 @@ var MenuList = React.createClass({
 
 var ViewChanger = React.createClass({
 
-    render: function () {
-        return (
-            return (React.createElement(this.props.views[this.props.id],{model:model}));
-        );
-    }
+	render: function () {
+		return (React.createElement(this.props.views[this.props.id],{model:model}));
+		
+	}
 });
 
 var App = React.createClass({
