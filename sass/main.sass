@@ -102,6 +102,7 @@ body
 		margin-left: 15px 
 		font-size: 21px
 	#user
+		width: 560px
 		float: right
 		height: $menu_heigth
 		text-align: center
@@ -145,15 +146,13 @@ body
 	max-height: 0px
 
 .popup
-	top: 50%
-	left: 50%
 	opacity: 1
-	position: fixed
-	transform: translate(-50%, -50%)
+	position: inherit
 	height: 153px
 	width: 250px
 	background-color: #DDD
 	z-index: 10
+	float: right
 	input
 		margin-left: auto !important
 		margin-right: auto !important
@@ -275,7 +274,7 @@ input[type=url]
 	.items
 		display: block
 		width: 100%
-		margin: 10px
+		margin: 10pxp
 
 	.num
 		font-size: 21px
@@ -283,3 +282,20 @@ input[type=url]
 
 	.num:after
 		content: "."
+
+.menu
+	background-color: $nav_color
+	display: flex
+	flex-wrap: wrap
+	justify-content: flex-start
+
+	.menu-item
+		cursor: pointer
+		color: white
+		padding: 8px
+
+		text-align: center
+		flex: 1
+
+	.menu-item:hover
+		background-color: #009AFD

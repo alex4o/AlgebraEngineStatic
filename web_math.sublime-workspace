@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"vi",
+				"views"
+			],
+			[
 				"vie",
 				"view_id"
 			],
@@ -143,15 +147,23 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 1926,
+				"buffer_size": 1848,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/alex4o/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+			"file": "lib/routie.js",
 			"settings":
 			{
-				"buffer_size": 152,
+				"buffer_size": 4909,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/alex4o/Applications/The Binding of Isaac Rebirth/run-x64.sh",
+			"settings":
+			{
+				"buffer_size": 82,
 				"line_ending": "Unix"
 			}
 		},
@@ -180,14 +192,6 @@
 			}
 		},
 		{
-			"file": "javascript/user.jsx",
-			"settings":
-			{
-				"buffer_size": 3216,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "README.md",
 			"settings":
 			{
@@ -196,13 +200,10 @@
 			}
 		},
 		{
-			"contents": "\n/*\nvar data = {\n	fraction    : 50,\n	natural		: 50,\n	irrational	: 0,\n	up	: {low:1 ,high:10},\n	down: {low:1 ,high:10}\n}\n*/\nvar model = {\n	view_id: 0,\n	data: {\n\n	},\n	addres: \"\",\n	user: {\n		name: \"\",\n		pass: \"\"\n	},\n	res :{\n\n	}\n}\n\nfunction checkStorageForDataOrReturnDefault(def){\n	if(localStorage[model.addres] != null && localStorage[model.addres] != \"\"){\n		return JSON.parse(localStorage[model.addres]);\n	}else{\n		return def\n	}\n}\n\n/** @jsx React.DOM */\nvar MathComponent = React.createClass({\n	componentDidUpdate:function(prevProps, prevState){\n\n		var problem = this.refs.problem.getDOMNode()\n		var solution = this.refs.solution.getDOMNode()\n		katex.render(this.props.math[0].problem,problem)\n		katex.render(this.props.math[0].solution,solution)\n		\n	},\n	componentDidMount: function() {\n		this.refs.problem.getDOMNode().innerHTML = \"За да създадете задача натиснете генерирай\"\n	},\n	render: function(){\n		return (\n			<div id=\"MathContainer\">\n				<span id=\"result\" ref=\"problem\"></span>\n				<span style={{display:this.props.solutionVisable ? \"block\" : \"none\"}} ref=\"solution\"></span>\n			</div>)\n	}\n})\n\n\nvar InputComponent = React.createClass({\n	views: [EquivalentExpressions,Equation,QuadraticEquation],\n	getInitialState: function(){\n		return {view: \"div\"}\n	},\n	componentDidMount: function(){\n		console.log(this.views)\n		routie('problems/type/:id', this.changeView);\n	},\n	changeView: function(id){\n		if(id < this.views.length){\n			this.setState({view: this.views[id]})\n			model.view_id = id | 0;\n		}\n	},\n	render: function () {\n		var data = this.props.model.data\n		return (React.createElement(this.state.view,{model:model}));\n	}\n});\n\nvar KaТeXitem = React.createClass({\n	componentDidMount:  function(){\n\n		//console.log(this.props.problem)\n\n		var shit = this.refs.shit.getDOMNode()\n		katex.render(this.props.problem,shit)\n\n\n	},\n	componentDidUpdate: function(prevProps, prevState){\n		//console.log(this.props.problem)\n\n		var shit = this.refs.shit.getDOMNode()\n		katex.render(this.props.problem,shit)\n	},\n	render: function(){\n		return(<span  ref=\"shit\"></span>)\n	}\n})\n\nvar PrintListComponent = React.createClass({\n	render: function () {\n		problems = this.props.res.map(function(result,iter){\n			//console.log(result)\n			return (<div className=\"items\"><span className=\"num\">{iter+1}</span><KaТeXitem problem={result.problem} /></div>)\n		})\n\n		solution = this.props.res.map(function(result,iter){\n			//console.log(result)\n			return (<div className=\"items\"><span className=\"num\">{iter+1}</span><KaТeXitem problem={result.solution} /></div>)\n		})\n\n		return (\n\n			<div id=\"anchor\" className=\"list\">\n				Задачи:\n				{problems}\n				<br />\n				Отговори:\n				{problems}\n			</div>\n		)\n	}\n});\n\n\nvar MenuList = React.createClass({\n	getInitialState: function () {\n	    return {\n	        selected: model.view_id\n	    };\n	},\n	change: function(index){\n		console.log(index)\n		this.setState({selected: index})\n	},\n	render: function(){\n		var self = this;\n		var list = this.props.items.map(function(item,index){\n			var style = \"\"\n			if(self.state.selected == index){\n				style = \"selected\"\n			}\n			return <a className={style} href={item.href} onClick={self.change.bind(self,index)}>{item.text}</a>\n		})\n		return (<div>{list}</div>)\n	}\n}) \n\nvar App = React.createClass({\n	getInitialState: function(){\n		return {\n			math: [{problem: \"\", solution: \"\"}],\n			sv: false,\n			list: []\n		}\n	},\n	submit: function(){\n		self = this\n		localStorage[model.addres] = JSON.stringify(model.data)\n		superagent.post(\"/api\" + model.addres).send(model.data).send({cor:1}).end(function(res){\n			if(res.status == 200){\n				model.res = JSON.parse(res.text)\n				self.setState({math: model.res})\n\n			}else{\n				self.setState({math: {problem: \"error\",solution:\" --- \"} })\n\n				//katex.render(\"error\",problem)\n\n\n			}\n		});\n		//alert(math)\n		//console.log(math)\n		\n		//this.setState({math: math})\n	},\n	submit_more: function(){\n		self = this\n		localStorage[model.addres] = JSON.stringify(model.data)\n		ofset = document.getElementById(\"anchor\").offsetTop;\n		\n		superagent.post(\"/api\" + model.addres).send(model.data).send({cor:10}).end(function(res){\n			if(res.status == 200){\n				model.res = JSON.parse(res.text)\n				console.log(model.res)\n\n				self.setState({list: model.res})\n				console.log(ofset)\n				scrollTo(0,ofset)\n\n			}else{\n				//katex.render(\"error\",problem)\n\n\n			}\n		});\n\n\n		//alert(math)\n		//console.log(math)\n	},\n	show: function(){\n		this.setState({sv: !this.state.sv});\n	},\n	render: function () {\n		return (\n			<div>\n\n			<MathComponent math={this.state.math} solutionVisable={this.state.sv}/>\n				<div id=\"sidebar\">\n\n					<div className=\"item\">\n						<span>7 клас</span>\n						<MenuList items={[\n							{href: \"#problems/type/0\", text:\"Tъждествени изрази\"},\n							{href: \"#problems/type/1\", text:\"Уравнения\"}\n							]} />\n					</div>\n			</div>\n\n			<div id=\"inner-content\" >\n				\n				<div id=\"app\">\n\n				<input type=\"button\" className=\"myButton\" value=\"Генерирай\" onClick={this.submit}/>\n				<input type=\"button\" className=\"myButton\" value=\"Генерирай 10\" onClick={this.submit_more}/>\n				<input type=\"button\" className=\"myButton\" value=\"Покажи/скрий отговор\" onClick={this.show}/>\n\n				<div id=\"InputContainer\">\n					<InputComponent model={model}/>\n				</div>\n\n				<PrintListComponent res={this.state.list}/>\n\n				</div>\n			</div>\n\n				\n\n				\n			</div>\n		);\n	}\n});\n\nReact.render(<App/>,document.getElementById(\"content\"))\nReact.render(<UserForm data={model.user}/>,document.getElementById(\"user\"))\n\n\n",
 			"file": "javascript/main.jsx",
-			"file_size": 5575,
-			"file_write_time": 130711914991476758,
 			"settings":
 			{
-				"buffer_size": 5457,
+				"buffer_size": 5919,
 				"line_ending": "Unix"
 			}
 		},
@@ -220,16 +221,28 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 155.0,
+		"height": 263.0,
 		"selected_items":
 		[
 			[
-				"upda",
-				"Package Control: Upgrade Package"
-			],
-			[
 				"qc",
 				"Git: Quick Commit"
+			],
+			[
+				"ctt",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"gqc",
+				"Git: Quick Commit"
+			],
+			[
+				"pcip",
+				"Package Control: Install Package"
+			],
+			[
+				"upda",
+				"Package Control: Upgrade Package"
 			],
 			[
 				"push",
@@ -324,7 +337,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 425.0
+		"width": 497.0
 	},
 	"console":
 	{
@@ -353,13 +366,13 @@
 	],
 	"file_history":
 	[
+		"/home/alex4o/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 		"/home/alex4o/Projects/aestatic/javascript/input.jsx",
 		"/home/alex4o/.config/sublime-text-3/Packages/SublimeGit/SublimeGit.sublime-settings",
 		"/home/alex4o/Projects/aestatic/lib/react-with-addons.js",
 		"/home/alex4o/Projects/aestatic/lib/JSXTransformer.js",
 		"/home/alex4o/Projects/aestatic/.git/hooks/pre-commit.sample",
 		"/home/alex4o/Projects/aestatic/.git/hooks/pre-commit",
-		"/home/alex4o/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 		"/home/alex4o/Projects/React/index.html",
 		"/home/alex4o/Projects/aestatic/web_math.sublime-project",
 		"/usr/share/nginx/html/web_math.sublime-project",
@@ -440,6 +453,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"inner",
+			"font_size",
+			"ignored_packages",
+			"Vintage",
 			"\").\n",
 			"bind",
 			"item",
@@ -511,7 +528,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 7,
 			"sheets":
 			[
 				{
@@ -520,15 +537,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1926,
+						"buffer_size": 1848,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								922,
-								922
+								570,
+								570
 							]
 						],
 						"settings":
@@ -537,42 +554,72 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 42.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "/home/alex4o/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
-					"semi_transient": false,
+					"file": "lib/routie.js",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 152,
+						"buffer_size": 4909,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								134,
-								134
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
+					"file": "/home/alex4o/Applications/The Binding of Isaac Rebirth/run-x64.sh",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 82,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10,
+								10
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
 					"file": "lib/react-with-addons.js",
 					"semi_transient": false,
 					"settings":
@@ -602,7 +649,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 4,
 					"file": ".git/hooks/post-commit",
 					"semi_transient": false,
 					"settings":
@@ -630,7 +677,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "sass/main.sass",
 					"semi_transient": false,
 					"settings":
@@ -642,8 +689,8 @@
 						"selection":
 						[
 							[
-								3696,
-								3696
+								117,
+								117
 							]
 						],
 						"settings":
@@ -652,39 +699,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2352.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "javascript/user.jsx",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 3216,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -712,7 +730,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
@@ -721,15 +739,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5457,
+						"buffer_size": 5919,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2676,
-								2676
+								3333,
+								3333
 							]
 						],
 						"settings":
@@ -740,10 +758,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1386.0,
+						"translation.y": 1680.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{

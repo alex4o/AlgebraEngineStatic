@@ -148,12 +148,17 @@ var MenuList = React.createClass({
 var ViewChanger = React.createClass({
 
 	render: function () {
-		return (React.createElement(this.props.views[this.props.id],{model:model}));
-		
+		console.log(this.props)
+		if(this.props.id < this.props.views.length){
+			return (React.createElement(this.props.views[this.props.id],{model:model}));
+		}else{
+			return <div></div>
+		}
 	}
 });
 
-var App = React.createClass({
+
+var Generator = React.createClass({
 	getInitialState: function(){
 		return {
 			math: [{problem: "", solution: ""}],
@@ -229,11 +234,12 @@ var App = React.createClass({
 			<div id="inner-content" >
 				
 				<div>
-
-					<input type="button" className="myButton" value="Генерирай" onClick={this.submit}/>
-					<input type="button" className="myButton" value="Генерирай 10" onClick={this.submit_more}/>
-					<input type="button" className="myButton" value="Покажи/скрий отговор" onClick={this.show}/>
-
+					<div className="menu">
+						<div className="menu-item" onClick={this.submit}>Генерирай</div>
+						<div className="menu-item" onClick={this.submit_more}>Генерирай няколко</div>
+						<div className="menu-item" onClick={this.show}>Покажи/скрий отговорите</div>
+					</div>
+					
 					<div id="InputContainer">
 						<InputComponent model={model}/>
 					</div>
@@ -242,10 +248,26 @@ var App = React.createClass({
 
 				</div>
 			</div>
-			
+
 			</div>
 
 			
+		);
+	}
+});
+
+var App = React.createClass({
+	getInitialState: function(){
+		return {
+			page: 0
+		}
+	},
+	render: function () {
+		return (
+			<div>
+				<ViewChanger views={[Generator]} id={this.state.page} />
+
+			</div>
 		);
 	}
 });
