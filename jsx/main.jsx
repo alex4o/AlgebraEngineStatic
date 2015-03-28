@@ -110,6 +110,9 @@ var PrintListComponent = React.createClass({
 		var st = {}
 		if(this.props.res.length > 0){
 			st["display"] = "block"
+			ofset = document.getElementById("anchor").offsetTop;
+			scrollTo(0,ofset)
+
 		}else{
 			st["display"] = "none"
 		}
@@ -196,7 +199,7 @@ var Generator = React.createClass({
 	submit_more: function(){
 		self = this
 		localStorage[model.addres] = JSON.stringify(model.data)
-		ofset = document.getElementById("anchor").offsetTop;
+		
 		
 		superagent.post("/api" + model.addres).send(model.data).send({cor:10}).end(function(res){
 			if(res.status == 200){
@@ -205,7 +208,6 @@ var Generator = React.createClass({
 
 				self.setState({list: model.res})
 				console.log(ofset)
-				scrollTo(0,ofset)
 
 			}else{
 				//katex.render("error",problem)
