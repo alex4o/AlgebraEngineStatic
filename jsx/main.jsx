@@ -255,11 +255,13 @@ var Generator = React.createClass({
 						<InputComponent model={model}/>
 					</div>
 
-					<PrintListComponent res={this.state.list}/>
 
 				</div>
-			</div>
 
+				
+
+			</div>
+			<PrintListComponent res={this.state.list}/>
 			</div>
 
 		);
