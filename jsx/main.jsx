@@ -107,10 +107,16 @@ var PrintListComponent = React.createClass({
 			//console.log(result)
 			return (<div className="items"><span className="num">{iter+1}</span><KaТeXitem problem={result.solution} /></div>)
 		})
+		var st = {}
+		if(this.props.res.length > 0){
+			st["display"] = "block"
+		}else{
+			st["display"] = "none"
+		}
 
 		return (
 
-			<div id="anchor" className="list">
+			<div id="anchor" style={st} className="list">
 				Задачи:
 				{problems}
 				<br />
@@ -251,7 +257,6 @@ var Generator = React.createClass({
 
 			</div>
 
-			
 		);
 	}
 });

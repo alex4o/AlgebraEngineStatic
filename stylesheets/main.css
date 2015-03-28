@@ -390,8 +390,3 @@ input[type=url] {
 .slide-menu-visable {
   display: block;
 }
-
-/* line 313, ../sass/main.sass */
-#anchor {
-  display: none;
-}
