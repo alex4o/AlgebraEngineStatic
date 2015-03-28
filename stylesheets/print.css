@@ -37,3 +37,8 @@ input {
 .myButton {
   visibility: hidden;
 }
+
+/* line 42, ../sass/print.scss */
+#anchor {
+  display: block !important;
+}

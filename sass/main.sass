@@ -81,7 +81,7 @@ body
 	margin-top: 30px
 	padding: 2em
 	background-color: $mc_color
-	@include border-radius(10px)
+	+border-radius(10px)
 
 	#result
 		font-family: 'Roboto Slab', ff-tisa-web-pro, Georgia, Arial, sans-serif
@@ -99,6 +99,7 @@ body
 	logo
 		line-height: $menu_heigth
 		height: $menu_heigth
+		color: #009AFD
 		margin-left: 15px 
 		font-size: 21px
 	#user
@@ -172,25 +173,25 @@ body
 
 
 .sform
-	padding-left: 10px
-	padding-right: 10px
+	.row
+		width: auto !important
+		margin: 10px
 
 .form 
 	width: 100%
-	.scol
+	>.scol
 		text-align: center
 
-	.row
+	>.row
 		position: relative
-		display: inline-block
-		width: 100%
 		border: 1px solid #E1E1E8
 		padding-bottom: 10px
 		padding-top: 30px
 		margin-top: 6px
 		margin-bottom: 6px
+		box-sizing: border-box
 
-		.col
+		>.col
 			padding: 5px
 			width: 48%
 			display: inline-block
@@ -229,9 +230,9 @@ input[type=url]
 	border-radius: 2px
 	
 .myButton
-	@include box-shadow(inset, 0px, 1px, 0px, 0px, #ffffff)
-	@include background-image(linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%))
-	@include border-radius(6px)
+	+box-shadow(inset, 0px, 1px, 0px, 0px, #ffffff)
+	+background-image(linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%))
+	+border-radius(6px)
 	border: 1px solid #dcdcdc
 	display: inline-block
 	cursor: pointer
@@ -245,7 +246,7 @@ input[type=url]
 	text-align: center
 
 .myButton:hover
-	@include background-image(linear-gradient(top, #f6f6f6 5%, #ffffff 100%))
+	+background-image(linear-gradient(top, #f6f6f6 5%, #ffffff 100%))
 	color: #009AFD
 
 .myButton:active
@@ -257,8 +258,8 @@ input[type=url]
 
 
 .alert
-	@include transition(opacity,0.5s,linear)
-	@include border-radius(4px)
+	+transition(opacity,0.5s,linear)
+	+border-radius(4px)
 	visibility: hidden
 	opacity: 0
 	position: absolute
@@ -285,17 +286,29 @@ input[type=url]
 
 .menu
 	background-color: $nav_color
-	display: flex
-	flex-wrap: wrap
-	justify-content: flex-start
+	+display-flex()
+	+justify-content(flex-start)
 
 	.menu-item
 		cursor: pointer
 		color: white
 		padding: 8px
-
+		font-size: 0.95em
 		text-align: center
-		flex: 1
+		+flex(1)
 
 	.menu-item:hover
 		background-color: #009AFD
+
+.slide-menu
+	display: none
+	background-color: #009AFD
+	.slide-menu-item
+		color:white	
+
+.slide-menu-visable
+	display: block
+
+
+#anchor
+	display: none

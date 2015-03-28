@@ -256,6 +256,43 @@ var Generator = React.createClass({
 	}
 });
 
+var Menu = React.createClass({
+	getInitialState: function() {
+		return {
+			visible: false	
+		};
+	},
+
+	show: function() {
+		this.setState({ visible: true });
+		document.addEventListener("click", this.hide.bind(this));
+	},
+
+	hide: function() {
+		document.removeEventListener("click", this.hide.bind(this));
+		this.setState({ visible: false });
+	},
+
+	render: function() {
+		return (
+		<div className="">
+			<div className={"slide-menu-"+(this.state.visible ? "visible " : "")+ " slide-menu"}>
+				{this.props.children}
+			</div>
+		</div>);
+	}
+});
+
+var MenuItem = React.createClass({
+	navigate: function(hash) {
+		window.location.hash = hash;
+	},
+
+	render: function() {
+		return <div className="slide-menu-item" onClick={this.navigate.bind(this, this.props.hash)}>{this.props.children}</div>;
+	}
+});
+
 var App = React.createClass({
 	getInitialState: function(){
 		return {
@@ -265,6 +302,12 @@ var App = React.createClass({
 	render: function () {
 		return (
 			<div>
+				<Menu>
+					<MenuItem hash="#WTF">Hello</MenuItem>
+					<MenuItem hash="#WTF1">NoWay</MenuItem>
+					<MenuItem hash="#WTF2">Shit</MenuItem>
+
+				</Menu>
 				<ViewChanger views={[Generator]} id={this.state.page} />
 
 			</div>
