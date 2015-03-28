@@ -103,7 +103,7 @@ var PrintListComponent = React.createClass({
 	},
 	shouldComponentUpdate: function(nextProps, nextState) {
 		return nextProps.res[0] !== this.props.res[0];
-	}
+	},
 	render: function () {
 		problems = this.props.res.map(function(result,iter){
 			//console.log(result)
