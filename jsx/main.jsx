@@ -97,6 +97,10 @@ var KaТeXitem = React.createClass({
 })
 
 var PrintListComponent = React.createClass({
+	componentDidUpdate: function(){
+		ofset = document.getElementById("anchor").offsetTop;
+		scrollTo(0,ofset)
+	},
 	render: function () {
 		problems = this.props.res.map(function(result,iter){
 			//console.log(result)
@@ -110,8 +114,7 @@ var PrintListComponent = React.createClass({
 		var st = {}
 		if(this.props.res.length > 0){
 			st["display"] = "block"
-			ofset = document.getElementById("anchor").offsetTop;
-			scrollTo(0,ofset)
+
 
 		}else{
 			st["display"] = "none"
