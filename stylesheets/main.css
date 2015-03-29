@@ -69,29 +69,30 @@ body nav {
 #content #inner-content {
   display: inline-block;
   margin-top: 40px;
-  padding: 40px;
   padding-top: 0px;
-  width: 700px;
+  width: 100%;
 }
-/* line 73, ../sass/main.sass */
+/* line 72, ../sass/main.sass */
 #content #inner-content h1 {
   text-align: center;
 }
 
-/* line 76, ../sass/main.sass */
+/* line 75, ../sass/main.sass */
 #MathContainer {
   border: 1px balck;
   text-align: center;
   width: 90%;
   height: 70px;
   margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
   padding: 2em;
   background-color: #ecf0f1;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px;
 }
-/* line 86, ../sass/main.sass */
+/* line 87, ../sass/main.sass */
 #MathContainer #result {
   font-family: "Roboto Slab", ff-tisa-web-pro, Georgia, Arial, sans-serif;
   display: block;
@@ -99,14 +100,14 @@ body nav {
   height: 50px;
 }
 
-/* line 92, ../sass/main.sass */
+/* line 93, ../sass/main.sass */
 #select {
   height: 60px;
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
-/* line 99, ../sass/main.sass */
+/* line 100, ../sass/main.sass */
 #select logo {
   line-height: 60px;
   height: 60px;
@@ -114,7 +115,7 @@ body nav {
   margin-left: 15px;
   font-size: 21px;
 }
-/* line 105, ../sass/main.sass */
+/* line 106, ../sass/main.sass */
 #select #user {
   width: 560px;
   float: right;
@@ -124,24 +125,24 @@ body nav {
   display: inline-block;
   margin-right: 15px;
 }
-/* line 114, ../sass/main.sass */
+/* line 115, ../sass/main.sass */
 #select #user input {
   margin-right: 10px;
 }
-/* line 116, ../sass/main.sass */
+/* line 117, ../sass/main.sass */
 #select #user span {
   margin-right: 10px;
 }
-/* line 118, ../sass/main.sass */
+/* line 119, ../sass/main.sass */
 #select #user .myButton {
   margin-right: 10px;
 }
-/* line 121, ../sass/main.sass */
+/* line 122, ../sass/main.sass */
 #select #user button:active {
   position: relative;
 }
 
-/* line 124, ../sass/main.sass */
+/* line 125, ../sass/main.sass */
 .minInput {
   margin-right: 0px;
   padding-right: 0px;
@@ -151,7 +152,7 @@ body nav {
   border-radius: 5px 0px 0px 5px !important;
 }
 
-/* line 132, ../sass/main.sass */
+/* line 133, ../sass/main.sass */
 .maxInput {
   padding-left: 0px;
   margin-left: 0px;
@@ -159,19 +160,19 @@ body nav {
   border-radius: 0px 5px 5px 0px !important;
 }
 
-/* line 141, ../sass/main.sass */
+/* line 142, ../sass/main.sass */
 .column {
   display: inline-block;
   width: 49%;
   text-align: center;
 }
 
-/* line 146, ../sass/main.sass */
+/* line 147, ../sass/main.sass */
 .hide {
   max-height: 0px;
 }
 
-/* line 149, ../sass/main.sass */
+/* line 150, ../sass/main.sass */
 .popup {
   opacity: 1;
   position: inherit;
@@ -181,7 +182,7 @@ body nav {
   z-index: 10;
   float: right;
 }
-/* line 157, ../sass/main.sass */
+/* line 158, ../sass/main.sass */
 .popup input {
   margin-left: auto !important;
   margin-right: auto !important;
@@ -189,7 +190,7 @@ body nav {
   display: block;
   margin-top: 5px;
 }
-/* line 163, ../sass/main.sass */
+/* line 164, ../sass/main.sass */
 .popup .myButton {
   margin-left: auto !important;
   margin-right: auto !important;
@@ -198,27 +199,27 @@ body nav {
   margin-top: 5px;
 }
 
-/* line 170, ../sass/main.sass */
+/* line 171, ../sass/main.sass */
 .form .row label {
   width: 80%;
   display: inline-block;
 }
 
-/* line 176, ../sass/main.sass */
+/* line 177, ../sass/main.sass */
 .sform .row {
   width: auto !important;
   margin: 10px;
 }
 
-/* line 180, ../sass/main.sass */
+/* line 181, ../sass/main.sass */
 .form {
   width: 100%;
 }
-/* line 182, ../sass/main.sass */
+/* line 183, ../sass/main.sass */
 .form > .scol {
   text-align: center;
 }
-/* line 185, ../sass/main.sass */
+/* line 186, ../sass/main.sass */
 .form > .row {
   position: relative;
   border: 1px solid #E1E1E8;
@@ -228,14 +229,14 @@ body nav {
   margin-bottom: 6px;
   box-sizing: border-box;
 }
-/* line 194, ../sass/main.sass */
+/* line 195, ../sass/main.sass */
 .form > .row > .col {
   padding: 5px;
   width: 48%;
   display: inline-block;
   text-align: center;
 }
-/* line 200, ../sass/main.sass */
+/* line 201, ../sass/main.sass */
 .form .row::before {
   text-align: left;
   position: absolute;
@@ -249,17 +250,17 @@ body nav {
   background-color: #ecf0f1;
 }
 
-/* line 214, ../sass/main.sass */
+/* line 215, ../sass/main.sass */
 .poput_visable {
   visibility: visible;
 }
 
-/* line 217, ../sass/main.sass */
+/* line 218, ../sass/main.sass */
 .popup_hidden {
   visibility: hidden;
 }
 
-/* line 220, ../sass/main.sass */
+/* line 221, ../sass/main.sass */
 input[type=date],
 input[type=datetime-local],
 input[type=email],
@@ -273,7 +274,7 @@ input[type=url] {
   border-radius: 2px;
 }
 
-/* line 232, ../sass/main.sass */
+/* line 233, ../sass/main.sass */
 .myButton {
   -moz-box-shadow: inset, 0px, 1px, 0px, 0px, #ffffff;
   -webkit-box-shadow: inset, 0px, 1px, 0px, 0px, #ffffff;
@@ -300,7 +301,7 @@ input[type=url] {
   text-align: center;
 }
 
-/* line 248, ../sass/main.sass */
+/* line 249, ../sass/main.sass */
 .myButton:hover {
   background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSI1JSIgc3RvcC1jb2xvcj0iI2Y2ZjZmNiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
   background-size: 100%;
@@ -311,13 +312,13 @@ input[type=url] {
   color: #009AFD;
 }
 
-/* line 255, ../sass/main.sass */
+/* line 256, ../sass/main.sass */
 .alert_show {
   visibility: visible !important;
   opacity: 1 !important;
 }
 
-/* line 260, ../sass/main.sass */
+/* line 261, ../sass/main.sass */
 .alert {
   -moz-transition: opacity, 0.5s, linear;
   -o-transition: opacity, 0.5s, linear;
@@ -337,27 +338,27 @@ input[type=url] {
   top: 0px;
 }
 
-/* line 273, ../sass/main.sass */
+/* line 274, ../sass/main.sass */
 .list {
   font: 400 1.21em KaTeX_Main;
 }
-/* line 275, ../sass/main.sass */
+/* line 276, ../sass/main.sass */
 .list .items {
   display: block;
   width: 100%;
   margin: 10pxp;
 }
-/* line 280, ../sass/main.sass */
+/* line 281, ../sass/main.sass */
 .list .num {
   font-size: 21px;
   margin: 5px;
 }
-/* line 284, ../sass/main.sass */
+/* line 285, ../sass/main.sass */
 .list .num:after {
   content: ".";
 }
 
-/* line 287, ../sass/main.sass */
+/* line 288, ../sass/main.sass */
 .menu {
   background-color: #4a4d50;
   display: -webkit-flex;
@@ -365,7 +366,7 @@ input[type=url] {
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
 }
-/* line 292, ../sass/main.sass */
+/* line 293, ../sass/main.sass */
 .menu .menu-item {
   cursor: pointer;
   color: white;
@@ -375,18 +376,44 @@ input[type=url] {
   -webkit-flex: 1;
   flex: 1;
 }
-/* line 300, ../sass/main.sass */
+/* line 301, ../sass/main.sass */
 .menu .menu-item:hover {
   background-color: #009AFD;
 }
 
-/* line 303, ../sass/main.sass */
+/* line 304, ../sass/main.sass */
 .slide-menu {
-  display: none;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 300px;
+  box-sizing: border-box;
+  height: 100%;
+  z-index: 10;
   background-color: #009AFD;
+  -moz-transform: translate3d(-300px, 0, 0);
+  -ms-transform: translate3d(-300px, 0, 0);
+  -webkit-transform: translate3d(-300px, 0, 0);
+  transform: translate3d(-300px, 0, 0);
+  -moz-transition: -moz-transform, 0.5s, ease;
+  -o-transition: -o-transform, 0.5s, ease;
+  -webkit-transition: -webkit-transform, 0.5s, ease;
+  transition: transform, 0.5s, ease;
+}
+/* line 315, ../sass/main.sass */
+.slide-menu .slide-menu-item {
+  padding: 10px;
+}
+/* line 319, ../sass/main.sass */
+.slide-menu .slide-menu-item:hover {
+  background-color: #008ae4;
 }
 
-/* line 309, ../sass/main.sass */
-.slide-menu-visable {
+/* line 323, ../sass/main.sass */
+.slide-menu-visible {
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
   display: block;
 }

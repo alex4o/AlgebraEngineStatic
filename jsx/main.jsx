@@ -61,7 +61,7 @@ var InputComponent = React.createClass({
 	},
 	componentDidMount: function(){
 		console.log(this.views)
-		routie('problems/type/:id', this.changeView);
+		routie('0/:id', this.changeView);
 	},
 	changeView: function(id){
 		if(id < this.views.length){
@@ -235,16 +235,6 @@ var Generator = React.createClass({
 
 			<MathComponent math={this.state.math} solutionVisable={this.state.sv}/>
 
-			<div id="sidebar">
-					<div className="item">
-						<span>7 клас</span>
-						<MenuList items={[
-							{href: "#problems/type/0", text:"Tъждествени изрази"},
-							{href: "#problems/type/1", text:"Уравнения"}
-							]} />
-					</div>
-			</div>
-
 			<div id="inner-content" >
 				
 				<div>
@@ -308,30 +298,109 @@ var MenuItem = React.createClass({
 		return <div className="slide-menu-item" onClick={this.navigate.bind(this, this.props.hash)}>{this.props.children}</div>;
 	}
 });
+var Home = React.createClass({
+	render: function(){
+		return (<div>
+				<h2>Начало</h2>
+			</div>)
+	}
+})
 
 var App = React.createClass({
 	getInitialState: function(){
 		return {
-			page: 0
+			page: 0,
 		}
 	},
+	openMenu: function(){
+		this.refs.menu.show()
+	},
+	componentDidMount: function(){
+		self = this
+		routie(":id",function(id){
+			console.log(id)
+			self.setState({page: id | 0})
+		});
+
+	},
 	render: function () {
-		return (
-			<div>
-				<Menu>
-					<MenuItem hash="#WTF">Hello</MenuItem>
-					<MenuItem hash="#WTF1">NoWay</MenuItem>
-					<MenuItem hash="#WTF2">Shit</MenuItem>
+		return (<div>
 
-				</Menu>
-				<ViewChanger views={[Generator]} id={this.state.page} />
-
+		<nav>
+			<div id="select">
+				<button onClick={this.openMenu}>show</button>
+				<logo>
+					Математика за всички
+				</logo>
+				<div id="user" style={{float:"right"}}>
+					<UserForm data={model.user}/>
+				</div>
 			</div>
+
+		</nav>
+
+
+		<div id="content">
+				<Menu ref="menu">
+						<MenuItem hash="#1">Начало</MenuItem>
+
+						<MenuItem hash="#0/0">Tъждествени изрази</MenuItem>
+						<MenuItem hash="#0/1">Уравнения</MenuItem>
+						<MenuItem hash="#0/2">WTF</MenuItem>
+
+					</Menu>
+					<ViewChanger views={[Generator,Home]} id={this.state.page} />
+		</div>
+				
+			
+
+		</div>
+
+
 		);
 	}
 });
 
-React.render(<App/>,document.getElementById("content"))
-React.render(<UserForm data={model.user}/>,document.getElementById("user"))
+var hash = {
+	a:
+		{
+		view: function(){
+			alert("hello")
+		},
+		subview: {
+			b: {
+				view: function(){
+					alert("hello b");
+				}
+			},
+			c: {
+				view: function(){
+					alert("hello c");
+				}
+			}
+		}
+	}
 
+
+}
+
+function changeview(hash,loc){
+	console.log(hash)
+
+	var view = hash[loc.pop()];
+	console.log(view)
+	
+	view.view();
+	console.log(loc)
+	if(view.subview !== undefined){
+	changeview(view.subview,loc)
+	}
+}
+
+window.addEventListener("hashchange", function(){
+	console.log();
+	changeview(hash,window.location.hash.slice(1).split("/").reverse())
+}, false);
+
+React.render(<App/>,document.body)
 

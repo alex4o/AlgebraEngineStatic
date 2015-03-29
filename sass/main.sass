@@ -67,9 +67,8 @@ body
 	#inner-content
 		display: inline-block
 		margin-top: 40px
-		padding: 40px
 		padding-top: 0px
-		width: 700px
+		width: 100%
 		h1
 			text-align: center
 
@@ -79,6 +78,8 @@ body
 	width: 90%
 	height: 70px
 	margin-top: 30px
+	margin-left: auto
+	margin-right: auto
 	padding: 2em
 	background-color: $mc_color
 	+border-radius(10px)
@@ -301,10 +302,24 @@ input[type=url]
 		background-color: #009AFD
 
 .slide-menu
-	display: none
+	position: absolute
+	top: 0px
+	left: 0px
+	width: 300px
+	box-sizing: border-box
+	height: 100%
+	z-index: 10
 	background-color: #009AFD
+	+transform(translate3d(-300px,0,0))
+	+transition(transform,0.5s,ease)
 	.slide-menu-item
-		color:white	
+		color:white
+		padding: 10px
 
-.slide-menu-visable
+	.slide-menu-item:hover
+		background-color: darken( #009AFD,5)
+
+
+.slide-menu-visible
+	+transform(translate3d(0,0,0))
 	display: block
