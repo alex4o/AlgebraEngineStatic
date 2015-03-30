@@ -4,7 +4,7 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu)
 
 
-$menu_heigth:	60px
+$menu_heigth:   60px
 $nav_color: #4a4d50
 $mc_color: #ecf0f1
 
@@ -97,12 +97,23 @@ body
 	
 	margin-left: auto
 	margin-right: auto
-	logo
+	>logo
 		line-height: $menu_heigth
 		height: $menu_heigth
 		color: #009AFD
-		margin-left: 15px 
+		margin-left: 65px 
 		font-size: 21px
+
+	>logo::before
+		position: absolute
+		top: 10px
+		left: 10px
+		width: 40px
+		height: 40px
+		cursor: pointer
+		content: " "
+		background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' width='30px' height='30px' viewBox='0 0 30 30' enable-background='new 0 0 30 30' xml:space='preserve'><rect style='fill:#009AFD;' width='30' height='5'/><rect style='fill:#009AFD;' y='24' width='30' height='5'/><rect style='fill:#009AFD;' y='12' width='30' height='5'/></svg>")
+		background-size: contain
 	#user
 		width: 560px
 		float: right

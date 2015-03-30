@@ -50,9 +50,12 @@ var MathComponent = React.createClass({
 
 		var problem = this.refs.problem.getDOMNode()
 		var solution = this.refs.solution.getDOMNode()
-		katex.render(this.props.math[0].problem,problem)
-		katex.render(this.props.math[0].solution,solution)
-		
+		if(this.props.math[0].problem.length == 0){
+			this.refs.problem.getDOMNode().innerHTML = "За да създадете задача натиснете генерирай"
+		}else{
+			katex.render(this.props.math[0].solution,solution)
+			katex.render(this.props.math[0].problem,problem)
+		}
 	},
 	componentDidMount: function() {
 		this.refs.problem.getDOMNode().innerHTML = "За да създадете задача натиснете генерирай"
@@ -65,28 +68,6 @@ var MathComponent = React.createClass({
 			</div>)
 	}
 })
-
-
-var InputComponent = React.createClass({
-	views: [EquivalentExpressions,Equation,QuadraticEquation],
-	getInitialState: function(){
-		return {view: "div"}
-	},
-	componentDidMount: function(){
-		console.log(this.views)
-		routie('0/:id', this.changeView);
-	},
-	changeView: function(id){
-		if(id < this.views.length){
-			this.setState({view: this.views[id]})
-			model.view_id = id | 0;
-		}
-	},
-	render: function () {
-		var data = model.data
-		return (React.createElement(this.state.view,{model:model}));
-	}
-});
 
 var KaТeXitem = React.createClass({
 	componentDidMount:  function(){
@@ -259,8 +240,6 @@ var Generator = React.createClass({
 					
 					<div id="InputContainer">
 						<ReactRouter.RouteHandler model={model}/>
-
-						//<InputComponent model={model}/>
 					</div>
 
 
@@ -334,7 +313,8 @@ var MenuItem = React.createClass({
 var Home = React.createClass({
 	render: function(){
 		return (<div>
-				<h2>Начало</h2>
+				<h1>Начало</h1>
+				<p>Създадохме сайт за генериране на задача, с цел улеснението на нашите учители. Сайта също е подходящ за ученици търсещи нови усещания в математиката.</p>
 			</div>)
 	}
 })
@@ -361,8 +341,7 @@ var App = React.createClass({
 
 		<nav>
 			<div id="select">
-				<button onClick={this.openMenu}>show</button>
-				<logo>
+				<logo onClick={this.openMenu}>
 					Математика за всички
 				</logo>
 				<div id="user" style={{float:"right"}}>
