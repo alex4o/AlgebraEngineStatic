@@ -23,6 +23,19 @@ var model = {
 	}
 }
 
+if (!String.prototype.format) {
+    String.prototype.format = function() {
+        var str = this.toString();
+        if (!arguments.length)
+            return str;
+        var args = typeof arguments[0],
+            args = (("string" == args || "number" == args) ? arguments : arguments[0]);
+        for (arg in args)
+            str = str.replace(RegExp("\\{" + arg + "\\}", "gi"), args[arg]);
+        return str;
+    }
+}
+
 function checkStorageForDataOrReturnDefault(def){
 	if(localStorage[model.addres] != null && localStorage[model.addres] != ""){
 		return JSON.parse(localStorage[model.addres]);
@@ -241,7 +254,7 @@ var Generator = React.createClass({
 					<div className="menu">
 						<div className="menu-item" onClick={this.submit}>Генерирай</div>
 						<div className="menu-item" onClick={this.submit_more}>Генерирай няколко</div>
-						<div className="menu-item" onClick={this.show}>Покажи/скрий отговорите</div>
+						<Togglemenuitem action={this.show} on="Скрий" off="Покажи">{'{0} отговорите'}</Togglemenuitem>
 					</div>
 					
 					<div id="InputContainer">
@@ -261,6 +274,23 @@ var Generator = React.createClass({
 			</div>
 
 		);
+	}
+});
+
+var Togglemenuitem = React.createClass({
+	getInitialState: function() {
+		return {
+			activated: false	
+		};
+	},
+	call: function(activated) {
+		this.props.action(this.state.activated)
+		this.setState({activated: !this.state.activated})
+		console.log()
+	},
+
+	render: function() {
+		return <div className="menu-item" onClick={this.call}>{this.props.children.format(this.state.activated ? this.props.on : this.props.off)}</div>;
 	}
 });
 
@@ -300,6 +330,7 @@ var MenuItem = React.createClass({
 		return <div className="slide-menu-item" onClick={this.navigate.bind(this, this.props.hash)}>{this.props.children}</div>;
 	}
 });
+
 var Home = React.createClass({
 	render: function(){
 		return (<div>
