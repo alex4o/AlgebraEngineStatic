@@ -46,6 +46,9 @@ function checkStorageForDataOrReturnDefault(def){
 
 /** @jsx React.DOM */
 var MathComponent = React.createClass({
+	shouldComponentUpdate: function(nextProps, nextState) {
+		return nextProps.math !== this.props.math;
+	},
 	componentDidUpdate:function(prevProps, prevState){
 
 		var problem = this.refs.problem.getDOMNode()
@@ -96,7 +99,7 @@ var PrintListComponent = React.createClass({
 		scrollTo(0,ofset)
 	},
 	shouldComponentUpdate: function(nextProps, nextState) {
-		return nextProps.res[0] !== this.props.res[0];
+		return nextProps.res !== this.props.res;
 	},
 	render: function () {
 		problems = this.props.res.map(function(result,iter){
