@@ -47,15 +47,13 @@ function checkStorageForDataOrReturnDefault(def){
 /** @jsx React.DOM */
 var MathComponent = React.createClass({
 	shouldComponentUpdate: function(nextProps, nextState) {
-		return nextProps.math !== this.props.math;
+		return nextProps.math !== this.props.math || nextProps.solutionVisable !== this.props.solutionVisable;
 	},
 	componentDidUpdate:function(prevProps, prevState){
 
 		var problem = this.refs.problem.getDOMNode()
 		var solution = this.refs.solution.getDOMNode()
-		if(this.props.math[0].problem.length == 0){
-			this.refs.problem.getDOMNode().innerHTML = "За да създадете задача натиснете генерирай"
-		}else{
+		if(this.props.math !== prevProps.math){
 			katex.render(this.props.math[0].solution,solution)
 			katex.render(this.props.math[0].problem,problem)
 		}

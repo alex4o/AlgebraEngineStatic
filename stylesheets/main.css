@@ -124,7 +124,7 @@ body nav {
   height: 40px;
   cursor: pointer;
   content: " ";
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' width='30px' height='30px' viewBox='0 0 30 30' enable-background='new 0 0 30 30' xml:space='preserve'><rect style='fill:#009AFD;' width='30' height='5'/><rect style='fill:#009AFD;' y='24' width='30' height='5'/><rect style='fill:#009AFD;' y='12' width='30' height='5'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' width='30px' height='30px' viewBox='0 0 30 30' enable-background='new 0 0 30 30' xml:space='preserve'><rect style='fill:#009AFD;' width='30' height='4' y='2'/><rect style='fill:#009AFD;' y='22' width='30' height='4'/><rect style='fill:#009AFD;' y='12' width='30' height='4'/></svg>");
   background-size: contain;
 }
 /* line 117, ../sass/main.sass */
@@ -414,14 +414,15 @@ input[type=url] {
 }
 /* line 326, ../sass/main.sass */
 .slide-menu .slide-menu-item {
+  cursor: pointer;
   padding: 10px;
 }
-/* line 330, ../sass/main.sass */
+/* line 331, ../sass/main.sass */
 .slide-menu .slide-menu-item:hover {
   background-color: #008ae4;
 }
 
-/* line 334, ../sass/main.sass */
+/* line 335, ../sass/main.sass */
 .slide-menu-visible {
   -moz-transform: translate3d(0, 0, 0);
   -ms-transform: translate3d(0, 0, 0);
