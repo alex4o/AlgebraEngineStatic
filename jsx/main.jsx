@@ -70,7 +70,7 @@ var InputComponent = React.createClass({
 		}
 	},
 	render: function () {
-		var data = this.props.model.data
+		var data = model.data
 		return (React.createElement(this.state.view,{model:model}));
 	}
 });
@@ -245,7 +245,9 @@ var Generator = React.createClass({
 					</div>
 					
 					<div id="InputContainer">
-						<InputComponent model={model}/>
+						<ReactRouter.RouteHandler model={model}/>
+
+						//<InputComponent model={model}/>
 					</div>
 
 
@@ -271,11 +273,11 @@ var Menu = React.createClass({
 
 	show: function() {
 		this.setState({ visible: true });
-		document.addEventListener("click", this.hide.bind(this));
+		document.addEventListener("click", this.hide);
 	},
 
 	hide: function() {
-		document.removeEventListener("click", this.hide.bind(this));
+		document.removeEventListener("click", this.hide);
 		this.setState({ visible: false });
 	},
 
@@ -342,14 +344,14 @@ var App = React.createClass({
 
 		<div id="content">
 				<Menu ref="menu">
-						<MenuItem hash="#1">Начало</MenuItem>
+						<MenuItem hash="#/">Начало</MenuItem>
 
-						<MenuItem hash="#0/0">Tъждествени изрази</MenuItem>
-						<MenuItem hash="#0/1">Уравнения</MenuItem>
-						<MenuItem hash="#0/2">WTF</MenuItem>
+						<MenuItem hash="#/Problem/EquivalentExpressions">Tъждествени изрази</MenuItem>
+						<MenuItem hash="#/Problem/Equation">Уравнения</MenuItem>
+						
 
 					</Menu>
-					<ViewChanger views={[Generator,Home]} id={this.state.page} />
+					<ReactRouter.RouteHandler/>
 		</div>
 				
 			
@@ -360,47 +362,21 @@ var App = React.createClass({
 		);
 	}
 });
+ReactRouter
 
-var hash = {
-	a:
-		{
-		view: function(){
-			alert("hello")
-		},
-		subview: {
-			b: {
-				view: function(){
-					alert("hello b");
-				}
-			},
-			c: {
-				view: function(){
-					alert("hello c");
-				}
-			}
-		}
-	}
+var routes = (
+  <ReactRouter.Route handler={App} path="/">
+    <ReactRouter.DefaultRoute handler={Home} />
+    <ReactRouter.Route name="problems" handler={Generator}>
+      <ReactRouter.Route name="" path="/Problem/Equation" handler={Equation} />
+      <ReactRouter.Route name="" path="/Problem/EquivalentExpressions" handler={EquivalentExpressions} />
+    </ReactRouter.Route>
+  </ReactRouter.Route>
+);
 
+ReactRouter.run(routes, function (Handler) {
+  React.render(<Handler/>, document.body);
+});
 
-}
-
-function changeview(hash,loc){
-	console.log(hash)
-
-	var view = hash[loc.pop()];
-	console.log(view)
-	
-	view.view();
-	console.log(loc)
-	if(view.subview !== undefined){
-	changeview(view.subview,loc)
-	}
-}
-
-window.addEventListener("hashchange", function(){
-	console.log();
-	changeview(hash,window.location.hash.slice(1).split("/").reverse())
-}, false);
-
-React.render(<App/>,document.body)
+//React.render(<App/>,document.body)
 
