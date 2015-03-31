@@ -129,6 +129,7 @@ body nav {
   /* line 122, ../sass/main.sass */
   #MathContainer #result {
     font-size: 1em;
+    overflow: scroll;
   }
 }
 @media (min-width: 1024px) {
@@ -138,14 +139,14 @@ body nav {
   }
 }
 
-/* line 133, ../sass/main.sass */
+/* line 134, ../sass/main.sass */
 #select {
   height: 60px;
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
-/* line 140, ../sass/main.sass */
+/* line 141, ../sass/main.sass */
 #select > logo {
   line-height: 60px;
   height: 60px;
@@ -153,7 +154,7 @@ body nav {
   margin-left: 65px;
   font-size: 21px;
 }
-/* line 147, ../sass/main.sass */
+/* line 148, ../sass/main.sass */
 #select > logo::before {
   position: absolute;
   top: 10px;
@@ -165,7 +166,7 @@ body nav {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' width='30px' height='30px' viewBox='0 0 30 30' enable-background='new 0 0 30 30' xml:space='preserve'><rect style='fill:#009AFD;' width='30' height='4' y='2'/><rect style='fill:#009AFD;' y='22' width='30' height='4'/><rect style='fill:#009AFD;' y='12' width='30' height='4'/></svg>");
   background-size: contain;
 }
-/* line 157, ../sass/main.sass */
+/* line 158, ../sass/main.sass */
 #select #user {
   width: 560px;
   float: right;
@@ -176,29 +177,29 @@ body nav {
   margin-right: 15px;
 }
 @media (max-width: 1023px) {
-  /* line 157, ../sass/main.sass */
+  /* line 158, ../sass/main.sass */
   #select #user {
     display: none;
   }
 }
-/* line 168, ../sass/main.sass */
+/* line 169, ../sass/main.sass */
 #select #user input {
   margin-right: 10px;
 }
-/* line 170, ../sass/main.sass */
+/* line 171, ../sass/main.sass */
 #select #user span {
   margin-right: 10px;
 }
-/* line 172, ../sass/main.sass */
+/* line 173, ../sass/main.sass */
 #select #user .myButton {
   margin-right: 10px;
 }
-/* line 175, ../sass/main.sass */
+/* line 176, ../sass/main.sass */
 #select #user button:active {
   position: relative;
 }
 
-/* line 178, ../sass/main.sass */
+/* line 179, ../sass/main.sass */
 .minInput {
   margin-right: 0px;
   padding-right: 0px;
@@ -208,7 +209,7 @@ body nav {
   border-radius: 5px 0px 0px 5px !important;
 }
 
-/* line 186, ../sass/main.sass */
+/* line 187, ../sass/main.sass */
 .maxInput {
   padding-left: 0px;
   margin-left: 0px;
@@ -216,19 +217,19 @@ body nav {
   border-radius: 0px 5px 5px 0px !important;
 }
 
-/* line 195, ../sass/main.sass */
+/* line 196, ../sass/main.sass */
 .column {
   display: inline-block;
   width: 49%;
   text-align: center;
 }
 
-/* line 200, ../sass/main.sass */
+/* line 201, ../sass/main.sass */
 .hide {
   max-height: 0px;
 }
 
-/* line 203, ../sass/main.sass */
+/* line 204, ../sass/main.sass */
 .popup {
   opacity: 1;
   position: inherit;
@@ -238,7 +239,7 @@ body nav {
   z-index: 20;
   float: right;
 }
-/* line 211, ../sass/main.sass */
+/* line 212, ../sass/main.sass */
 .popup input {
   margin-left: auto !important;
   margin-right: auto !important;
@@ -246,7 +247,7 @@ body nav {
   display: block;
   margin-top: 5px;
 }
-/* line 217, ../sass/main.sass */
+/* line 218, ../sass/main.sass */
 .popup .myButton {
   margin-left: auto !important;
   margin-right: auto !important;
@@ -255,27 +256,27 @@ body nav {
   margin-top: 5px;
 }
 
-/* line 224, ../sass/main.sass */
+/* line 225, ../sass/main.sass */
 .form .row label {
   width: 80%;
   display: inline-block;
 }
 
-/* line 230, ../sass/main.sass */
+/* line 231, ../sass/main.sass */
 .sform .row {
   width: auto !important;
   margin: 10px;
 }
 
-/* line 234, ../sass/main.sass */
+/* line 235, ../sass/main.sass */
 .form {
   width: 100%;
 }
-/* line 236, ../sass/main.sass */
+/* line 237, ../sass/main.sass */
 .form > .scol {
   text-align: center;
 }
-/* line 239, ../sass/main.sass */
+/* line 240, ../sass/main.sass */
 .form > .row {
   position: relative;
   border: 1px solid #E1E1E8;
@@ -285,25 +286,25 @@ body nav {
   margin-bottom: 6px;
   box-sizing: border-box;
 }
-/* line 248, ../sass/main.sass */
+/* line 249, ../sass/main.sass */
 .form > .row > .col {
   padding: 5px;
   display: inline-block;
   text-align: center;
 }
 @media (min-width: 1024px) {
-  /* line 248, ../sass/main.sass */
+  /* line 249, ../sass/main.sass */
   .form > .row > .col {
     width: 48%;
   }
 }
 @media (max-width: 1023px) {
-  /* line 248, ../sass/main.sass */
+  /* line 249, ../sass/main.sass */
   .form > .row > .col {
     width: 100%;
   }
 }
-/* line 259, ../sass/main.sass */
+/* line 260, ../sass/main.sass */
 .form .row::before {
   text-align: left;
   position: absolute;
@@ -317,17 +318,17 @@ body nav {
   background-color: #ecf0f1;
 }
 
-/* line 273, ../sass/main.sass */
+/* line 274, ../sass/main.sass */
 .poput_visable {
   visibility: visible;
 }
 
-/* line 276, ../sass/main.sass */
+/* line 277, ../sass/main.sass */
 .popup_hidden {
   visibility: hidden;
 }
 
-/* line 279, ../sass/main.sass */
+/* line 280, ../sass/main.sass */
 input[type=date],
 input[type=datetime-local],
 input[type=email],
@@ -341,7 +342,7 @@ input[type=url] {
   border-radius: 2px;
 }
 
-/* line 291, ../sass/main.sass */
+/* line 292, ../sass/main.sass */
 .myButton {
   -moz-box-shadow: inset, 0px, 1px, 0px, 0px, #ffffff;
   -webkit-box-shadow: inset, 0px, 1px, 0px, 0px, #ffffff;
@@ -368,7 +369,7 @@ input[type=url] {
   text-align: center;
 }
 
-/* line 307, ../sass/main.sass */
+/* line 308, ../sass/main.sass */
 .myButton:hover {
   background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSI1JSIgc3RvcC1jb2xvcj0iI2Y2ZjZmNiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
   background-size: 100%;
@@ -379,13 +380,13 @@ input[type=url] {
   color: #009AFD;
 }
 
-/* line 314, ../sass/main.sass */
+/* line 315, ../sass/main.sass */
 .alert_show {
   visibility: visible !important;
   opacity: 1 !important;
 }
 
-/* line 319, ../sass/main.sass */
+/* line 320, ../sass/main.sass */
 .alert {
   -moz-transition: opacity, 0.5s, linear;
   -o-transition: opacity, 0.5s, linear;
@@ -405,27 +406,27 @@ input[type=url] {
   top: 0px;
 }
 
-/* line 332, ../sass/main.sass */
+/* line 333, ../sass/main.sass */
 .list {
   font: 400 1.21em KaTeX_Main;
 }
-/* line 334, ../sass/main.sass */
+/* line 335, ../sass/main.sass */
 .list .items {
   display: block;
   width: 100%;
   margin: 10pxp;
 }
-/* line 339, ../sass/main.sass */
+/* line 340, ../sass/main.sass */
 .list .num {
   font-size: 21px;
   margin: 5px;
 }
-/* line 343, ../sass/main.sass */
+/* line 344, ../sass/main.sass */
 .list .num:after {
   content: ".";
 }
 
-/* line 346, ../sass/main.sass */
+/* line 347, ../sass/main.sass */
 .menu {
   background-color: #4a4d50;
   display: -webkit-flex;
@@ -433,7 +434,7 @@ input[type=url] {
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
 }
-/* line 351, ../sass/main.sass */
+/* line 352, ../sass/main.sass */
 .menu .menu-item {
   cursor: pointer;
   color: white;
@@ -443,12 +444,12 @@ input[type=url] {
   -webkit-flex: 1;
   flex: 1;
 }
-/* line 359, ../sass/main.sass */
+/* line 360, ../sass/main.sass */
 .menu .menu-item:hover {
   background-color: #009AFD;
 }
 
-/* line 362, ../sass/main.sass */
+/* line 363, ../sass/main.sass */
 .slide-menu {
   position: absolute;
   top: 0px;
@@ -467,17 +468,17 @@ input[type=url] {
   -webkit-transition: -webkit-transform, 0.5s, ease;
   transition: transform, 0.5s, ease;
 }
-/* line 373, ../sass/main.sass */
+/* line 374, ../sass/main.sass */
 .slide-menu .slide-menu-item {
   cursor: pointer;
   padding: 10px;
 }
-/* line 378, ../sass/main.sass */
+/* line 379, ../sass/main.sass */
 .slide-menu .slide-menu-item:hover {
   background-color: #008ae4;
 }
 
-/* line 382, ../sass/main.sass */
+/* line 383, ../sass/main.sass */
 .slide-menu-visible {
   -moz-transform: translate3d(0, 0, 0);
   -ms-transform: translate3d(0, 0, 0);
