@@ -8,6 +8,24 @@ $menu_heigth:   60px
 $nav_color: #4a4d50
 $mc_color: #ecf0f1
 
+$phone-width: 0px
+$tablet-width: 768px
+$desktop-width: 1024px
+
+
+
+@mixin tablet 
+	@media (max-width: #{$desktop-width - 1px})
+		@content
+	
+
+
+@mixin desktop 
+	@media (min-width: #{$desktop-width}) 
+		@content
+	
+
+
 h1
 	font-family: 'Roboto Slab', ff-tisa-web-pro, Georgia, Arial, sans-serif
 	font-size: 175%
@@ -22,11 +40,22 @@ body
 		background-color: $nav_color
 
 #content
-	width: 1000px
 	margin-left: auto
 	margin-right: auto
 	background-color: white
 	height: auto
+	+tablet
+		width: 100%
+
+	+desktop
+		width: 1000px
+
+	h1
+		text-align: center
+
+	p
+		margin: 10px
+
 	#sidebar
 		width: 205px
 		display: inline-block
@@ -35,7 +64,6 @@ body
 		margin-top: 30px
 		padding-bottom: 10px
 		background: #CCC
-
 
 		.item 
 			span
@@ -69,8 +97,7 @@ body
 		margin-top: 40px
 		padding-top: 0px
 		width: 100%
-		h1
-			text-align: center
+
 
 #MathContainer
 	border: 1px balck
@@ -80,14 +107,27 @@ body
 	margin-top: 30px
 	margin-left: auto
 	margin-right: auto
-	padding: 2em
-	background-color: $mc_color
-	+border-radius(10px)
+	
+	
+	
+	+tablet
+		padding: 0px
+		background-color: none
+
+	+desktop
+		padding: 2em
+		background-color: $mc_color
+		+border-radius(10px)
 
 	#result
+		+tablet
+			font-size: 1em
+
+		+desktop
+			font-size: 1.5em
 		font-family: 'Roboto Slab', ff-tisa-web-pro, Georgia, Arial, sans-serif
 		display: block
-		font-size: 1.5em
+		
 		height: 50px
 
 #select
@@ -119,6 +159,8 @@ body
 		float: right
 		height: $menu_heigth
 		text-align: center
+		+tablet
+			display: none
 		
 		line-height: $menu_heigth
 		display: inline-block
@@ -164,7 +206,7 @@ body
 	height: 153px
 	width: 250px
 	background-color: #DDD
-	z-index: 10
+	z-index: 20
 	float: right
 	input
 		margin-left: auto !important
@@ -204,8 +246,13 @@ body
 		box-sizing: border-box
 
 		>.col
+			+desktop
+				width: 48%
+				
+			+tablet
+				width: 100%
+
 			padding: 5px
-			width: 48%
 			display: inline-block
 			text-align: center
 	
