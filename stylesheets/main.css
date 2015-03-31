@@ -101,6 +101,7 @@ body nav {
   margin-top: 30px;
   margin-left: auto;
   margin-right: auto;
+  overflow: scroll;
 }
 @media (max-width: 1023px) {
   /* line 102, ../sass/main.sass */
@@ -129,7 +130,6 @@ body nav {
   /* line 122, ../sass/main.sass */
   #MathContainer #result {
     font-size: 1em;
-    overflow: scroll;
   }
 }
 @media (min-width: 1024px) {
