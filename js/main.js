@@ -125,7 +125,7 @@ var PrintListComponent = React.createClass({displayName: "PrintListComponent",
 				problems, 
 				React.createElement("br", null), 
 				"Отговори:", 
-				problems
+				solution
 			)
 		)
 	}
