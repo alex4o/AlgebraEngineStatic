@@ -331,11 +331,6 @@ var App = React.createClass({
 	},
 	componentDidMount: function(){
 		self = this
-		routie(":id",function(id){
-			console.log(id)
-			self.setState({page: id | 0})
-		});
-
 	},
 	render: function () {
 		return (<div>
