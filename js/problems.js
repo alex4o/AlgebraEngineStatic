@@ -23,7 +23,6 @@ var Problems = React.createClass({displayName: "Problems",
 			React.createElement("h1", null, "Генерирани задачи"), 
 			React.createElement("div", {className: "gen-list"}, 
 				ListItems
-
 			)
 		)
 		);

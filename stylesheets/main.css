@@ -489,15 +489,16 @@ input[type=url] {
 
 /* line 389, ../sass/main.sass */
 .gen-list .gen-item {
+  line-height: 40px;
   display: -webkit-flex;
   display: flex;
 }
-/* line 391, ../sass/main.sass */
+/* line 393, ../sass/main.sass */
 .gen-list .latex {
   -webkit-flex: 6;
   flex: 6;
 }
-/* line 394, ../sass/main.sass */
+/* line 396, ../sass/main.sass */
 .gen-list .control {
   -webkit-flex: 1;
   flex: 1;
