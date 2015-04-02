@@ -87,7 +87,7 @@ var KaТeXitem = React.createClass({displayName: "KaТeXitem",
 		katex.render(this.props.problem,shit)
 	},
 	render: function(){
-		return(React.createElement("span", {ref: "shit"}))
+		return(React.createElement("span", {className: "latex", ref: "shit"}))
 	}
 })
 
@@ -130,6 +130,7 @@ var PrintListComponent = React.createClass({displayName: "PrintListComponent",
 		)
 	}
 });
+
 
 
 var MenuList = React.createClass({displayName: "MenuList",
@@ -373,6 +374,8 @@ ReactRouter
 var routes = (
   React.createElement(ReactRouter.Route, {handler: App, path: "/"}, 
     React.createElement(ReactRouter.DefaultRoute, {handler: Home}), 
+    React.createElement(ReactRouter.Route, {name: "", path: "/Problems", handler: Problems}), 
+
     React.createElement(ReactRouter.Route, {name: "problems", handler: Generator}, 
       React.createElement(ReactRouter.Route, {name: "", path: "/Problem/Equation", handler: Equation}), 
       React.createElement(ReactRouter.Route, {name: "", path: "/Problem/EquivalentExpressions", handler: EquivalentExpressions})
