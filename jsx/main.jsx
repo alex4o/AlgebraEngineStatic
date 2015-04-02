@@ -180,7 +180,7 @@ var Generator = React.createClass({
 	submit: function(){
 		self = this
 		localStorage[model.addres] = JSON.stringify(model.data)
-		superagent.post("/api" + model.addres).send(model.data).send({cor:1}).end(function(res){
+		superagent.post("/api" + model.addres).send(model.data).send({cor:1, token: sessionStorage.getItem("token")}).end(function(res){
 			if(res.status == 200){
 				model.res = JSON.parse(res.text)
 				self.setState({math: model.res})
@@ -203,7 +203,7 @@ var Generator = React.createClass({
 		localStorage[model.addres] = JSON.stringify(model.data)
 		
 		
-		superagent.post("/api" + model.addres).send(model.data).send({cor:10}).end(function(res){
+		superagent.post("/api" + model.addres).send(model.data).send({cor:10, token: sessionStorage.getItem("token")}).end(function(res){
 			if(res.status == 200){
 				model.res = JSON.parse(res.text)
 				console.log(model.res)
@@ -355,6 +355,8 @@ var App = React.createClass({
 
 						<MenuItem hash="#/Problem/EquivalentExpressions">Tъждествени изрази</MenuItem>
 						<MenuItem hash="#/Problem/Equation">Уравнения</MenuItem>
+
+						<MenuItem hash="#/Problems">Генерирани</MenuItem>
 						
 
 					</Menu>

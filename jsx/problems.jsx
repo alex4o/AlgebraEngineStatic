@@ -7,13 +7,15 @@ var Problems = React.createClass({
 	},
 	componentDidMount: function () {
 		self = this;
-	    superagent.get("/api/data/problems/").end(function(res){
-	    	self.setState({
-	    		list: JSON.parse(res.text)
-	    	});
-	    })  
+  		superagent.get("/api/data/problems/").query({token: sessionStorage.getItem("token")}).end(this.update)
+	},
+	update: function(res){
+		this.setState({
+			list: JSON.parse(res.text)
+		});
 	},
 	render: function() {
+
 		ListItems = this.state.list.map(function(item,index){
 			return (<ProblemListItem latex={item.t1}/>)
 		})

@@ -160,7 +160,7 @@ body
 		width: 560px
 		float: right
 		height: $menu_heigth
-		text-align: center
+		text-align: right
 		+tablet
 			display: none
 		
@@ -386,12 +386,18 @@ input[type=url]
 	display: block
 
 .gen-list
+	
+	.gen-item:last-child
+		border-bottom: none
+
 	.gen-item
+		border-bottom: 1px solid #ccc
 		line-height: 40px
 		align-items: center
 		+display-flex()
 	.latex
 		+flex(6)
+		overflow: hidden
 
 	.control
 		+flex(1)

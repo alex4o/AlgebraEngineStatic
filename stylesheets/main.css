@@ -171,7 +171,7 @@ body nav {
   width: 560px;
   float: right;
   height: 60px;
-  text-align: center;
+  text-align: right;
   line-height: 60px;
   display: inline-block;
   margin-right: 15px;
@@ -487,19 +487,25 @@ input[type=url] {
   display: block;
 }
 
-/* line 389, ../sass/main.sass */
+/* line 390, ../sass/main.sass */
+.gen-list .gen-item:last-child {
+  border-bottom: none;
+}
+/* line 393, ../sass/main.sass */
 .gen-list .gen-item {
+  border-bottom: 1px solid #ccc;
   line-height: 40px;
   align-items: center;
   display: -webkit-flex;
   display: flex;
 }
-/* line 393, ../sass/main.sass */
+/* line 398, ../sass/main.sass */
 .gen-list .latex {
   -webkit-flex: 6;
   flex: 6;
+  overflow: hidden;
 }
-/* line 396, ../sass/main.sass */
+/* line 402, ../sass/main.sass */
 .gen-list .control {
   -webkit-flex: 1;
   flex: 1;
