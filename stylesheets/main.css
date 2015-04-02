@@ -490,6 +490,7 @@ input[type=url] {
 /* line 389, ../sass/main.sass */
 .gen-list .gen-item {
   line-height: 40px;
+  align-items: center;
   display: -webkit-flex;
   display: flex;
 }
