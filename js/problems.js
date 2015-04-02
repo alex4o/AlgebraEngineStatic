@@ -7,8 +7,10 @@ var Problems = React.createClass({displayName: "Problems",
 	},
 	componentDidMount: function () {
 		self = this
-	    superagent.get("/api/data/problems/").end(function(){
-
+	    superagent.get("/api/data/problems/").end(function(res){
+	    	self.setState({
+	    		list: JSON.parse(res.text)
+	    	});
 	    })  
 	},
 	render:function() {

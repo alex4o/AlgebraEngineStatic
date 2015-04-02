@@ -9,7 +9,7 @@ var Problems = React.createClass({
 		self = this
 	    superagent.get("/api/data/problems/").end(function(res){
 	    	self.setState({
-	    		list: JSON.parse(res.text); 
+	    		list: JSON.parse(res.text)
 	    	});
 	    })  
 	},
