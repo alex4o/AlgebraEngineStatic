@@ -4,6 +4,46 @@
 		"selected_items":
 		[
 			[
+				"line",
+				"line-height"
+			],
+			[
+				"list",
+				"ListItems"
+			],
+			[
+				"com",
+				"componentDidMount	Life Cycle Method"
+			],
+			[
+				"mar",
+				"margin"
+			],
+			[
+				"ba",
+				"background-image"
+			],
+			[
+				"vie",
+				"view"
+			],
+			[
+				"margin",
+				"margin-right"
+			],
+			[
+				"bor",
+				"border-box"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"Menu",
+				"MenuItem"
+			],
+			[
 				"text",
 				"text-align"
 			],
@@ -20,16 +60,8 @@
 				"views"
 			],
 			[
-				"vie",
-				"view_id"
-			],
-			[
 				"comp",
 				"componentDidMount	Life Cycle Method"
-			],
-			[
-				"com",
-				"componentWillUnmount	Life Cycle Method"
 			],
 			[
 				"Re",
@@ -38,10 +70,6 @@
 			[
 				"ma",
 				"margin-right"
-			],
-			[
-				"margin",
-				"margin-left"
 			],
 			[
 				"pos",
@@ -54,10 +82,6 @@
 			[
 				"na",
 				"nav_color"
-			],
-			[
-				"ba",
-				"background-color"
 			],
 			[
 				"tex",
@@ -112,10 +136,6 @@
 				"d:ib	display:inline-block"
 			],
 			[
-				"bor",
-				"border-left"
-			],
-			[
 				"ta",
 				"text-align"
 			],
@@ -159,31 +179,39 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 1848,
+				"buffer_size": 1886,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/alex4o/Applications/The Binding of Isaac Rebirth/run-x64.sh",
+			"file": "sass/print.scss",
 			"settings":
 			{
-				"buffer_size": 82,
+				"buffer_size": 540,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "lib/react-with-addons.js",
+			"file": "jsx/problems.jsx",
 			"settings":
 			{
-				"buffer_size": 659449,
+				"buffer_size": 856,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": ".git/hooks/post-commit",
+			"file": "js/problems.js",
 			"settings":
 			{
-				"buffer_size": 168,
+				"buffer_size": 1090,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "jsx/main.jsx",
+			"settings":
+			{
+				"buffer_size": 8612,
 				"line_ending": "Unix"
 			}
 		},
@@ -191,42 +219,8 @@
 			"file": "sass/main.sass",
 			"settings":
 			{
-				"buffer_size": 4936,
+				"buffer_size": 6524,
 				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "javascript/user.jsx",
-			"settings":
-			{
-				"buffer_size": 3216,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "README.md",
-			"settings":
-			{
-				"buffer_size": 177,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "javascript/main.jsx",
-			"settings":
-			{
-				"buffer_size": 5917,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "Package Control Messages\n========================\n\nTheme - Gravity:\n---------------\n\n  \n  Thanks for using the Gravity theme!\n  You \"may\" need to restart Sublime Text for it to display correctly.\n  \n  Feel free to contact me if you have any questions, or need to report any issues via:\n  \n  GitHub Issues\n  https://github.com/frankyonnetti/gravity-sublime-theme/issues\n  \n  or Twitter\n  @dh_Frank\n  \n  \n  --------------------------------\n  \n  To activate the theme for ST3, add or replace your current theme settings with the code below.\n  \n  For dark theme:\n  \n  {\n      \"theme\": \"Gravity.sublime-theme\",\n      \"color_scheme\": \"Packages/Theme - Gravity/Monokai Gravity (SL).tmTheme\"\n  }\n  \n  For light theme:\n  \n  {\n      \"theme\": \"Reverse Gravity.sublime-theme\",\n      \"color_scheme\": \"Packages/Theme - Gravity/Monokai Gravity (SL).tmTheme\"\n  }\n  \n  For file tab height option use:\n  \n  \"tab_height_short\": true\n      - or -\n  \"tab_height_tall\": true\n  \n  \n  --------------------------------\n  \n  \n  Changes in 2.0.8\n  \n  - Replaced Monokai with Monokai Extended. Biggest change I made to it was the background color to match the Gravity theme.\n  \n  \n  Changes in 2.0.7\n  \n  - Minor color change.\n  \n  \n  Changes in 2.0.5 / 2.0.6\n  \n  - Changed back color to jSON strings.\n  - Added color to 'this' keyword for JS. \n      - Thanks again giltig https://github.com/giltig\n  \n  \n  Changes in 2.0.4\n  \n  - Added a fix for a bug that caused the file tab font descenders to get cut off (g, y, etc.) on Linux and Windows. Macs are not effected.\n  https://github.com/jamiewilson/predawn/issues/35#issuecomment-51838224\n      - Thanks giltig https://github.com/giltig\n  - To apply the fix, add this setting to your \"Settings - User\" file.\n      \"tab_font_small\": true\n  \n  \n  Changes in 2.0.3\n  \n  - Changed the style and color of the close indicators.\n      - Thanks pentag0 - http://www.reddit.com/user/pentag0\n  \n  \n  Changes in v2.0.2\n  \n  - Fixed the double border issue on file tabs.\n      - Thanks pickx - https://github.com/pickx\n  - Fixed the display issue with the overlay scrollbars.\n  \n  \n  Changes in v2.0.1\n  \n  - Added height option for the file tabs. In your settings add:\n      \"tab_height_short\": true\n          - or -\n      \"tab_height_tall\": true\n      (Tip: resize window or type \"Super + F\" to automatically adjust the tab display after saving settings)\n      - Thanks Gagan Janjua - https://github.com/gj1118\n  \n  - Added more contrast to the auto-complete pop-up\n      - Thanks Jasper Jorna - https://github.com/Twiebie\n      - & Alex Whitman - https://github.com/alexwhitman\n  \n  \n  Changes in v2.0.0\n  \n  - Introducing a new light theme called \"Reverse Gravity\"!\n  - Updated all sidebar icons to more consistent with OSX.\n  - Updated the Gravity tabs so the active tab is brighter then the inactive tabs.\n  - The Gravity theme value was lighten slightly overall.\n  - Many other UI tweaks and cleanups.\n  \n  \n  Credit to those who have helped me discover issues in v1.x.x\n  \n  Jesse Leite - https://github.com/JerseyMilker\n  Nico Hoffmann - https://github.com/distantnative\n  Nicolás Santángelo - https://github.com/NicoSantangelo\n  \n  ",
-			"settings":
-			{
-				"buffer_size": 3154,
-				"line_ending": "Unix",
-				"name": "Package Control Messages",
-				"scratch": true
 			}
 		}
 	],
@@ -237,13 +231,53 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 227.0,
-		"last_filter": "push",
+		"height": 191.0,
+		"last_filter": "jsx",
 		"selected_items":
 		[
 			[
+				"jsx",
+				"Set Syntax: JSX"
+			],
+			[
+				"js",
+				"Set Syntax: JavaScript (JSX)"
+			],
+			[
+				"git c	",
+				"Git: Commit"
+			],
+			[
 				"push",
 				"Git: Push"
+			],
+			[
+				"q",
+				"Git: Quick Commit"
+			],
+			[
+				"ctt",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"space",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"add",
+				"Git: Add Current File"
+			],
+			[
+				"bash",
+				"Set Syntax: Shell Script (Bash)"
+			],
+			[
+				"qc",
+				"Git: Quick Commit"
+			],
+			[
+				"q	",
+				"Git: Quick Commit"
 			],
 			[
 				"git qc",
@@ -251,14 +285,6 @@
 			],
 			[
 				"convert",
-				"Indentation: Convert to Tabs"
-			],
-			[
-				"qc",
-				"Git: Quick Commit"
-			],
-			[
-				"ctt",
 				"Indentation: Convert to Tabs"
 			],
 			[
@@ -280,10 +306,6 @@
 			[
 				"commit",
 				"Git: Commit"
-			],
-			[
-				"add",
-				"Git: Add Current File"
 			],
 			[
 				"com",
@@ -330,10 +352,6 @@
 				"Gitk"
 			],
 			[
-				"jsx",
-				"Set Syntax: JSX"
-			],
-			[
 				"install",
 				"Package Control: Install Package"
 			],
@@ -362,7 +380,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 425.0
+		"width": 497.0
 	},
 	"console":
 	{
@@ -385,17 +403,28 @@
 	"expanded_folders":
 	[
 		"/home/alex4o/Projects/aestatic",
-		"/home/alex4o/Projects/aestatic/javascript",
+		"/home/alex4o/Projects/aestatic/js",
+		"/home/alex4o/Projects/aestatic/jsx",
 		"/home/alex4o/Projects/aestatic/lib",
 		"/home/alex4o/Projects/aestatic/sass"
 	],
 	"file_history":
 	[
+		"/home/alex4o/Projects/aestatic/sass/main.sass",
+		"/home/alex4o/Projects/math4all/.openshift/action_hooks/build",
+		"/home/alex4o/Projects/aestatic/js/problems.js",
+		"/home/alex4o/Projects/aestatic/sass/print.scss",
+		"/home/alex4o/Projects/aestatic/js/user.js",
+		"/home/alex4o/Projects/aestatic/javascript/main.jsx",
+		"/home/alex4o/Projects/aestatic/index.html",
+		"/home/alex4o/Applications/The Binding of Isaac Rebirth/run-x64.sh",
+		"/home/alex4o/Projects/aestatic/lib/react-with-addons.js",
+		"/home/alex4o/Projects/aestatic/.git/hooks/post-commit",
+		"/home/alex4o/Projects/aestatic/README.md",
 		"/home/alex4o/Applications/xTime/bin/xtimecomposer",
 		"/home/alex4o/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 		"/home/alex4o/Projects/aestatic/javascript/input.jsx",
 		"/home/alex4o/.config/sublime-text-3/Packages/SublimeGit/SublimeGit.sublime-settings",
-		"/home/alex4o/Projects/aestatic/lib/react-with-addons.js",
 		"/home/alex4o/Projects/aestatic/lib/JSXTransformer.js",
 		"/home/alex4o/Projects/aestatic/.git/hooks/pre-commit.sample",
 		"/home/alex4o/Projects/aestatic/.git/hooks/pre-commit",
@@ -479,6 +508,26 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"				\n",
+			"Katex",
+			"flex",
+			"KaT",
+			"){\n",
+			".col",
+			"col",
+			".col",
+			"cursor",
+			"menu",
+			"before",
+			"after",
+			"color",
+			"model",
+			"loc",
+			"	\n",
+			"transition",
+			"style",
+			"menu",
+			"font",
 			"menu",
 			"inner",
 			"font_size",
@@ -550,12 +599,12 @@
 		"show_context": true,
 		"use_buffer2": true,
 		"whole_word": false,
-		"wrap": true
+		"wrap": false
 	},
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -564,15 +613,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1848,
+						"buffer_size": 1886,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								570,
-								570
+								334,
+								334
 							]
 						],
 						"settings":
@@ -584,173 +633,30 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "/home/alex4o/Applications/The Binding of Isaac Rebirth/run-x64.sh",
+					"file": "sass/print.scss",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 82,
+						"buffer_size": 540,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10,
-								10
+								424,
+								424
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "lib/react-with-addons.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 659449,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								374765,
-								374781
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 170300.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": ".git/hooks/post-commit",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 168,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								54,
-								54
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "sass/main.sass",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4936,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4936,
-								4936
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Sass/Syntaxes/Sass.tmLanguage",
+							"syntax": "Packages/SCSS/SCSS.tmLanguage",
 							"translate_tabs_to_spaces": false
-						},
-						"translation.x": -0.0,
-						"translation.y": 3674.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "javascript/user.jsx",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 3216,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "README.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 177,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								84,
-								84
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Markdown/Markdown.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -760,63 +666,119 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "javascript/main.jsx",
+					"buffer": 2,
+					"file": "jsx/problems.jsx",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5917,
+						"buffer_size": 856,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5382,
-								5382
+								535,
+								535
 							]
 						],
 						"settings":
 						{
-							"history_list_is_closing": true,
 							"syntax": "Packages/JSX/JSX.tmLanguage",
-							"tab_size": 4,
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2716.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "js/problems.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1090,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								659,
+								659
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": -0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "jsx/main.jsx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8612,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4800,
+								4800
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JSX/JSX-real.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3172.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 5,
+					"file": "sass/main.sass",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3154,
+						"buffer_size": 6524,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3154,
-								3154
+								5937,
+								5937
 							]
 						],
 						"settings":
 						{
-							"auto_indent": false,
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"word_wrap": true
+							"syntax": "Packages/Sass/Syntaxes/Sass.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 5220.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -824,11 +786,11 @@
 	],
 	"incremental_find":
 	{
-		"height": 22.0
+		"height": 23.0
 	},
 	"input":
 	{
-		"height": 49.0
+		"height": 48.0
 	},
 	"layout":
 	{
@@ -873,7 +835,7 @@
 	"project": "web_math.sublime-project",
 	"replace":
 	{
-		"height": 62.0
+		"height": 42.0
 	},
 	"save_all_on_build": true,
 	"select_file":
