@@ -14,14 +14,15 @@ var Problems = React.createClass({displayName: "Problems",
 	    })  
 	},
 	render:function() {
+		ListItems = this.state.list.map(function(item,index){
+			return (React.createElement(ProblemListItem, {latex: item.t1}))
+		})
 		return (
 		
 		React.createElement("div", null, 
 			React.createElement("h1", null, "Генерирани задачи"), 
 			React.createElement("div", {className: "gen-list"}, 
-				React.createElement(ProblemListItem, null), 
-				React.createElement(ProblemListItem, null), 
-				React.createElement(ProblemListItem, null)
+				ListItems
 
 			)
 		)
@@ -33,7 +34,7 @@ var ProblemListItem = React.createClass({displayName: "ProblemListItem",
     render: function () {
         return (
             React.createElement("div", {className: "gen-item"}, 
-				React.createElement(KaТeXitem, {problem: "ax^2-bx+c"}), 
+				React.createElement(KaТeXitem, {problem: this.props.latex}), 
 				React.createElement("span", {className: "control"}, "Любима"), 
 				React.createElement("span", {className: "control"}, "Изтрий")
 			)
