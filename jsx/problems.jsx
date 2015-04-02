@@ -1,19 +1,19 @@
 var Problems = React.createClass({
-	getInitialState() {
+	getInitialState: function() {
 		return {
 		  list: [],
 		  starlist: []
 		};
 	},
 	componentDidMount: function () {
-		self = this
+		self = this;
 	    superagent.get("/api/data/problems/").end(function(res){
 	    	self.setState({
 	    		list: JSON.parse(res.text)
 	    	});
 	    })  
 	},
-	render() {
+	render: function() {
 		ListItems = this.state.list.map(function(item,index){
 			return (<ProblemListItem latex={item.t1}/>)
 		})
