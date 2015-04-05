@@ -61,12 +61,14 @@ var UserForm = React.createClass({
 		if(this.state.logged_in == false){
 			
 				Panel = (<div>
-							<StringInput placeholder="Потребителско име" value={data} bind="name" />
+							<StringInput placeholder="Потребителско Име" value={data} bind="name" />
 							<PassInput placeholder="Парола" value={data} bind="pass" />
 							<div className="myButton" onClick={this.login}>Вход</div>
-							<div className="myButton" onClick={this.signup}>Регистрация</div>
+							<div className="myButton" onClick={this.signup}>
+								Регистрация
+								<RegisterForm ref="rform"/>
+							</div>
 							<Alert error_message={this.state.alert_msg}/>
-							<RegisterForm ref="rform"/>
 						</div>)
 			
 		}else{

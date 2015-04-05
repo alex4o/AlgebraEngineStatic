@@ -61,12 +61,14 @@ var UserForm = React.createClass({displayName: "UserForm",
 		if(this.state.logged_in == false){
 			
 				Panel = (React.createElement("div", null, 
-							React.createElement(StringInput, {placeholder: "Потребителско име", value: data, bind: "name"}), 
+							React.createElement(StringInput, {placeholder: "Потребителско Име", value: data, bind: "name"}), 
 							React.createElement(PassInput, {placeholder: "Парола", value: data, bind: "pass"}), 
 							React.createElement("div", {className: "myButton", onClick: this.login}, "Вход"), 
-							React.createElement("div", {className: "myButton", onClick: this.signup}, "Регистрация"), 
-							React.createElement(Alert, {error_message: this.state.alert_msg}), 
-							React.createElement(RegisterForm, {ref: "rform"})
+							React.createElement("div", {className: "myButton", onClick: this.signup}, 
+								"Регистрация", 
+								React.createElement(RegisterForm, {ref: "rform"})
+							), 
+							React.createElement(Alert, {error_message: this.state.alert_msg})
 						))
 			
 		}else{

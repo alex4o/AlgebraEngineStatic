@@ -36,8 +36,8 @@ var ProblemListItem = React.createClass({
         return (
             <div className="gen-item">
 				<KaТeXitem problem={this.props.latex}/>
-				<span className="control">Любима</span>
-				<span className="control">Изтрий</span>
+				{/*<span className="control">Любима</span>
+				<span className="control">Изтрий</span>*/}
 			</div>
         );
     }

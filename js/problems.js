@@ -35,9 +35,9 @@ var ProblemListItem = React.createClass({displayName: "ProblemListItem",
     render: function () {
         return (
             React.createElement("div", {className: "gen-item"}, 
-				React.createElement(KaТeXitem, {problem: this.props.latex}), 
-				React.createElement("span", {className: "control"}, "Любима"), 
-				React.createElement("span", {className: "control"}, "Изтрий")
+				React.createElement(KaТeXitem, {problem: this.props.latex})
+				/*<span className="control">Любима</span>
+				<span className="control">Изтрий</span>*/
 			)
         );
     }
