@@ -12,16 +12,11 @@ module.exports = React.createClass({
 
 			}
 
-			token = atob(sessionStorage.getItem("token").split(".")[1])
-			if(token.user_id != -1){
-				li = false;
-			}else{
-				li = true;
-			}
-			
+			token = JSON.parse(atob(sessionStorage.getItem("token").split(".")[1]))
+			console.log("id " + token.user_id);
 			return({
-				logged_in: li ,
-				username: ""
+				logged_in: true ,
+				username: token.user
 			})
 		}
 		var state = check_logged()
@@ -38,7 +33,7 @@ module.exports = React.createClass({
 				error("грешка в сървъра")
 			}
 			out = JSON.parse(atob(res.text.split(".")[1]))
-			console.log(out)
+			console.log(out.user_id)
 			if(out.user_id > -1){
 				sessionStorage.setItem("token",res.text)
 				done()	
@@ -60,7 +55,9 @@ module.exports = React.createClass({
 
 	},
 	signup: function(){
-		this.setState({reg_popup:"visible"})
+		console.log(this.refs)
+		this.refs.rform.show()
+		//this.setState({reg_popup:"visible"})
 
 	},
 	render: function () {
@@ -68,12 +65,14 @@ module.exports = React.createClass({
 		if(this.state.logged_in == false){
 			
 				Panel = (<div>
-							<Input.String placeholder="Потребителско име" value={data} bind="name" />
-							<Input.Md5 placeholder="Парола" value={data} bind="pass" />
+							<StringInput placeholder="Потребителско Име" value={data} bind="name" />
+							<PassInput placeholder="Парола" value={data} bind="pass" />
 							<div className="myButton" onClick={this.login}>Вход</div>
-							<div className="myButton" onClick={this.signup}>Регистрация</div>
+							<div className="myButton" onClick={this.signup}>
+								Регистрация
+								<RegisterForm ref="rform"/>
+							</div>
 							<Alert error_message={this.state.alert_msg}/>
-							<RegisterForm visability={this.state.reg_popup}/>
 						</div>)
 			
 		}else{
@@ -107,18 +106,26 @@ var Alert = React.createClass({
 })
 
 var RegisterForm = React.createClass({
+	getInitialState: function() {
+		return {visability: "hidden"};
+	},
 	model: {
 		username: "",
 		password:"",
 		pr:""
 	},
+	show: function(){
+		this.setState({visability: "visible"})
+		console.log("show")
+	},
 	register: function(){
+		self = this
 		if(this.model.password == this.model.pr){
-			this.model.password = md5(this.model.pr)
 			console.log(this.model)
 			delete this.model.pr
 			superagent.post("/api/signup/").send(this.model).end(function(res){
 				alert("Вие се регистрирахте.")
+				self.setState({visability: "hidden"})
 
 			});
 			console.log(this.model)
@@ -128,7 +135,7 @@ var RegisterForm = React.createClass({
 	render: function(){
 
 	return(
-		<div className="popup" style={{visibility: this.props.visability}}>
+		<div className="popup" style={{visibility: this.state.visability}}>
 			
 			<Input.String value={this.model} bind="username" placeholder="Пoтребителско име"/>
 			<Input.Pass value={this.model} bind="password" placeholder="Парола"/>
