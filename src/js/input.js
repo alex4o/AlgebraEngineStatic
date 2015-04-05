@@ -1,5 +1,8 @@
+var React = require('react');
 /** @jsx React.DOM */
-var StringInput = React.createClass({
+
+module.exports = {
+String: React.createClass({
     defaultProps:function(){
 
     },
@@ -9,9 +12,9 @@ var StringInput = React.createClass({
     render: function(){
         return(<input  defaultValue={this.props.value[this.props.bind].toString()} type="text" placeholder={this.props.placeholder} onChange={this.onChange}/>)
     }
-});
+}),
 
-var PassInput = React.createClass({
+Pass: React.createClass({
     defaultProps:function(){
 
     },
@@ -21,9 +24,9 @@ var PassInput = React.createClass({
     render: function(){
         return(<input type="password" placeholder={this.props.placeholder} onChange={this.onChange}/>)
     }
-});
+}),
 
-var Md5Input = React.createClass({
+Md5: React.createClass({
     defaultProps:function(){
 
     },
@@ -33,9 +36,9 @@ var Md5Input = React.createClass({
     render: function(){
         return(<input type="password" placeholder={this.props.placeholder} onChange={this.onChange}/>)
     }
-});
+}),
 
-var NumberInput = React.createClass({
+Number: React.createClass({
 	defaultProps:function(){
 
 	},
@@ -48,9 +51,9 @@ var NumberInput = React.createClass({
 			<input defaultValue={this.props.value[this.props.bind].toString()} type="text" onChange={this.onChange}/>
 		)
 	}
-});
+}),
 
-var RadioInput = React.createClass({
+Radio: React.createClass({
 	defaultProps:function(){
 
 	},
@@ -64,9 +67,9 @@ var RadioInput = React.createClass({
 			<input type="radio" value={this.props.value} name={this.props.group} onChange={this.props.update}/>
 		)
 	}
-});
+}),
 
-var RadioWallInput = React.createClass({
+RadioWall: React.createClass({
 	boxes:[],
 	getInitialState: function(){
 		for (var i = 0; i < this.props.count; i++) {
@@ -93,9 +96,9 @@ var RadioWallInput = React.createClass({
 			
 		)
 	}
-});
+}),
 
-var RangeInput = React.createClass({
+Range: React.createClass({
 	getInitialState: function(){
 		return {size: Math.abs(this.props.min)+Math.abs(this.props.max)}
 	},
@@ -109,9 +112,9 @@ var RangeInput = React.createClass({
 	render: function(){
 		return <input type="range" defaultValue={this.props.value[this.props.bind][1]} min={this.props.min} max={this.props.max} width="300" onChange={this.onChange}/>
 	}
-});
+}),
 
-var MinMaxInput = React.createClass({
+MinMax: React.createClass({
 
 	getInitialState: function(){
 		return {size: Math.abs(this.props.min)+Math.abs(this.props.max)}
@@ -130,3 +133,5 @@ var MinMaxInput = React.createClass({
 			)
 	}
 })
+
+}

@@ -1,4 +1,8 @@
-var UserForm = React.createClass({
+var React = require('react');
+var Input = require("./input.js")
+
+
+module.exports = React.createClass({
 	getInitialState: function() {
 		var check_logged = function(){
 			if(sessionStorage.getItem("token") == null){
@@ -64,8 +68,8 @@ var UserForm = React.createClass({
 		if(this.state.logged_in == false){
 			
 				Panel = (<div>
-							<StringInput placeholder="Потребителско име" value={data} bind="name" />
-							<Md5Input placeholder="Парола" value={data} bind="pass" />
+							<Input.String placeholder="Потребителско име" value={data} bind="name" />
+							<Input.Md5 placeholder="Парола" value={data} bind="pass" />
 							<div className="myButton" onClick={this.login}>Вход</div>
 							<div className="myButton" onClick={this.signup}>Регистрация</div>
 							<Alert error_message={this.state.alert_msg}/>
@@ -126,9 +130,9 @@ var RegisterForm = React.createClass({
 	return(
 		<div className="popup" style={{visibility: this.props.visability}}>
 			
-			<StringInput value={this.model} bind="username" placeholder="Пoтребителско име"/>
-			<PassInput value={this.model} bind="password" placeholder="Парола"/>
-			<PassInput value={this.model} bind="pr" placeholder="Поватряне на парола"/>
+			<Input.String value={this.model} bind="username" placeholder="Пoтребителско име"/>
+			<Input.Pass value={this.model} bind="password" placeholder="Парола"/>
+			<Input.Pass value={this.model} bind="pr" placeholder="Поватряне на парола"/>
 			<div className="myButton" onClick={this.register}>Регистрирай</div>
 		</div>)
 	}

@@ -1,13 +1,18 @@
+/** @jsx React.DOM */
 
-/*
-var data = {
-	fraction    : 50,
-	natural		: 50,
-	irrational	: 0,
-	up	: {low:1 ,high:10},
-	down: {low:1 ,high:10}
-}
-*/
+var React = require('react');
+var Router = require("react-router");
+var Route = Router.Route;
+var DefaultRoute = Router.DefaultRoute;
+var NotFoundRoute = Router.NotFoundRoute;
+var RouteHandler = Router.RouteHandler;
+var UserForm = require("./user.js")
+var Problems = require("./problems.js")
+var EquivalentExpressions = require("./view/EquivalentExpressions.js")
+var Equation = require("./view/Equation.js")
+
+console.log(UserForm)
+
 var model = {
 	view_id: 0,
 	data: {
@@ -44,7 +49,6 @@ function checkStorageForDataOrReturnDefault(def){
 	}
 }
 
-/** @jsx React.DOM */
 var MathComponent = React.createClass({
 	shouldComponentUpdate: function(nextProps, nextState) {
 		return nextProps.math !== this.props.math || nextProps.solutionVisable !== this.props.solutionVisable;
@@ -241,7 +245,7 @@ var Generator = React.createClass({
 					</div>
 					
 					<div id="InputContainer">
-						<ReactRouter.RouteHandler model={model}/>
+						<RouteHandler model={model}/>
 					</div>
 
 
@@ -338,9 +342,9 @@ var App = React.createClass({
 
 		<nav>
 			<div id="select">
-				<logo onClick={this.openMenu}>
+				<div className="logo" onClick={this.openMenu}>
 					Математика за всички
-				</logo>
+				</div>
 				<div id="user" style={{float:"right"}}>
 					<UserForm data={model.user}/>
 				</div>
@@ -358,7 +362,7 @@ var App = React.createClass({
 						
 
 					</Menu>
-					<ReactRouter.RouteHandler/>
+					<RouteHandler/>
 		</div>
 				
 			
@@ -369,21 +373,21 @@ var App = React.createClass({
 		);
 	}
 });
-ReactRouter
+
 
 var routes = (
-  <ReactRouter.Route handler={App} path="/">
-    <ReactRouter.DefaultRoute handler={Home} />
-    <ReactRouter.Route name="" path="/Problems" handler={Problems} />
+  <Route handler={App} path="/">
+    <DefaultRoute handler={Home} />
+    <Route name="" path="/Problems" handler={Problems} />
 
-    <ReactRouter.Route name="problems" handler={Generator}>
-      <ReactRouter.Route name="" path="/Problem/Equation" handler={Equation} />
-      <ReactRouter.Route name="" path="/Problem/EquivalentExpressions" handler={EquivalentExpressions} />
-    </ReactRouter.Route>
-  </ReactRouter.Route>
+    <Route name="problems" handler={Generator}>
+      <Route name="" path="/Problem/Equation" handler={Equation} />
+      <Route name="" path="/Problem/EquivalentExpressions" handler={EquivalentExpressions} />
+    </Route>
+  </Route>
 );
 
-ReactRouter.run(routes, function (Handler) {
+Router.run(routes, function (Handler) {
   React.render(<Handler/>, document.body);
 });
 

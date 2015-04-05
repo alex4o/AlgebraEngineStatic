@@ -1,4 +1,13 @@
-var QuadraticEquation = React.createClass({
+var React = require('react');
+function checkStorageForDataOrReturnDefault(def){
+	if(localStorage[model.addres] != null && localStorage[model.addres] != ""){
+		return JSON.parse(localStorage[model.addres]);
+	}else{
+		return def
+	}
+}
+
+module.exports = React.createClass({
     componentDidMount: function(){
         self = this
 
