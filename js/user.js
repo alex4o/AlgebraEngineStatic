@@ -8,16 +8,11 @@ var UserForm = React.createClass({displayName: "UserForm",
 
 			}
 
-			token = atob(sessionStorage.getItem("token").split(".")[1])
-			if(token.user_id != -1){
-				li = false;
-			}else{
-				li = true;
-			}
-			
+			token = JSON.parse(atob(sessionStorage.getItem("token").split(".")[1]))
+			console.log("id " + token.user_id);
 			return({
-				logged_in: li ,
-				username: ""
+				logged_in: true ,
+				username: token.user
 			})
 		}
 		var state = check_logged()
@@ -34,7 +29,7 @@ var UserForm = React.createClass({displayName: "UserForm",
 				error("грешка в сървъра")
 			}
 			out = JSON.parse(atob(res.text.split(".")[1]))
-			console.log(out)
+			console.log(out.user_id)
 			if(out.user_id > -1){
 				sessionStorage.setItem("token",res.text)
 				done()	
@@ -56,7 +51,9 @@ var UserForm = React.createClass({displayName: "UserForm",
 
 	},
 	signup: function(){
-		this.setState({reg_popup:"visible"})
+		console.log(this.refs)
+		this.refs.rform.show()
+		//this.setState({reg_popup:"visible"})
 
 	},
 	render: function () {
@@ -64,12 +61,14 @@ var UserForm = React.createClass({displayName: "UserForm",
 		if(this.state.logged_in == false){
 			
 				Panel = (React.createElement("div", null, 
-							React.createElement(StringInput, {placeholder: "Потребителско име", value: data, bind: "name"}), 
-							React.createElement(Md5Input, {placeholder: "Парола", value: data, bind: "pass"}), 
+							React.createElement(StringInput, {placeholder: "Потребителско Име", value: data, bind: "name"}), 
+							React.createElement(PassInput, {placeholder: "Парола", value: data, bind: "pass"}), 
 							React.createElement("div", {className: "myButton", onClick: this.login}, "Вход"), 
-							React.createElement("div", {className: "myButton", onClick: this.signup}, "Регистрация"), 
-							React.createElement(Alert, {error_message: this.state.alert_msg}), 
-							React.createElement(RegisterForm, {visability: this.state.reg_popup})
+							React.createElement("div", {className: "myButton", onClick: this.signup}, 
+								"Регистрация", 
+								React.createElement(RegisterForm, {ref: "rform"})
+							), 
+							React.createElement(Alert, {error_message: this.state.alert_msg})
 						))
 			
 		}else{
@@ -103,18 +102,26 @@ var Alert = React.createClass({displayName: "Alert",
 })
 
 var RegisterForm = React.createClass({displayName: "RegisterForm",
+	getInitialState: function() {
+		return {visability: "hidden"};
+	},
 	model: {
 		username: "",
 		password:"",
 		pr:""
 	},
+	show: function(){
+		this.setState({visability: "visible"})
+		console.log("show")
+	},
 	register: function(){
+		self = this
 		if(this.model.password == this.model.pr){
-			this.model.password = md5(this.model.pr)
 			console.log(this.model)
 			delete this.model.pr
 			superagent.post("/api/signup/").send(this.model).end(function(res){
 				alert("Вие се регистрирахте.")
+				self.setState({visability: "hidden"})
 
 			});
 			console.log(this.model)
@@ -124,7 +131,7 @@ var RegisterForm = React.createClass({displayName: "RegisterForm",
 	render: function(){
 
 	return(
-		React.createElement("div", {className: "popup", style: {visibility: this.props.visability}}, 
+		React.createElement("div", {className: "popup", style: {visibility: this.state.visability}}, 
 			
 			React.createElement(StringInput, {value: this.model, bind: "username", placeholder: "Пoтребителско име"}), 
 			React.createElement(PassInput, {value: this.model, bind: "password", placeholder: "Парола"}), 

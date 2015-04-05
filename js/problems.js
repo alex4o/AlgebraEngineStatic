@@ -7,13 +7,15 @@ var Problems = React.createClass({displayName: "Problems",
 	},
 	componentDidMount: function () {
 		self = this;
-	    superagent.get("/api/data/problems/").end(function(res){
-	    	self.setState({
-	    		list: JSON.parse(res.text)
-	    	});
-	    })  
+  		superagent.get("/api/data/problems/").query({token: sessionStorage.getItem("token")}).end(this.update)
+	},
+	update: function(res){
+		this.setState({
+			list: JSON.parse(res.text)
+		});
 	},
 	render: function() {
+
 		ListItems = this.state.list.map(function(item,index){
 			return (React.createElement(ProblemListItem, {latex: item.t1}))
 		})
@@ -33,9 +35,9 @@ var ProblemListItem = React.createClass({displayName: "ProblemListItem",
     render: function () {
         return (
             React.createElement("div", {className: "gen-item"}, 
-				React.createElement(KaТeXitem, {problem: this.props.latex}), 
-				React.createElement("span", {className: "control"}, "Любима"), 
-				React.createElement("span", {className: "control"}, "Изтрий")
+				React.createElement(KaТeXitem, {problem: this.props.latex})
+				/*<span className="control">Любима</span>
+				<span className="control">Изтрий</span>*/
 			)
         );
     }

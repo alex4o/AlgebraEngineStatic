@@ -30,6 +30,7 @@ h1
 	font-family: 'Roboto Slab', ff-tisa-web-pro, Georgia, Arial, sans-serif
 	font-size: 175%
 
+
 body
 	font-family: 'Ubuntu', sans-serif
 	margin: 0px
@@ -51,6 +52,7 @@ body
 		width: 1000px
 
 	h1
+		margin: 1.2em
 		text-align: center
 
 	p
@@ -154,13 +156,13 @@ body
 		height: 40px
 		cursor: pointer
 		content: " "
-		background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' width='30px' height='30px' viewBox='0 0 30 30' enable-background='new 0 0 30 30' xml:space='preserve'><rect style='fill:#009AFD;' width='30' height='4' y='2'/><rect style='fill:#009AFD;' y='22' width='30' height='4'/><rect style='fill:#009AFD;' y='12' width='30' height='4'/></svg>")
+		background-image: url("/burger.svg")
 		background-size: contain
 	#user
-		width: 560px
+		width: 45%
 		float: right
 		height: $menu_heigth
-		text-align: center
+		text-align: right
 		+tablet
 			display: none
 		
@@ -169,7 +171,7 @@ body
 		margin-right: 15px
 		input
 			margin-right: 10px
-		span
+		>span
 			margin-right: 10px 
 		.myButton
 			margin-right: 10px 
@@ -204,11 +206,14 @@ body
 
 .popup
 	opacity: 1
-	position: inherit
+	position: absolute
+	//position: inherit
 	height: 153px
 	width: 250px
 	background-color: #DDD
 	z-index: 20
+	top: 60px
+	right: 0px
 	float: right
 	input
 		margin-left: auto !important
@@ -386,12 +391,18 @@ input[type=url]
 	display: block
 
 .gen-list
+	
+	.gen-item:last-child
+		border-bottom: none
+
 	.gen-item
+		border-bottom: 1px solid #ccc
 		line-height: 40px
 		align-items: center
 		+display-flex()
 	.latex
 		+flex(6)
+		overflow: hidden
 
 	.control
 		+flex(1)

@@ -180,7 +180,7 @@ var Generator = React.createClass({
 	submit: function(){
 		self = this
 		localStorage[model.addres] = JSON.stringify(model.data)
-		superagent.post("/api" + model.addres).send(model.data).send({cor:1}).end(function(res){
+		superagent.post("/api" + model.addres).send(model.data).send({cor:1, token: sessionStorage.getItem("token")}).end(function(res){
 			if(res.status == 200){
 				model.res = JSON.parse(res.text)
 				self.setState({math: model.res})
@@ -203,7 +203,7 @@ var Generator = React.createClass({
 		localStorage[model.addres] = JSON.stringify(model.data)
 		
 		
-		superagent.post("/api" + model.addres).send(model.data).send({cor:10}).end(function(res){
+		superagent.post("/api" + model.addres).send(model.data).send({cor:10, token: sessionStorage.getItem("token")}).end(function(res){
 			if(res.status == 200){
 				model.res = JSON.parse(res.text)
 				console.log(model.res)
@@ -316,7 +316,11 @@ var Home = React.createClass({
 	render: function(){
 		return (<div>
 				<h1>Начало</h1>
-				<p>Създадохме сайт за генериране на задача, с цел улеснението на нашите учители. Сайта също е подходящ за ученици търсещи нови усещания в математиката.</p>
+				<p>
+				Това е сайт за генериране на задачи който създадохме с цел улесняване на учитлете по математика в създаването на контролни.
+				В последствие се оказа, че програмате е полезна и за учениците с желание за отличен успех.
+				Генерирането на задачи статва черес задаване на праметри каот например: Степен, Брой Корени, Максимални и минимални стойнасти на коефициенти и др.
+				За да започнете, кликнете в горния ляв ъгъл.</p>
 			</div>)
 	}
 })
@@ -355,6 +359,8 @@ var App = React.createClass({
 
 						<MenuItem hash="#/Problem/EquivalentExpressions">Tъждествени изрази</MenuItem>
 						<MenuItem hash="#/Problem/Equation">Уравнения</MenuItem>
+
+						<MenuItem hash="#/Problems">Генерирани</MenuItem>
 						
 
 					</Menu>
