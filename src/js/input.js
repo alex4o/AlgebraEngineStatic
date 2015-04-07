@@ -1,5 +1,4 @@
 var React = require('react');
-/** @jsx React.DOM */
 
 module.exports = {
 String: React.createClass({

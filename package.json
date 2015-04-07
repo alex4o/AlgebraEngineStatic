@@ -10,7 +10,9 @@
     "sass-loader": "*",
     "superagent": "*",
     "webpack-dev-server": "~1.8.0",
-    "react-webpack": "~0.4.1"
+    "react-webpack": "~0.4.1",
+    "babel-core": "~5.0.9",
+    "babel-loader": "~5.0.0"
   },
   "license": "beerware"
 }

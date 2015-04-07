@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var React = require('react');
 var Router = require("react-router");
 var Route = Router.Route;
@@ -10,11 +8,10 @@ var UserForm = require("./user.js")
 var Problems = require("./problems.js")
 var EquivalentExpressions = require("./view/EquivalentExpressions.js")
 var Equation = require("./view/Equation.js")
-
+import katexitem from "./katex.js"
 console.log(UserForm)
 
 var model = {
-	view_id: 0,
 	data: {
 
 	},
@@ -74,26 +71,7 @@ var MathComponent = React.createClass({
 	}
 })
 
-var KaТeXitem = React.createClass({
-	componentDidMount:  function(){
 
-		//console.log(this.props.problem)
-
-		var shit = this.refs.shit.getDOMNode()
-		katex.render(this.props.problem,shit)
-
-
-	},
-	componentDidUpdate: function(prevProps, prevState){
-		//console.log(this.props.problem)
-
-		var shit = this.refs.shit.getDOMNode()
-		katex.render(this.props.problem,shit)
-	},
-	render: function(){
-		return(<span className="latex" ref="shit"></span>)
-	}
-})
 
 var PrintListComponent = React.createClass({
 	componentDidUpdate: function(){
@@ -346,9 +324,9 @@ var App = React.createClass({
 
 		<nav>
 			<div id="select">
-				<div className="logo" onClick={this.openMenu}>
+				<logo onClick={this.openMenu}>
 					Математика за всички
-				</div>
+				</logo>
 				<div id="user" style={{float:"right"}}>
 					<UserForm data={model.user}/>
 				</div>
@@ -393,8 +371,11 @@ var routes = (
   </Route>
 );
 
-Router.run(routes, function (Handler) {
-  React.render(<Handler/>, document.body);
+Router.run(routes, function (Handler,state) {
+	console.log(state);
+	console.log(Handler);
+	
+	React.render(<Handler/>, document.body);
 });
 
 //React.render(<App/>,document.body)

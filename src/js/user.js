@@ -65,8 +65,8 @@ module.exports = React.createClass({
 		if(this.state.logged_in == false){
 			
 				Panel = (<div>
-							<StringInput placeholder="Потребителско Име" value={data} bind="name" />
-							<PassInput placeholder="Парола" value={data} bind="pass" />
+							<Input.String placeholder="Потребителско Име" value={data} bind="name" />
+							<Input.Pass placeholder="Парола" value={data} bind="pass" />
 							<div className="myButton" onClick={this.login}>Вход</div>
 							<div className="myButton" onClick={this.signup}>
 								Регистрация

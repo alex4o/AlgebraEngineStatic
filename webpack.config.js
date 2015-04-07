@@ -8,10 +8,12 @@ module.exports = {
     	loaders: [
 	        { 
 	        	test: /\.js$/,
-	        	loader: 'jsx-loader?harmony'
+	        	exclude: /node_modules/,
+	        	loader: 'babel-loader?cacheDirectory=true'
 	        },
 	        {
 	        	test: /\.sass?$/,
+
 	        	loader: "style-loader!css-loader!sass-loader"
 	    	}
 	    ]
