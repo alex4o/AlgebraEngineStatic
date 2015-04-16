@@ -1,11 +1,6 @@
 var React = require('react');
-function checkStorageForDataOrReturnDefault(def){
-	if(localStorage[model.addres] != null && localStorage[model.addres] != ""){
-		return JSON.parse(localStorage[model.addres]);
-	}else{
-		return def
-	}
-}
+import Input from '../input';
+
 
 module.exports = React.createClass({
 	componentDidMount: function(){
@@ -15,7 +10,7 @@ module.exports = React.createClass({
 	componentWillMount: function () {
 		this.props.model.addres = "/gen/EquivalentExpression/"
 
-		this.props.model.data = checkStorageForDataOrReturnDefault({
+		this.props.model.data = this.props.check({
 			pow:2,
 			let:"xyz",
 			Letters:
@@ -49,76 +44,76 @@ module.exports = React.createClass({
 		return (
 			<div className="form">
 				<div className="row scol" rel="Степен" >
-						Максимална <NumberInput value={data} bind="pow"/>
+						Максимална <Input.Number value={data} bind="pow"/>
 				</div>
 
 				<div className="row scol" rel="Променливи" >
-						<StringInput value={data} bind="let"/>
+						<Input.String value={data} bind="let"/>
 				</div>
 
 				<div className="row" rel="Брой елементи в скобите" >
 					<div className="col" >
-						Минимум <NumberInput value={data.Letters} bind="min"/>
+						Минимум <Input.Number value={data.Letters} bind="min"/>
 					</div>
 					<div className="col" >
-						Максимум <NumberInput value={data.Letters} bind="max"/>
+						Максимум <Input.Number value={data.Letters} bind="max"/>
 					</div>
 				</div>
 
 
 				<div className="row" rel="Брой на скобите" >
 					<div className="col" >
-						Минимум <NumberInput value={data.Term} bind="min"/>
+						Минимум <Input.Number value={data.Term} bind="min"/>
 					</div>
 					<div className="col" >
-						Максимум <NumberInput value={data.Term} bind="max"/>
+						Максимум <Input.Number value={data.Term} bind="max"/>
 					</div>
 				</div>
 
 				<div className="row form sform" rel="Коефициенти пред променливите" >
 					<div className="row scol"  rel="Вид" >
-						Цели <RangeInput value={data.coef} bind="type" min="0" max="100" /> Дробни
+						Цели <Input.Range value={data.coef} bind="type" min="0" max="100" /> Дробни
 					</div>
 						
 					<div className="row" rel="Числител" >
 						<div className="col" >
-							максимум <NumberInput value={data.coef.up} bind="high"/>
+							максимум <Input.Number value={data.coef.up} bind="high"/>
 						</div>
 						<div className="col" >
-							минимум <NumberInput value={data.coef.up} bind="low"/>
+							минимум <Input.Number value={data.coef.up} bind="low"/>
 						</div>
 					</div>
 					
 					<div className="row" rel="Знаменател" >
 						<div className="col" >
-							максимум <NumberInput value={data.coef.down} bind="high"/>
+							максимум <Input.Number value={data.coef.down} bind="high"/>
 						</div>
 						<div className="col" >
-								минимум <NumberInput value={data.coef.down} bind="low"/>
+								минимум <Input.Number value={data.coef.down} bind="low"/>
 						</div>
 					</div>
 				</div>
 				
 				<div className="row form sform" rel="Коефициенти пред скобите" >
 					<div className="row scol"  rel="Вид " >
-						Цели <RangeInput value={data.tcoef} bind="type" min="0" max="100" /> Дробни
+						Цели <Input.Range value={data.tcoef} bind="type" min="0" max="100" /> Дробни
 					</div>
 						
 					<div className="row" rel="Числител" >
 						<div className="col" >
-							максимум <NumberInput value={data.tcoef.up} bind="high"/>
+							максимум <Input.Number value={data.tcoef.up} bind="high"/>
 						</div>
 						<div className="col" >
-							минимум <NumberInput value={data.tcoef.up} bind="low"/>
+							минимум <Input.Number value={data.tcoef.up} bind="low"/>
 						</div>
 					</div>
 					
 					<div className="row" rel="Знаменател" >
 						<div className="col" >
-							максимум <NumberInput value={data.tcoef.down} bind="high"/>
+							максимум <Input.Number value={data.tcoef.down} bind="high"/>
 						</div>
 						<div className="col" >
-								минимум <NumberInput value={data.tcoef.down} bind="low"/>
+								минимум <Input.Number value={data.tcoef.down} bind="low"/>
 						</div>
 					</div>
 				</div>

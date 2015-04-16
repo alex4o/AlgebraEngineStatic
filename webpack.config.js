@@ -1,3 +1,4 @@
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
     entry: ["./src/js/main.js"],
 
@@ -14,10 +15,16 @@ module.exports = {
 	        {
 	        	test: /\.sass?$/,
 
-	        	loader: "style-loader!css-loader!sass-loader"
+	        	loader: "style!css!sass?indentedSyntax"
 	    	}
 	    ]
-		},
+	},
+	plugins: [
+		new HtmlWebpackPlugin({
+			template: 'src/html/index.html',
+			filename: 'res/index.html' 
+		})
+	],
     resolve: {
   		modulesDirectories: ["node_modules", "bower_components"],
   	},

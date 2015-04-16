@@ -62,9 +62,10 @@ module.exports = React.createClass({
 	},
 	render: function () {
 		var data = this.props.data
+		let panel = {}
 		if(this.state.logged_in == false){
 			
-				Panel = (<div>
+				panel = (<div>
 							<Input.String placeholder="Потребителско Име" value={data} bind="name" />
 							<Input.Pass placeholder="Парола" value={data} bind="pass" />
 							<div className="myButton" onClick={this.login}>Вход</div>
@@ -77,12 +78,12 @@ module.exports = React.createClass({
 			
 		}else{
 			
-				Panel = <div><span>{this.state.username}</span><div className="myButton" onClick={this.logout}>изход</div></div>
+				panel = <div><span>{this.state.username}</span><div className="myButton" onClick={this.logout}>изход</div></div>
 		}
 
 		return (
 			<div>
-				{Panel}
+				{panel}
 			</div>
 		)
 	}
@@ -90,12 +91,12 @@ module.exports = React.createClass({
 
 var Alert = React.createClass({
 	componentDidUpdate:function(old,news){
-		alert_box = this.refs.alert_box.getDOMNode()
+		let alert_box = this.refs.alert_box.getDOMNode()
 		alert_box.classList.add("alert_show")
 		setTimeout(this.hide,1500)
 	},
 	hide:function(){
-		alert_box = this.refs.alert_box.getDOMNode()
+		let alert_box = this.refs.alert_box.getDOMNode()
 		alert_box.classList.remove("alert_show")
 	},
 	render: function(){

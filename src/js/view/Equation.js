@@ -1,11 +1,4 @@
 var React = require('react');
-function checkStorageForDataOrReturnDefault(def){
-	if(localStorage[model.addres] != null && localStorage[model.addres] != ""){
-		return JSON.parse(localStorage[model.addres]);
-	}else{
-		return def
-	}
-}
 
 module.exports = React.createClass({
     componentDidMount: function(){
@@ -17,7 +10,7 @@ module.exports = React.createClass({
         this.props.model.addres = "/gen/Equation/"
 
 		
-    	this.props.model.data = checkStorageForDataOrReturnDefault({
+    	this.props.model.data = this.props.check({
 			pow : 2,
 			powTerm: 2,
 			let:"x",
@@ -83,7 +76,7 @@ module.exports = React.createClass({
 							максимум <NumberInput value={data.root.down} bind="high"/>
 						</div>
 						<div className="col" >
-								минимум <NumberInput value={data.root.down} bind="low"/>
+							минимум <NumberInput value={data.root.down} bind="low"/>
 						</div>
 					</div>
 				</div>

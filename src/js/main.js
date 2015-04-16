@@ -1,17 +1,21 @@
-var React = require('react');
-var Router = require("react-router");
-var Route = Router.Route;
-var DefaultRoute = Router.DefaultRoute;
-var NotFoundRoute = Router.NotFoundRoute;
-var RouteHandler = Router.RouteHandler;
-var UserForm = require("./user.js")
-var Problems = require("./problems.js")
-var EquivalentExpressions = require("./view/EquivalentExpressions.js")
-var Equation = require("./view/Equation.js")
-import katexitem from "./katex.js"
-console.log(UserForm)
+import React from 'react';
+import Router, {Route,DefaultRoute,NotFoundRoute,RouteHandler} from "react-router";
 
-var model = {
+
+//components
+import UserForm from "./user";
+import Problems from "./problems";
+import Home from "./home";
+
+import Generator from "./generator"
+
+import EquivalentExpressions from"./view/EquivalentExpressions.js"
+import Equation from "./view/Equation.js"
+import katex from "./katex.js"
+
+
+
+window.model = {
 	data: {
 
 	},
@@ -28,19 +32,21 @@ var model = {
 if (!String.prototype.format) {
     String.prototype.format = function() {
         var str = this.toString();
-        if (!arguments.length)
+        if (!arguments.length){
             return str;
-        var args = typeof arguments[0],
-            args = (("string" == args || "number" == args) ? arguments : arguments[0]);
-        for (arg in args)
-            str = str.replace(RegExp("\\{" + arg + "\\}", "gi"), args[arg]);
+        }
+        var args = typeof arguments[0],args = (("string" == args || "number" == args) ? arguments : arguments[0]);
+
+        for (let arg of args){
+            str = str.replace(RegExp("\\{" + arg + "\\}", "gi"), arg);
+        }
         return str;
     }
 }
 
 function checkStorageForDataOrReturnDefault(def){
-	if(localStorage[model.addres] != null && localStorage[model.addres] != ""){
-		return JSON.parse(localStorage[model.addres]);
+	if(localStorage[window.model.addres] != null && localStorage[window.model.addres] != ""){
+		return JSON.parse(localStorage[window.model.addres]);
 	}else{
 		return def
 	}
@@ -82,14 +88,14 @@ var PrintListComponent = React.createClass({
 		return nextProps.res !== this.props.res;
 	},
 	render: function () {
-		problems = this.props.res.map(function(result,iter){
+		let problems = this.props.res.map(function(result,iter){
 			//console.log(result)
-			return (<div className="items"><span className="num">{iter+1}</span><KaТeXitem problem={result.problem} /></div>)
+			return (<div className="items"><span className="num">{iter+1}</span><katex problem={result.problem} /></div>)
 		})
 
-		solution = this.props.res.map(function(result,iter){
+		let solution = this.props.res.map(function(result,iter){
 			//console.log(result)
-			return (<div className="items"><span className="num">{iter+1}</span><KaТeXitem problem={result.solution} /></div>)
+			return (<div className="items"><span className="num">{iter+1}</span><katex problem={result.solution} /></div>)
 		})
 		var st = {}
 		if(this.props.res.length > 0){
@@ -138,6 +144,10 @@ var MenuList = React.createClass({
 	}
 }) 
 
+
+/*
+unused code maybe develop in future
+
 var ViewChanger = React.createClass({
 
 	render: function () {
@@ -149,113 +159,7 @@ var ViewChanger = React.createClass({
 		}
 	}
 });
-
-
-var Generator = React.createClass({
-	getInitialState: function(){
-		return {
-			math: [{problem: "", solution: ""}],
-			sv: false,
-			list: []
-		}
-	},
-	submit: function(){
-		self = this
-		localStorage[model.addres] = JSON.stringify(model.data)
-		superagent.post("/api" + model.addres).send(model.data).send({cor:1, token: sessionStorage.getItem("token")}).end(function(res){
-			if(res.status == 200){
-				model.res = JSON.parse(res.text)
-				self.setState({math: model.res})
-
-			}else{
-				self.setState({math: {problem: "error",solution:" --- "} })
-
-				//katex.render("error",problem)
-
-
-			}
-		});
-		//alert(math)
-		//console.log(math)
-		
-		//this.setState({math: math})
-	},
-	submit_more: function(){
-		self = this
-		localStorage[model.addres] = JSON.stringify(model.data)
-		
-		
-		superagent.post("/api" + model.addres).send(model.data).send({cor:10, token: sessionStorage.getItem("token")}).end(function(res){
-			if(res.status == 200){
-				model.res = JSON.parse(res.text)
-				console.log(model.res)
-
-				self.setState({list: model.res})
-				console.log(ofset)
-
-			}else{
-				//katex.render("error",problem)
-
-
-			}
-		});
-
-
-		//alert(math)
-		//console.log(math)
-	},
-	show: function(){
-		this.setState({sv: !this.state.sv});
-	},
-	render: function () {
-		return (
-			<div>
-
-			<MathComponent math={this.state.math} solutionVisable={this.state.sv}/>
-
-			<div id="inner-content" >
-				
-				<div>
-					<div className="menu">
-						<div className="menu-item" onClick={this.submit}>Генерирай</div>
-						<div className="menu-item" onClick={this.submit_more}>Генерирай няколко</div>
-						<Togglemenuitem action={this.show} on="Скрий" off="Покажи">{'{0} отговорите'}</Togglemenuitem>
-					</div>
-					
-					<div id="InputContainer">
-						<RouteHandler model={model}/>
-					</div>
-
-
-				</div>
-
-				
-
-			</div>
-			
-			<PrintListComponent res={this.state.list}/>
-			</div>
-
-		);
-	}
-});
-
-var Togglemenuitem = React.createClass({
-	getInitialState: function() {
-		return {
-			activated: false	
-		};
-	},
-	call: function(activated) {
-		this.props.action(this.state.activated)
-		this.setState({activated: !this.state.activated})
-		console.log()
-	},
-
-	render: function() {
-		return <div className="menu-item" onClick={this.call}>{this.props.children.format(this.state.activated ? this.props.on : this.props.off)}</div>;
-	}
-});
+*/
 
 var Menu = React.createClass({
 	getInitialState: function() {
@@ -293,21 +197,6 @@ var MenuItem = React.createClass({
 		return <div className="slide-menu-item" onClick={this.navigate.bind(this, this.props.hash)}>{this.props.children}</div>;
 	}
 });
-
-var Home = React.createClass({
-	render: function(){
-		return (<div>
-				<h1>Начало</h1>
-				<p>
-				<h2>Здравейте и добре дошли в "Математика за всички"! </h2>
-
-Ние сме Александър Бонин и Косьо Николов и  създадохме този сайт, в който могат автоматично да се генерират задачи по алгебра. Целта ни е да подпомогнем учителите в процеса на създаване на задачи за упражнение и контролни работи. Учениците, които искат да повишат нивото на своята подготовка по математика, също могат да използват нашия генератор.
-Промяната на стойностите на параметрите - "Степен", "Брой на елементите в скобите", "Вид на коефициентите", "Вид на корените" и други води до създаване на задачи от различен вид. Програмата може да покаже и отговорите на задачите, а Вие, скъпи потребители, трябва само да се престрашите и да натиснете в горния ляв ъгъл.
-
-Приятно генериране!</p>
-			</div>)
-	}
-})
 
 var App = React.createClass({
 	getInitialState: function(){
@@ -374,9 +263,6 @@ var routes = (
 );
 
 Router.run(routes, function (Handler,state) {
-	console.log(state);
-	console.log(Handler);
-	
 	React.render(<Handler/>, document.body);
 });
 
