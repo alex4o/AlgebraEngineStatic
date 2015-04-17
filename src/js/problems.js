@@ -1,25 +1,36 @@
 import React from 'react';
 import http from 'superagent';
-import katex from "./katex";
+import Katex from "./katex";
 
 
-module.exports = React.createClass({
-	getInitialState: function() {
-		return {
+export default class Problems extends React.Component
+{
+	constructor(props)
+	{
+		console.log("Init !!!!")
+		super(props);
+		this.state = {
 		  list: [],
 		  starlist: []
 		};
-	},
-	componentDidMount: function () {
+	}
+
+	componentDidMount() 
+	{
+		console.log("Mount WTF!!!")
 		self = this;
-  		http.get("/api/data/problems/").query({token: sessionStorage.getItem("token")}).end(this.update)
-	},
-	update: function(res){
+  		http.get("/api/data/problems/").query({token: sessionStorage.getItem("token")}).end(this.update.bind(this));
+	}
+
+	update(err,res)
+	{
 		this.setState({
 			list: JSON.parse(res.text)
 		});
-	},
-	render: function() {
+	}
+
+	render()
+	{
 
 		let ListItems = this.state.list.map(function(item,index){
 			return (<ProblemListItem latex={item.t1}/>)
@@ -34,17 +45,18 @@ module.exports = React.createClass({
 		</div>
 		);
 	}
-});
+}
 
-var ProblemListItem = React.createClass({
-    render: function () {
+class ProblemListItem extends React.Component
+{
+    render() {
         return (
             <div className="gen-item">
-				<katex problem={this.props.latex}/>
+				<Katex problem={this.props.latex}/>
 				{/*<span className="control">Любима</span>
 				<span className="control">Изтрий</span>*/}
 			</div>
         );
     }
-});
+}
 

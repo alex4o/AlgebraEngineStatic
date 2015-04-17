@@ -1,16 +1,16 @@
-var React = require('react');
+import React from 'react';
 
 module.exports = React.createClass({
-    componentDidMount: function(){
-        self = this
+	componentDidMount: function(){
+		self = this
 
 	},
 
 	componentWillMount: function(){
-        this.props.model.addres = "/gen/Equation/"
+		this.props.model.addres = "/gen/Equation/"
 
 		
-    	this.props.model.data = this.props.check({
+		this.props.model.data = this.props.check({
 			pow : 2,
 			powTerm: 2,
 			let:"x",
@@ -28,14 +28,14 @@ module.exports = React.createClass({
 			
 		});
 
-    },
+	},
 
-    render: function () {
+	render: function () {
 
 
 		var data = this.props.model.data
 
-        return (
+		return (
 			<div className="form">
 				<div className="row scol" rel="Степен" >
 						<NumberInput value={data} bind="pow"/>
@@ -81,6 +81,6 @@ module.exports = React.createClass({
 					</div>
 				</div>
 			</div>
-        );
+		);
     }
 });

@@ -4,11 +4,12 @@
     "react-router": "~0.13.2",
     "webpack": "~1.7.3",
     "alt": "~0.15.3",
-    "html-webpack-plugin": "git+https://github.com/ampedandwired/html-webpack-plugin.git"
+    "html-webpack-plugin": "git+https://github.com/ampedandwired/html-webpack-plugin.git",
+    "katex-build": "~0.2.0",
+    "katex": "~0.2.0"
   },
   "devDependencies": {
     "jsx-loader": "~0.13.1",
-    "katex-build": "*",
     "sass-loader": "*",
     "superagent": "*",
     "webpack-dev-server": "~1.8.0",

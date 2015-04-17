@@ -1,4 +1,5 @@
-var React = require('react');
+import React from 'react';
+
 function checkStorageForDataOrReturnDefault(def){
 	if(localStorage[model.addres] != null && localStorage[model.addres] != ""){
 		return JSON.parse(localStorage[model.addres]);

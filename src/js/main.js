@@ -11,8 +11,8 @@ import Generator from "./generator"
 
 import EquivalentExpressions from"./view/EquivalentExpressions.js"
 import Equation from "./view/Equation.js"
-import katex from "./katex.js"
-
+import Katex from "./katex.js"
+import katex from "katex"
 
 
 window.model = {
@@ -28,96 +28,6 @@ window.model = {
 
 	}
 }
-
-if (!String.prototype.format) {
-    String.prototype.format = function() {
-        var str = this.toString();
-        if (!arguments.length){
-            return str;
-        }
-        var args = typeof arguments[0],args = (("string" == args || "number" == args) ? arguments : arguments[0]);
-
-        for (let arg of args){
-            str = str.replace(RegExp("\\{" + arg + "\\}", "gi"), arg);
-        }
-        return str;
-    }
-}
-
-function checkStorageForDataOrReturnDefault(def){
-	if(localStorage[window.model.addres] != null && localStorage[window.model.addres] != ""){
-		return JSON.parse(localStorage[window.model.addres]);
-	}else{
-		return def
-	}
-}
-
-var MathComponent = React.createClass({
-	shouldComponentUpdate: function(nextProps, nextState) {
-		return nextProps.math !== this.props.math || nextProps.solutionVisable !== this.props.solutionVisable;
-	},
-	componentDidUpdate:function(prevProps, prevState){
-
-		var problem = this.refs.problem.getDOMNode()
-		var solution = this.refs.solution.getDOMNode()
-		if(this.props.math !== prevProps.math){
-			katex.render(this.props.math[0].solution,solution)
-			katex.render(this.props.math[0].problem,problem)
-		}
-	},
-	componentDidMount: function() {
-		this.refs.problem.getDOMNode().innerHTML = "За да създадете задача натиснете генерирай"
-	},
-	render: function(){
-		return (
-			<div id="MathContainer">
-				<span id="result" ref="problem"></span>
-				<span style={{display:this.props.solutionVisable ? "block" : "none"}} ref="solution"></span>
-			</div>)
-	}
-})
-
-
-
-var PrintListComponent = React.createClass({
-	componentDidUpdate: function(){
-		ofset = document.getElementById("anchor").offsetTop;
-		scrollTo(0,ofset)
-	},
-	shouldComponentUpdate: function(nextProps, nextState) {
-		return nextProps.res !== this.props.res;
-	},
-	render: function () {
-		let problems = this.props.res.map(function(result,iter){
-			//console.log(result)
-			return (<div className="items"><span className="num">{iter+1}</span><katex problem={result.problem} /></div>)
-		})
-
-		let solution = this.props.res.map(function(result,iter){
-			//console.log(result)
-			return (<div className="items"><span className="num">{iter+1}</span><katex problem={result.solution} /></div>)
-		})
-		var st = {}
-		if(this.props.res.length > 0){
-			st["display"] = "block"
-
-
-		}else{
-			st["display"] = "none"
-		}
-
-		return (
-
-			<div id="anchor" style={st} className="list">
-				Задачи:
-				{problems}
-				<br />
-				Отговори:
-				{solution}
-			</div>
-		)
-	}
-});
 
 
 
@@ -146,7 +56,7 @@ var MenuList = React.createClass({
 
 
 /*
-unused code maybe develop in future
+unused router may develop in future
 
 var ViewChanger = React.createClass({
 
@@ -215,7 +125,10 @@ var App = React.createClass({
 
 		<nav>
 			<div id="select">
-				<logo onClick={this.openMenu}>
+				<burger onClick={this.openMenu}>
+
+				</burger>
+				<logo >
 					Математика за всички
 				</logo>
 				<div id="user" style={{float:"right"}}>

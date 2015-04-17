@@ -1,6 +1,7 @@
 import React from 'react';
+import katex from 'katex';
 
-class katex extends React.Component
+class Katex extends React.Component
 {
 	componentDidMount(){
 
@@ -24,4 +25,4 @@ class katex extends React.Component
 	}
 }
 
-export default katex;
+export default Katex;
