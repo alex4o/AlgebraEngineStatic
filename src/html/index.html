@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Math</title>
+		<meta charset="UTF-8"/>
+
+		<meta name="viewport" content="width=device-width, minimum-scale=.75, maximum-scale=1.0" />
+		
+		<link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+		<link href="/css/print.css" media="print" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.css">
+		<!--[if IE]>
+			<link href="/css/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+		<![endif]-->
+
+		<link rel="stylesheet" type="text/css" href="/css/main.css">
+
+		<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+	</body>
+	{% for (var chunk in o.htmlWebpackPlugin.files.chunks) { %}
+	<script src="{%=o.htmlWebpackPlugin.files.chunks[chunk].entry.split('/').reverse()[0]%}"></script>
+	{% } %}
+</html>
