@@ -1,0 +1,3 @@
+build:
+	compass compile
+	webpack
