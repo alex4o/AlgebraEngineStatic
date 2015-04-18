@@ -36,9 +36,11 @@ body
 	margin: 0px
 	padding: 0px
 	background-color: white
-	nav
-		color: white
-		background-color: $nav_color
+
+	//nav
+	//	color: white
+	//	background-color: $nav_color
+
 
 #content
 	margin-left: auto
@@ -101,37 +103,14 @@ body
 		width: 100%
 
 
-#MathContainer
-	border: 1px balck
-	text-align: center
-	width: 90%
-	height: 70px
-	margin-top: 30px
-	margin-left: auto
-	margin-right: auto
-	
-	
+#result
 	+tablet
-		padding: 0px
-		background-color: none
-		overflow: scroll
-
+		font-size: 1em
 
 	+desktop
-		padding: 2em
-		background-color: $mc_color
-		+border-radius(10px)
-
-	#result
-		+tablet
-			font-size: 1em
-
-
-		+desktop
-			font-size: 1.5em
+		font-size: 1.5em
 		font-family: 'Roboto Slab', ff-tisa-web-pro, Georgia, Arial, sans-serif
 		display: block
-		
 		height: 50px
 
 #select
@@ -407,3 +386,17 @@ input[type=url]
 
 	.control
 		+flex(1)
+
+.panel-body 
+	> div.col-md-12
+		display: inline-block
+		text-align: center
+
+	> div.col-md-2
+		text-align: center
+	> div.col-md-6
+		display: inline-block
+		text-align: center
+
+.btn-toolbar
+	margin: 20px

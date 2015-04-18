@@ -7,7 +7,7 @@ export default class Problems extends React.Component
 {
 	constructor(props)
 	{
-		console.log("Init !!!!")
+		
 		super(props);
 		this.state = {
 		  list: [],
@@ -17,7 +17,6 @@ export default class Problems extends React.Component
 
 	componentDidMount() 
 	{
-		console.log("Mount WTF!!!")
 		self = this;
   		http.get("/api/data/problems/").query({token: sessionStorage.getItem("token")}).end(this.update.bind(this));
 	}

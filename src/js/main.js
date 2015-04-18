@@ -1,6 +1,7 @@
 import React from 'react';
 import Router, {Route,DefaultRoute,NotFoundRoute,RouteHandler} from "react-router";
 
+import {Alert,Button,Navbar,Grid,NavItem,Nav,DropdownButton,Input} from 'react-bootstrap';
 
 //components
 import UserForm from "./user";
@@ -13,6 +14,7 @@ import EquivalentExpressions from"./view/EquivalentExpressions.js"
 import Equation from "./view/Equation.js"
 import Katex from "./katex.js"
 import katex from "katex"
+
 
 
 window.model = {
@@ -121,36 +123,45 @@ var App = React.createClass({
 		self = this
 	},
 	render: function () {
-		return (<div>
+		return (
+		<div>
 
-		<nav>
-			<div id="select">
-				<burger onClick={this.openMenu}>
+		<Navbar brand='Математика за всички' toggleNavKey={0}>
+			
+				<Nav right eventKey={0}>
+					<NavItem eventKey={1} href='#'>Начало</NavItem>
+					<DropdownButton eventKey={2} href='#/Problem' navItem={true} title="Генератор">
+						<NavItem eventKey="2.1" href='#/Problem/EquivalentExpressions'>Tъждествени изрази</NavItem>
+						<NavItem eventKey="2.2" href='#/Problem/Equation'>Уравнения</NavItem>
+					</DropdownButton>
+					<NavItem eventKey={3} href='#/Problems'>Задачи</NavItem>
 
-				</burger>
-				<logo >
-					Математика за всички
-				</logo>
-				<div id="user" style={{float:"right"}}>
-					<UserForm data={model.user}/>
-				</div>
-			</div>
+					<DropdownButton eventKey={5} navItem={true} title="Вход">
+						<Input type="text" placeholder='Потребителско име'/>
+						<Input type="text" placeholder='Парола'/>
 
-		</nav>
+					</DropdownButton>
+					<DropdownButton eventKey={6} navItem={true} title="Регистрация">
+
+					</DropdownButton>
+
+				</Nav>
+			
+		</Navbar>
 
 
-		<div id="content">
+
+		<div>
 				<Menu ref="menu">
-						<MenuItem hash="#/">Начало</MenuItem>
+					<MenuItem hash="#/">Начало</MenuItem>
+					<MenuItem hash="#/Problem/EquivalentExpressions"></MenuItem>
+					<MenuItem hash="#/Problem/Equation"></MenuItem>
+					<MenuItem hash="#/Problems"></MenuItem>
+				</Menu>
 
-						<MenuItem hash="#/Problem/EquivalentExpressions">Tъждествени изрази</MenuItem>
-						<MenuItem hash="#/Problem/Equation">Уравнения</MenuItem>
-
-						<MenuItem hash="#/Problems">Генерирани</MenuItem>
-						
-
-					</Menu>
+				<Grid>
 					<RouteHandler/>
+				</Grid>					
 		</div>
 				
 			

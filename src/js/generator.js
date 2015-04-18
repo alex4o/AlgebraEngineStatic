@@ -2,6 +2,9 @@ import React from "react";
 import {RouteHandler} from "react-router";
 import http from 'superagent';
 import katex from 'katex';
+import Katex from './katex';
+
+import {Col,Button,Navbar,Grid,ButtonToolbar,Panel,DropdownButton} from 'react-bootstrap';
 
 String.prototype.format = function() {
 	var str = this.toString();
@@ -94,27 +97,28 @@ export default class Generator extends React.Component
 
 	render() {
 		return (
+			
 			<div>
 
-			<MathComponent math={this.state.math} solutionVisable={this.state.sv}/>
+	
 
-			<div id="inner-content" >
-				
+			<Col md={12}>
+				<MathComponent math={this.state.math} solutionVisable={this.state.sv}/>
+
 				<div>
-					<div className="menu">
-						<div className="menu-item" onClick={this.submit.bind(this)}>Генерирай</div>
-						<div className="menu-item" onClick={this.submit_more.bind(this)}>Генерирай няколко</div>
-						<Togglemenuitem action={this.show.bind(this)} on="Скрий" off="Покажи">{'{0} отговорите'}</Togglemenuitem>
+					<div>
+						<ButtonToolbar>
+							<Button bsStyle='primary' onClick={this.submit.bind(this)}>Генерирай</Button>
+							<Button onClick={this.submit_more.bind(this)}>Генерирай няколко</Button>
+							<Togglemenuitem action={this.show.bind(this)} on="Скрий" off="Покажи">{'{0} отговорите'}</Togglemenuitem>
+						</ButtonToolbar>
 					</div>
-					
-					<div id="InputContainer">
-						<RouteHandler model={window.model} check={checkStorageForDataOrReturnDefault}/>
-					</div>
-				</div>
-			</div>		
-			<PrintListComponent res={this.state.list}/>
-			</div>
+					<RouteHandler model={window.model} check={checkStorageForDataOrReturnDefault}/>
+				</div>		
+				<PrintListComponent res={this.state.list}/>
+			</Col>
 
+			</div>
 		);
 	}
 }
@@ -137,10 +141,10 @@ var MathComponent = React.createClass({
 	},
 	render: function(){
 		return (
-			<div id="MathContainer">
+			<Panel>
 				<span id="result" ref="problem"></span>
 				<span style={{display:this.props.solutionVisable ? "block" : "none"}} ref="solution"></span>
-			</div>)
+			</Panel>)
 	}
 })
 
@@ -155,12 +159,18 @@ var PrintListComponent = React.createClass({
 	render: function () {
 		let problems = this.props.res.map(function(result,iter){
 			//console.log(result)
-			return (<div className="items"><span className="num">{iter+1}</span><Katex problem={result.problem} /></div>)
+			return (<div className="items">
+				<span className="num">{iter+1}</span>
+				<Katex problem={result.problem} />
+				</div>)
 		})
 
 		let solution = this.props.res.map(function(result,iter){
 			//console.log(result)
-			return (<div className="items"><span className="num">{iter+1}</span><Katex problem={result.solution} /></div>)
+			return (<div className="items">
+				<span className="num">{iter+1}</span>
+				<Katex problem={result.solution} />
+				</div>)
 		})
 		var st = {}
 		if(this.props.res.length > 0){
@@ -198,6 +208,6 @@ var Togglemenuitem = React.createClass({
 	},
 
 	render: function() {
-		return <div className="menu-item" onClick={this.call.bind(this)}>{this.props.children.format(this.state.activated ? this.props.on : this.props.off)}</div>;
+		return <Button onClick={this.call.bind(this)}>{this.props.children.format(this.state.activated ? this.props.on : this.props.off)}</Button>;
 	}
 });

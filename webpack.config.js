@@ -1,4 +1,5 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+
 module.exports = {
     entry: ["./src/js/main.js"],
 
@@ -10,7 +11,7 @@ module.exports = {
 	        { 
 	        	test: /\.js$/,
 	        	exclude: /node_modules/,
-	        	loader: 'babel-loader?cacheDirectory=true'
+	        	loader: 'babel?cacheDirectory=true'
 	        },
 	        {
 	        	test: /\.sass?$/,

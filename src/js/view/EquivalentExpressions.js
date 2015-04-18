@@ -1,5 +1,6 @@
 import React from 'react';
 import Input from '../input';
+import {Row,Button,Navbar,Grid,Col,Panel,DropdownButton} from 'react-bootstrap';
 
 
 module.exports = React.createClass({
@@ -42,83 +43,103 @@ module.exports = React.createClass({
 		var data = this.props.model.data
 
 		return (
-			<div className="form">
-				<div className="row scol" rel="Степен" >
+			<Row>
+				<Panel header="Степен" >
+					<Col md={12}>
 						Максимална <Input.Number value={data} bind="pow"/>
-				</div>
+					</Col>
+				</Panel>
 
-				<div className="row scol" rel="Променливи" >
+				<Panel header="Променливи" >
+					<Col md={12}>
 						<Input.String value={data} bind="let"/>
-				</div>
+					</Col>
+				</Panel>
 
-				<div className="row" rel="Брой елементи в скобите" >
-					<div className="col" >
+				<Panel header="Брой елементи в скобите" >
+					<Col md={6}>
 						Минимум <Input.Number value={data.Letters} bind="min"/>
-					</div>
-					<div className="col" >
+					</Col>
+					<Col md={6}>
 						Максимум <Input.Number value={data.Letters} bind="max"/>
-					</div>
-				</div>
+					</Col>
+				</Panel>
 
 
-				<div className="row" rel="Брой на скобите" >
-					<div className="col" >
+				<Panel header="Брой на скобите" >
+					<Col md={6}>
 						Минимум <Input.Number value={data.Term} bind="min"/>
-					</div>
-					<div className="col" >
+					</Col>
+					<Col md={6}>
 						Максимум <Input.Number value={data.Term} bind="max"/>
-					</div>
-				</div>
+					</Col>
+				</Panel>
 
-				<div className="row form sform" rel="Коефициенти пред променливите" >
-					<div className="row scol"  rel="Вид" >
-						Цели <Input.Range value={data.coef} bind="type" min="0" max="100" /> Дробни
-					</div>
+				<Panel header="Коефициенти пред променливите" >
+					<Panel header="Вид" >
+					<Col md={2} xs={1}>
+						Цели
+					</Col>
+					<Col md={8} xs={10}>
+						<Input.Range value={data.coef} bind="type" min="0" max="100" />
+					</Col>
+					<Col md={2} xs={1}>
+						Дробни
+					</Col>
+					</Panel>
 						
-					<div className="row" rel="Числител" >
-						<div className="col" >
+					<Panel header="Числител" >
+						<Col md={6}>
 							максимум <Input.Number value={data.coef.up} bind="high"/>
-						</div>
-						<div className="col" >
+						</Col>
+						<Col md={6}>
 							минимум <Input.Number value={data.coef.up} bind="low"/>
-						</div>
-					</div>
+						</Col>
+					</Panel>
 					
-					<div className="row" rel="Знаменател" >
-						<div className="col" >
+					<Panel header="Знаменател" >
+						<Col md={6}>
 							максимум <Input.Number value={data.coef.down} bind="high"/>
-						</div>
-						<div className="col" >
+						</Col>
+						<Col md={6}>
 								минимум <Input.Number value={data.coef.down} bind="low"/>
-						</div>
-					</div>
-				</div>
+						</Col>
+					</Panel>
+				</Panel>
 				
-				<div className="row form sform" rel="Коефициенти пред скобите" >
-					<div className="row scol"  rel="Вид " >
-						Цели <Input.Range value={data.tcoef} bind="type" min="0" max="100" /> Дробни
-					</div>
+				<Panel header="Коефициенти пред скобите" >
+					<Panel header="Вид " >
+						<Col md={2} xs={1}>
+							Цели
+						</Col>
+						<Col md={8} xs={10}>
+							<Input.Range value={data.tcoef} bind="type" min="0" max="100" />
+						</Col>
+						<Col md={2} xs={1}>
+							Дробни
+						</Col>
+					</Panel>
 						
-					<div className="row" rel="Числител" >
-						<div className="col" >
+					<Panel header="Числител" >
+						<Col md={6}>
 							максимум <Input.Number value={data.tcoef.up} bind="high"/>
-						</div>
-						<div className="col" >
+						</Col>
+						<Col md={6}>
 							минимум <Input.Number value={data.tcoef.up} bind="low"/>
-						</div>
-					</div>
+						</Col>
+					</Panel>
 					
-					<div className="row" rel="Знаменател" >
-						<div className="col" >
+					<Panel header="Знаменател" >
+						<Col md={6}>
 							максимум <Input.Number value={data.tcoef.down} bind="high"/>
-						</div>
-						<div className="col" >
-								минимум <Input.Number value={data.tcoef.down} bind="low"/>
-						</div>
-					</div>
-				</div>
+						</Col>
+						<Col md={6}>
+							минимум <Input.Number value={data.tcoef.down} bind="low"/>
+						</Col>
+					</Panel>
+				</Panel>
 
-			</div>
+			</Row>
 		);
 	}
 });
