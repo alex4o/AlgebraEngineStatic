@@ -102,7 +102,7 @@ module.exports = React.createClass({
 							максимум <Input.Number value={data.coef.down} bind="high"/>
 						</Col>
 						<Col md={6}>
-								минимум <Input.Number value={data.coef.down} bind="low"/>
+							минимум <Input.Number value={data.coef.down} bind="low"/>
 						</Col>
 					</Panel>
 				</Panel>

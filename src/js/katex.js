@@ -3,25 +3,21 @@ import katex from 'katex';
 
 class Katex extends React.Component
 {
+	constructor(props)
+	{
+		super(props);
+	}
+
 	componentDidMount(){
-
 		//console.log(this.props.problem)
-
-		var content = this.refs.content.getDOMNode()
-		katex.render(this.props.problem,content)
-
-
 	}
 
 	componentDidUpdate(prevProps, prevState){
-		//console.log(this.props.problem)
 
-		var content = this.refs.content.getDOMNode()
-		katex.render(this.props.problem,content)
 	}
 
 	render(){
-		return(<span className="latex" ref="content"></span>)
+		return(<span className="latex" ref="content" dangerouslySetInnerHTML={{__html: katex.renderToString(this.props.problem)}}></span>)
 	}
 }
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import Router, {Route,DefaultRoute,NotFoundRoute,RouteHandler} from "react-router";
 
-import {Alert,Button,Navbar,Grid,NavItem,Nav,DropdownButton,Input} from 'react-bootstrap';
+import {Alert,Button,Navbar,Grid,NavItem,Nav,DropdownButton,Input,ModalTrigger} from 'react-bootstrap';
 
 //components
-import UserForm from "./user";
+import {LoginModal,RegisterModal} from "./user";
 import Problems from "./problems";
 import Home from "./home";
 
@@ -14,6 +14,9 @@ import EquivalentExpressions from"./view/EquivalentExpressions.js"
 import Equation from "./view/Equation.js"
 import Katex from "./katex.js"
 import katex from "katex"
+
+import UserActions from "./actions/user"
+import UserStore from "./stores/user"
 
 
 
@@ -31,32 +34,6 @@ window.model = {
 	}
 }
 
-
-
-var MenuList = React.createClass({
-	getInitialState: function () {
-		return {
-			selected: model.view_id
-		};
-	},
-	change: function(index){
-		console.log(index)
-		this.setState({selected: index})
-	},
-	render: function(){
-		var self = this;
-		var list = this.props.items.map(function(item,index){
-			var style = ""
-			if(self.state.selected == index){
-				style = "selected"
-			}
-			return <a className={style} href={item.href} onClick={self.change.bind(self,index)}>{item.text}</a>
-		})
-		return (<div>{list}</div>)
-	}
-}) 
-
-
 /*
 unused router may develop in future
 
@@ -73,47 +50,10 @@ var ViewChanger = React.createClass({
 });
 */
 
-var Menu = React.createClass({
-	getInitialState: function() {
-		return {
-			visible: false	
-		};
-	},
-
-	show: function() {
-		this.setState({ visible: true });
-		document.addEventListener("click", this.hide);
-	},
-
-	hide: function() {
-		document.removeEventListener("click", this.hide);
-		this.setState({ visible: false });
-	},
-
-	render: function() {
-		return (
-		<div className="">
-			<div className={"slide-menu-"+(this.state.visible ? "visible " : "")+ " slide-menu"}>
-				{this.props.children}
-			</div>
-		</div>);
-	}
-});
-
-var MenuItem = React.createClass({
-	navigate: function(hash) {
-		window.location.hash = hash;
-	},
-
-	render: function() {
-		return <div className="slide-menu-item" onClick={this.navigate.bind(this, this.props.hash)}>{this.props.children}</div>;
-	}
-});
-
 var App = React.createClass({
 	getInitialState: function(){
 		return {
-			page: 0,
+			user: ""
 		}
 	},
 	openMenu: function(){
@@ -121,48 +61,53 @@ var App = React.createClass({
 	},
 	componentDidMount: function(){
 		self = this
+		UserStore.listen((data) => {
+			console.log(data);
+			console.log(UserStore.getState());
+			this.setState(UserStore.getState().data)
+		})
 	},
 	render: function () {
+		let user;
+		if(this.state.user == ""){
+			user = (<Nav right eventKey={0}>
+					<ModalTrigger modal={<LoginModal />}>
+						<li><a>Вход</a></li>
+					</ModalTrigger>
+					<ModalTrigger modal={<RegisterModal />}>
+						<li><a>Регистрация</a></li>
+					</ModalTrigger>
+				</Nav>
+				)
+		}else{
+			user = (<Nav right eventKey={0}>
+				<DropdownButton navItem={true} title={this.state.user}>
+					<NavItem>Изход</NavItem>
+				</DropdownButton>
+				</Nav>
+				)
+		}
 		return (
 		<div>
 
-		<Navbar brand='Математика за всички' toggleNavKey={0}>
+		<Navbar inverse staticTop brand='Математика за всички' toggleNavKey={0}>
 			
-				<Nav right eventKey={0}>
+				<Nav left>
 					<NavItem eventKey={1} href='#'>Начало</NavItem>
 					<DropdownButton eventKey={2} href='#/Problem' navItem={true} title="Генератор">
 						<NavItem eventKey="2.1" href='#/Problem/EquivalentExpressions'>Tъждествени изрази</NavItem>
 						<NavItem eventKey="2.2" href='#/Problem/Equation'>Уравнения</NavItem>
 					</DropdownButton>
 					<NavItem eventKey={3} href='#/Problems'>Задачи</NavItem>
-
-					<DropdownButton eventKey={5} navItem={true} title="Вход">
-						<Input type="text" placeholder='Потребителско име'/>
-						<Input type="text" placeholder='Парола'/>
-
-					</DropdownButton>
-					<DropdownButton eventKey={6} navItem={true} title="Регистрация">
-
-					</DropdownButton>
-
 				</Nav>
-			
+				{user}
 		</Navbar>
 
 
 
-		<div>
-				<Menu ref="menu">
-					<MenuItem hash="#/">Начало</MenuItem>
-					<MenuItem hash="#/Problem/EquivalentExpressions"></MenuItem>
-					<MenuItem hash="#/Problem/Equation"></MenuItem>
-					<MenuItem hash="#/Problems"></MenuItem>
-				</Menu>
-
-				<Grid>
-					<RouteHandler/>
-				</Grid>					
-		</div>
+		<Grid>
+			<RouteHandler/>
+		</Grid>					
 				
 			
 

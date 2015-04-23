@@ -120,23 +120,6 @@ body
 	
 	margin-left: auto
 	margin-right: auto
-	>logo
-		line-height: $menu_heigth
-		height: $menu_heigth
-		color: #009AFD
-		margin-left: 65px 
-		font-size: 2.5em
-
-	>burger
-		position: absolute
-		top: 18px
-		left: 20px
-		width: 26px
-		height: 26px
-		cursor: pointer
-		content: " "
-		background-image: url("/burger.svg")
-		background-size: contain
 
 	>#user
 		width: 45%
@@ -274,47 +257,6 @@ input[type=url]
 	border: 1px solid rgba(39, 41, 43, 0.15)
 	padding: 5px
 	border-radius: 2px
-	
-.myButton
-	+box-shadow(inset, 0px, 1px, 0px, 0px, #ffffff)
-	+background-image(linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%))
-	+border-radius(6px)
-	border: 1px solid #dcdcdc
-	display: inline-block
-	cursor: pointer
-	color: #666666
-	font-family: arial
-	font-size: 15px
-	font-weight: bold
-	line-height: 30px
-	padding-left: 5px
-	padding-right: 5px
-	text-align: center
-
-.myButton:hover
-	+background-image(linear-gradient(top, #f6f6f6 5%, #ffffff 100%))
-	color: #009AFD
-
-.myButton:active
-	position:relative
-
-.alert_show
-	visibility: visible !important
-	opacity: 1 !important
-
-
-.alert
-	+transition(opacity,0.5s,linear)
-	+border-radius(4px)
-	visibility: hidden
-	opacity: 0
-	position: absolute
-	left: 20%
-	width: 60%
-	background: rgba(255,0,0,0.5)
-	line-height: 25px
-	margin-top: 18px
-	top: 0px
 
 .list
 	font: 400 1.21em KaTeX_Main
@@ -377,7 +319,7 @@ input[type=url]
 
 	.gen-item
 		border-bottom: 1px solid #ccc
-		line-height: 40px
+		
 		align-items: center
 		+display-flex()
 	.latex
@@ -400,3 +342,20 @@ input[type=url]
 
 .btn-toolbar
 	margin: 20px
+
+.example-enter
+	opacity: 0.01
+	transition: opacity 0.4s ease-in
+
+
+.example-enter.example-enter-active
+	opacity: 1
+
+
+.example-leave
+	opacity: 1
+	transition: opacity 0.1s ease-in
+
+
+.example-leave.example-leave-active
+	opacity: 0.01

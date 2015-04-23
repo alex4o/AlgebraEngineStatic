@@ -1,4 +1,8 @@
 import React from 'react';
+import Input from '../input';
+
+import {Row,Button,Navbar,Grid,Col,Panel,DropdownButton} from 'react-bootstrap';
+
 
 module.exports = React.createClass({
 	componentDidMount: function(){
@@ -36,51 +40,66 @@ module.exports = React.createClass({
 		var data = this.props.model.data
 
 		return (
-			<div className="form">
-				<div className="row scol" rel="Степен" >
-						<NumberInput value={data} bind="pow"/>
-				</div>
+			<Row>
+				<Panel header="Степен" >
+					<Col md={12}>
+						<Input.Number value={data} bind="pow"/>
+					</Col>
+				</Panel>
 
-				<div className="row scol" rel="Степен на скобите" >
-						Максимална <NumberInput value={data} bind="powTerm"/>
-				</div>
+				<Panel header="Степен на скобите" >
+					<Col md={12}>
+						Максимална <Input.Number value={data} bind="powTerm"/>
+					</Col>
+				</Panel>
 
-				<div className="row scol" rel="Променлива" >
-						<StringInput value={data} bind="let"/>
-				</div>
+				<Panel header="Променлива" >
+					<Col md={12}>
+						<Input.String value={data} bind="let"/>
+					</Col>
 
-				<div className="row" rel="Брой на скобите" >
-					<div className="col" >
-						Минимум <NumberInput value={data.Term} bind="min"/>
-					</div>
-					<div className="col" >
-						Максимум <NumberInput value={data.Term} bind="max"/>
-					</div>
-				</div>
-				<div className="row form sform" rel="Корени" >
-					<div className="row scol"  rel="Вид" >
-						Цели <RangeInput value={data.root} bind="type" min="0" max="100" /> Дробни
-					</div>
+				</Panel>
 
-					<div className="row" rel="Числител" >
-						<div className="col" >
-							максимум <NumberInput value={data.root.up} bind="high"/>
-						</div>
-						<div className="col" >
-							минимум <NumberInput value={data.root.up} bind="low"/>
-						</div>
-					</div>
+				<Panel header="Брой на скобите" >
+					<Col md={6}>
+						Минимум <Input.Number value={data.Term} bind="min"/>
+					</Col>
+					<Col md={6}>
+						Максимум <Input.Number value={data.Term} bind="max"/>
+					</Col>
+				</Panel>
+				<Panel header="Корени" >
+					<Panel header="Вид" >
+						<Col md={2} xs={1}>
+							Цели
+						</Col>
+						<Col md={8} xs={10}>
+							<Input.Range value={data.root} bind="type" min="0" max="100" />
+						</Col>
+						<Col md={2} xs={1}>
+							Дробни
+						</Col>
+					</Panel>
+
+					<Panel header="Числител" >
+						<Col md={6}>
+							максимум <Input.Number value={data.root.up} bind="high"/>
+						</Col>
+						<Col md={6}>
+							минимум <Input.Number value={data.root.up} bind="low"/>
+						</Col>
+					</Panel>
 					
-					<div className="row" rel="Знаменател" >
-						<div className="col" >
-							максимум <NumberInput value={data.root.down} bind="high"/>
-						</div>
-						<div className="col" >
-							минимум <NumberInput value={data.root.down} bind="low"/>
-						</div>
-					</div>
-				</div>
-			</div>
+					<Panel header="Знаменател" >
+						<Col md={6}>
+							максимум <Input.Number value={data.root.down} bind="high"/>
+						</Col>
+						<Col md={6}>
+							минимум <Input.Number value={data.root.down} bind="low"/>
+						</Col>
+					</Panel>
+				</Panel>
+			</Row>
 		);
     }
 });

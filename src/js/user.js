@@ -1,147 +1,61 @@
-var React = require('react');
-var Input = require("./input.js")
-
-
-module.exports = React.createClass({
-	getInitialState: function() {
-		var check_logged = function(){
-			if(sessionStorage.getItem("token") == null){
-				return {
-					logged_in: false
-				}
-
-			}
-
-			token = JSON.parse(atob(sessionStorage.getItem("token").split(".")[1]))
-			console.log("id " + token.user_id);
-			return({
-				logged_in: true ,
-				username: token.user
-			})
+import React from 'react';
+import {Modal,Input,Button} from "react-bootstrap"
+import UserActions from "./actions/user"
+class LoginModal extends React.Component
+{
+	login(){
+		let credentials = {
+			name: this.refs.name.getInputDOMNode().value,
+			pass: this.refs.pass.getInputDOMNode().value
 		}
-		var state = check_logged()
-		state.reg_popup = "hidden"
-		state.alert_msg = ""
-		return state
+		console.log(credentials)
+		UserActions.requestLogIn(credentials);
+	}
 
-	},
-	login: function(){
-		done = this.logged_in
-		error = this.error
-		superagent.post("/api/login/").send(this.props.data).end(function(res){
-			if(res.status != 200){
-				error("грешка в сървъра")
-			}
-			out = JSON.parse(atob(res.text.split(".")[1]))
-			console.log(out.user_id)
-			if(out.user_id > -1){
-				sessionStorage.setItem("token",res.text)
-				done()	
-			}else{
-				error("грешно потребителско име и/или парола")
-			}
-		});
-	},
-	error: function(msg){
-			this.setState({alert_msg: msg})
-			
-	},
-	logged_in: function(){
-		this.setState({ logged_in : true, username: this.props.data.name })
-	},
-	logout: function(){
-		sessionStorage.removeItem("token")
-		this.setState({ logged_in : false})
-
-	},
-	signup: function(){
-		console.log(this.refs)
-		this.refs.rform.show()
-		//this.setState({reg_popup:"visible"})
-
-	},
-	render: function () {
-		var data = this.props.data
-		let panel = {}
-		if(this.state.logged_in == false){
-			
-				panel = (<div>
-							<Input.String placeholder="Потребителско Име" value={data} bind="name" />
-							<Input.Pass placeholder="Парола" value={data} bind="pass" />
-							<div className="myButton" onClick={this.login}>Вход</div>
-							<div className="myButton" onClick={this.signup}>
-								Регистрация
-								<RegisterForm ref="rform"/>
-							</div>
-							<Alert error_message={this.state.alert_msg}/>
-						</div>)
-			
-		}else{
-			
-				panel = <div><span>{this.state.username}</span><div className="myButton" onClick={this.logout}>изход</div></div>
-		}
-
+	render(){
 		return (
-			<div>
-				{panel}
+		<Modal>
+			<div className='modal-body' bsStyle='primary' title='Вход'>
+				<form className=''>
+					<Input ref="name" type="text" label="Потребителско име"/>
+					<Input ref="pass" type="password" label="Парола"/>
+				</form>
+				<div className='modal-footer'>
+					<Button onClick={this.props.onRequestHide}>Затвори</Button>
+					<Button bsStyle='primary' onClick={this.login.bind(this)}>Влез</Button>
+				</div>
 			</div>
-		)
-	}
-});
-
-var Alert = React.createClass({
-	componentDidUpdate:function(old,news){
-		let alert_box = this.refs.alert_box.getDOMNode()
-		alert_box.classList.add("alert_show")
-		setTimeout(this.hide,1500)
-	},
-	hide:function(){
-		let alert_box = this.refs.alert_box.getDOMNode()
-		alert_box.classList.remove("alert_show")
-	},
-	render: function(){
- 		return (<div className="alert" ref="alert_box">{this.props.error_message}</div>)
+		</Modal>);
 
 	}
+}
 
-})
-
-var RegisterForm = React.createClass({
-	getInitialState: function() {
-		return {visability: "hidden"};
-	},
-	model: {
-		username: "",
-		password:"",
-		pr:""
-	},
-	show: function(){
-		this.setState({visability: "visible"})
-		console.log("show")
-	},
-	register: function(){
-		self = this
-		if(this.model.password == this.model.pr){
-			console.log(this.model)
-			delete this.model.pr
-			superagent.post("/api/signup/").send(this.model).end(function(res){
-				alert("Вие се регистрирахте.")
-				self.setState({visability: "hidden"})
-
-			});
-			console.log(this.model)
+class RegisterModal extends React.Component
+{
+	register(){
+		let credentials = {
+			name: this.refs.name.getInputDOMNode().value,
+			pass: this.refs.pass.getInputDOMNode().value,
+			passAgain: this.refs.passAgain.getInputDOMNode().value
 		}
-	},
-
-	render: function(){
-
-	return(
-		<div className="popup" style={{visibility: this.state.visability}}>
-			
-			<Input.String value={this.model} bind="username" placeholder="Пoтребителско име"/>
-			<Input.Pass value={this.model} bind="password" placeholder="Парола"/>
-			<Input.Pass value={this.model} bind="pr" placeholder="Поватряне на парола"/>
-			<div className="myButton" onClick={this.register}>Регистрирай</div>
-		</div>)
 	}
-})
+
+	render(){
+		return(<Modal>
+			<div className='modal-body' bsStyle='primary' title='Вход'>
+				<form className=''>
+					<Input ref="name" type="text" label="Потребителско име"/>
+					<Input ref="pass" type="password" label="Парола"/>
+					<Input ref="passAgain" type="password" label="Парола (повтори)"/>
+
+				</form>
+				<div className='modal-footer'>
+					<Button onClick={this.props.onRequestHide}>Затвори</Button>
+					<Button bsStyle='primary' onClick={this.register.bind(this)}>Ргистряция</Button>
+				</div>
+			</div>
+		</Modal>)
+	}
+}
+
+export {RegisterModal,LoginModal}

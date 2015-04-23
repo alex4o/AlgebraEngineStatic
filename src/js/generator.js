@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react/addons';
+var ReactTransitionGroup = React.addons.CSSTransitionGroup
 import {RouteHandler} from "react-router";
 import http from 'superagent';
 import katex from 'katex';
@@ -96,6 +97,7 @@ export default class Generator extends React.Component
 	}
 
 	render() {
+		var name = this.context.router.getCurrentPath();
 		return (
 			
 			<div>
@@ -110,10 +112,13 @@ export default class Generator extends React.Component
 						<ButtonToolbar>
 							<Button bsStyle='primary' onClick={this.submit.bind(this)}>Генерирай</Button>
 							<Button onClick={this.submit_more.bind(this)}>Генерирай няколко</Button>
-							<Togglemenuitem action={this.show.bind(this)} on="Скрий" off="Покажи">{'{0} отговорите'}</Togglemenuitem>
+							<ToggleButton action={this.show.bind(this)} on="Скрий" off="Покажи">{'{0} отговорите'}</ToggleButton>
 						</ButtonToolbar>
 					</div>
-					<RouteHandler model={window.model} check={checkStorageForDataOrReturnDefault}/>
+
+					<ReactTransitionGroup transitionLeave={false} component="div" transitionName="example">
+						<RouteHandler model={window.model} key={name} check={checkStorageForDataOrReturnDefault}/>
+					</ReactTransitionGroup>
 				</div>		
 				<PrintListComponent res={this.state.list}/>
 			</Col>
@@ -121,6 +126,10 @@ export default class Generator extends React.Component
 			</div>
 		);
 	}
+}
+
+Generator.contextTypes = {
+	router: React.PropTypes.func
 }
 
 var MathComponent = React.createClass({
@@ -195,7 +204,7 @@ var PrintListComponent = React.createClass({
 });
 
 
-var Togglemenuitem = React.createClass({
+var ToggleButton = React.createClass({
 	getInitialState: function() {
 		return {
 			activated: false	
