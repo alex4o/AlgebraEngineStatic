@@ -50,24 +50,33 @@ var ViewChanger = React.createClass({
 });
 */
 
-var App = React.createClass({
-	getInitialState: function(){
-		return {
+class App extends React.Component
+{
+	constructor(props){
+		super(props)
+		this.state = {
 			user: ""
 		}
-	},
-	openMenu: function(){
+	}
+
+	openMenu(){
 		this.refs.menu.show()
-	},
-	componentDidMount: function(){
+	}
+
+	componentDidMount(){
 		self = this
 		UserStore.listen((data) => {
-			console.log(data);
-			console.log(UserStore.getState());
+			console.log("update view");
 			this.setState(UserStore.getState().data)
 		})
-	},
-	render: function () {
+		UserActions.checkLogIn();
+	}
+
+	exit(){
+		UserActions.exit()
+	}
+
+	render() {
 		let user;
 		if(this.state.user == ""){
 			user = (<Nav right eventKey={0}>
@@ -82,7 +91,7 @@ var App = React.createClass({
 		}else{
 			user = (<Nav right eventKey={0}>
 				<DropdownButton navItem={true} title={this.state.user}>
-					<NavItem>Изход</NavItem>
+					<li onClick={this.exit}><a>Изход</a></li>
 				</DropdownButton>
 				</Nav>
 				)
@@ -116,7 +125,7 @@ var App = React.createClass({
 
 		);
 	}
-});
+}
 
 
 var routes = (

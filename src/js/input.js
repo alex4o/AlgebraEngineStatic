@@ -102,7 +102,7 @@ Range: React.createClass({
 		return {size: Math.abs(this.props.min)+Math.abs(this.props.max)}
 	},
 	onChange: function(e){
-
+		console.log(e.target.value)
 		this.props.value[this.props.bind][1] = e.target.value | 0;
 		this.props.value[this.props.bind][0] = this.props.max - e.target.value;
 

@@ -3,6 +3,10 @@ import {Modal,Input,Button} from "react-bootstrap"
 import UserActions from "./actions/user"
 class LoginModal extends React.Component
 {
+	componentDidMount() {
+		this.refs.name.getInputDOMNode().focus();
+	}
+
 	login(){
 		let credentials = {
 			name: this.refs.name.getInputDOMNode().value,
@@ -32,6 +36,10 @@ class LoginModal extends React.Component
 
 class RegisterModal extends React.Component
 {
+	componentDidMount() {
+		this.refs.name.getInputDOMNode().focus();
+	}
+
 	register(){
 		let credentials = {
 			name: this.refs.name.getInputDOMNode().value,

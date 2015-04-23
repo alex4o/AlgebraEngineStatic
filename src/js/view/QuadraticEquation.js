@@ -15,10 +15,7 @@ module.exports = React.createClass({
 	},
 
 	componentWillMount: function(){
-        this.props.model.addres = "/gen/QuadraticEquation/"
-
-		
-    	this.props.model.data = checkStorageForDataOrReturnDefault({
+		this.props.model.data = checkStorageForDataOrReturnDefault({
 			type : [50,50],
 			up	: {low:1 ,high:10},
 			down: {low:1 ,high:10}

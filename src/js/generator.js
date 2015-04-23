@@ -43,6 +43,8 @@ export default class Generator extends React.Component
 	}
 
 	submit(){
+		var name = this.context.router.getCurrentPath();
+		console.log(name)
 		model = window.model
 		self = this
 		localStorage[model.addres] = JSON.stringify(model.data)
@@ -53,16 +55,8 @@ export default class Generator extends React.Component
 
 			}else{
 				self.setState({math: {problem: "error",solution:" --- "} })
-
-				//katex.render("error",problem)
-
-
 			}
 		});
-		//alert(math)
-		//console.log(math)
-		
-		//this.setState({math: math})
 	}
 
 	submit_more(){
@@ -82,14 +76,8 @@ export default class Generator extends React.Component
 
 			}else{
 				//katex.render("error",problem)
-
-
 			}
 		});
-
-
-		//alert(math)
-		//console.log(math)
 	}
 
 	show(){
@@ -98,6 +86,7 @@ export default class Generator extends React.Component
 
 	render() {
 		var name = this.context.router.getCurrentPath();
+
 		return (
 			
 			<div>
@@ -130,7 +119,7 @@ export default class Generator extends React.Component
 
 Generator.contextTypes = {
 	router: React.PropTypes.func
-}
+};
 
 var MathComponent = React.createClass({
 	shouldComponentUpdate: function(nextProps, nextState) {
@@ -217,6 +206,6 @@ var ToggleButton = React.createClass({
 	},
 
 	render: function() {
-		return <Button onClick={this.call.bind(this)}>{this.props.children.format(this.state.activated ? this.props.on : this.props.off)}</Button>;
+		return <Button onClick={this.call}>{this.props.children.format(this.state.activated ? this.props.on : this.props.off)}</Button>;
 	}
 });

@@ -1,5 +1,5 @@
 var alt = require('../alt');
-var UserApi = require('../../api/UserApi');
+var UserApi = require('../api/UserApi');
 
 class UserActions {
 
@@ -21,11 +21,26 @@ class UserActions {
 
 	}
 
+	exit(){
+		this.dispatch();
+		sessionStorage.removeItem("token");
+		this.actions.receiveLoginToken({data :{user: ""}})
+	}
+
 	checkLogIn(){
 		this.dispatch();
-		var data = sessionStorage.getItem("token")
-		if(new Date(data.data.exp*1000) > Data.now()){
+		var data = JSON.parse(sessionStorage.getItem("token"))
+		console.log(data)
+		
+		if(data  == null){
+			this.actions.receiveLoginToken({data :{user: ""}})
+			return;
+		}
+
+		if(new Date(data.data.exp*1000) > Date.now()){
 			this.actions.receiveLoginToken(data)
+		}else{
+			this.actions.receiveLoginToken({data :{user: ""}})
 		}
 	}
 
@@ -35,7 +50,7 @@ class UserActions {
 
 		UserApi.login(credentials,function(res,err) {
 			if(res != null){
-				sessionStorage.setItem('token', JSON.stringify(res.data));
+				sessionStorage.setItem('token', JSON.stringify(res));
 				self.actions.receiveLoginToken(res);
 				console.log("received login token");
 			}else{

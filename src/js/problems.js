@@ -18,13 +18,15 @@ export default class Problems extends React.Component
 	componentDidMount() 
 	{
 		self = this;
-		http.get("/api/data/problems/").query({token: sessionStorage.getItem("token")}).end(this.update.bind(this));
+		http.get("/api/data/problems/").query({token: JSON.parse(sessionStorage.getItem("token")).token}).end(this.update.bind(this));
 	}
 
 	update(err,res)
 	{
+		let out = JSON.parse(res.text);
+
 		this.setState({
-			list: JSON.parse(res.text)
+			list: (out == undefined) ? out : [] 
 		});
 	}
 
