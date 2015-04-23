@@ -1,11 +1,13 @@
 import React from 'react/addons';
+
 var ReactTransitionGroup = React.addons.CSSTransitionGroup
+
 import {RouteHandler} from "react-router";
 import http from 'superagent';
 import katex from 'katex';
 import Katex from './katex';
 
-import {Col,Button,Navbar,Grid,ButtonToolbar,Panel,DropdownButton} from 'react-bootstrap';
+import {Col,Button,SplitButton,Grid,ButtonToolbar,Panel,DropdownButton,MenuItem} from 'react-bootstrap';
 
 String.prototype.format = function() {
 	var str = this.toString();
@@ -38,7 +40,8 @@ export default class Generator extends React.Component
 		this.state = {
 			math: [{problem: "", solution: ""}],
 			sv: false,
-			list: []
+			list: [],
+			cor:1
 		}
 	}
 
@@ -48,34 +51,21 @@ export default class Generator extends React.Component
 		model = window.model
 		self = this
 		localStorage[model.addres] = JSON.stringify(model.data)
-		http.post("/api" + model.addres).send(model.data).send({cor:1, token: sessionStorage.getItem("token")}).end(function(err, res){
-			if(res.status == 200){
-				model.res = JSON.parse(res.text)
-				self.setState({math: model.res})
-
-			}else{
-				self.setState({math: {problem: "error",solution:" --- "} })
+		var update = (val) => {
+			self.setState({math: val})
+		}
+		if(this.state.cor > 1){
+			update = (val) => {
+				self.setState({list: val})
 			}
-		});
-	}
+		}
 
-	submit_more(){
-		self = this
-		model = window.model
-
-		localStorage[model.addres] = JSON.stringify(model.data)
-		
-		
-		http.post("/api" + model.addres).send(model.data).send({cor:10, token: sessionStorage.getItem("token")}).end(function(err, res){
+		http.post("/api" + model.addres).send(model.data).send({cor: this.state.cor, token: sessionStorage.getItem("token")}).end(function(err, res){
 			if(res.status == 200){
 				model.res = JSON.parse(res.text)
-				console.log(model.res)
-
-				self.setState({list: model.res})
-				console.log(ofset)
-
+				update(model.res)
 			}else{
-				//katex.render("error",problem)
+				self.setState({math: [{problem: "error",solution:" --- "}] })
 			}
 		});
 	}
@@ -84,33 +74,34 @@ export default class Generator extends React.Component
 		this.setState({sv: !this.state.sv});
 	}
 
+	change(event){
+		this.setState({cor: event});
+	}
+
 	render() {
-		var name = this.context.router.getCurrentPath();
-
 		return (
-			
 			<div>
-
-	
-
 			<Col md={12}>
 				<MathComponent math={this.state.math} solutionVisable={this.state.sv}/>
 
 				<div>
 					<div>
 						<ButtonToolbar>
-							<Button bsStyle='primary' onClick={this.submit.bind(this)}>Генерирай</Button>
-							<Button onClick={this.submit_more.bind(this)}>Генерирай няколко</Button>
+							<SplitButton bsStyle='primary' onSelect={this.change.bind(this)} onClick={this.submit.bind(this)} title={"Генерирай " + this.state.cor}>
+								<MenuItem eventKey={1}>1</MenuItem>
+								<MenuItem eventKey={10}>10</MenuItem>
+								<MenuItem eventKey={25}>25</MenuItem>
+							</SplitButton>
 							<ToggleButton action={this.show.bind(this)} on="Скрий" off="Покажи">{'{0} отговорите'}</ToggleButton>
 						</ButtonToolbar>
 					</div>
 
 					<ReactTransitionGroup transitionLeave={false} component="div" transitionName="example">
-						<RouteHandler model={window.model} key={name} check={checkStorageForDataOrReturnDefault}/>
+						<RouteHandler model={window.model} key={window,model.addres} check={checkStorageForDataOrReturnDefault}/>
 					</ReactTransitionGroup>
 				</div>		
-				<PrintListComponent res={this.state.list}/>
 			</Col>
+				<PrintListComponent res={this.state.list}/>
 
 			</div>
 		);
@@ -125,30 +116,22 @@ var MathComponent = React.createClass({
 	shouldComponentUpdate: function(nextProps, nextState) {
 		return nextProps.math !== this.props.math || nextProps.solutionVisable !== this.props.solutionVisable;
 	},
-	componentDidUpdate:function(prevProps, prevState){
-
-		var problem = this.refs.problem.getDOMNode()
-		var solution = this.refs.solution.getDOMNode()
-		if(this.props.math !== prevProps.math){
-			katex.render(this.props.math[0].solution,solution)
-			katex.render(this.props.math[0].problem,problem)
-		}
-	},
 	componentDidMount: function() {
-		this.refs.problem.getDOMNode().innerHTML = "За да създадете задача натиснете генерирай"
+		console.log(React.findDOMNode(this.refs.problem))
+		React.findDOMNode(this.refs.problem).innerHTML = "За да създадете задача натиснете генерирай"
 	},
 	render: function(){
 		return (
 			<Panel>
-				<span id="result" ref="problem"></span>
-				<span style={{display:this.props.solutionVisable ? "block" : "none"}} ref="solution"></span>
+				<Katex ref="problem" id="result" problem={this.props.math[0].problem}/>
+				<Katex style={{display:this.props.solutionVisable ? "block" : "none"}} problem={this.props.math[0].solution}/>
 			</Panel>)
 	}
 })
 
 var PrintListComponent = React.createClass({
 	componentDidUpdate: function(){
-		ofset = document.getElementById("anchor").offsetTop;
+		let ofset = document.getElementById("anchor").offsetTop;
 		scrollTo(0,ofset)
 	},
 	shouldComponentUpdate: function(nextProps, nextState) {

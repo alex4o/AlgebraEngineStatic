@@ -26,21 +26,17 @@ export default class Problems extends React.Component
 		let out = JSON.parse(res.text);
 
 		this.setState({
-			list: (out == undefined) ? out : [] 
+			list: (out == undefined) ? [] : out 
 		});
 	}
 
 	render()
-	{
-
-
-		return (
-		
+	{return (
 		<div>
 			<h1>Генерирани задачи</h1>
 			<ProblemList list={this.state.list}/>
 		</div>
-		);
+	);
 	}
 }
 
@@ -67,7 +63,7 @@ class ProblemList extends React.Component
 	render(){
 
 		let ListItems = this.props.list.map(function(item,index){
-			return (<ProblemListItem height="49px" latex={item.t1}/>)
+			return (<ProblemListItem height="49px" key={index} latex={item.t1}/>)
 		})
 
 		return(
@@ -85,8 +81,8 @@ class ProblemListItem extends React.Component
         return (
             <div className="gen-item" style={{lineHeight:this.props.height}}>
 				<Katex problem={this.props.latex}/>
-				{/*<span className="control">Любима</span>
-				<span className="control">Изтрий</span>*/}
+				<span className="control">Любима</span>
+				<span className="control">Изтрий</span>
 			</div>
         );
     }

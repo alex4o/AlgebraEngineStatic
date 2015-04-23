@@ -17,7 +17,7 @@ class Katex extends React.Component
 	}
 
 	render(){
-		return(<span className="latex" ref="content" dangerouslySetInnerHTML={{__html: katex.renderToString(this.props.problem)}}></span>)
+		return(<span id={this.props.id} style={this.props.style} className="latex" ref="content" dangerouslySetInnerHTML={{__html: katex.renderToString(this.props.problem)}}></span>)
 	}
 }
 
