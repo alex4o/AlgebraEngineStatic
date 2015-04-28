@@ -5,15 +5,24 @@ import http from "superagent"
 // or the count of fileds to return
 
 export default class GeneratorApi{
-	generate(address,data,cor,token){
-			http.post("/api" + address).send(model.data).send({cor:cor, token: token}).end(function(err, res){
-			if(res.status == 200){
-				model.res = JSON.parse(res.text)
-				return model.res;
+	static generate(address,descriptor,cor,token,callback){
 
+		http.post("/api" + address).send(descriptor).send({cor:cor, token: token}).end(function(err, res){
+			console.log(err == null)
+			if(err == null){
+				let out = JSON.parse(res.text)
+				console.log(out);
+				if(cor > 1){
+					callback({list: out });
+
+				}else{
+					callback({math: out[0] });
+
+				}
 			}else{
-				return err;
+				callback(null,err);
 			}
 		});
+
 	}
 }

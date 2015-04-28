@@ -1,10 +1,16 @@
 import http from "superagent"
 
 export default class UserApi{
-	static createUser(credentials,callback){
+	static register(credentials,callback){
 		console.log(this.credentials)
-		http.post("/api/signup/").send(this.model).end(function(err,res){
-			callback()
+		console.log(credentials)
+		http.post("/api/signup/").send(credentials).end(function(err,res){
+			let out = JSON.parse(res.text);
+			if(!out.ok){
+				out.error = "Вече съществува потребител с такова име."
+			}
+			callback(out)
+
 		});
 	}
 

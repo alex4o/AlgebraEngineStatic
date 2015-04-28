@@ -7,13 +7,12 @@ class UserActions {
 		this.dispatch(token);
 	}
 
-	receiveLoginError(error) {
-		this.dispatch(error);
-	}
-
 	receiveRegisterStatus(status){
 		this.dispatch(status);
+	}
 
+	receiveLoginError(error){
+		this.dispatch(error);
 	}
 
 	receiveRegisterError(error){
@@ -41,7 +40,26 @@ class UserActions {
 			this.actions.receiveLoginToken(data)
 		}else{
 			this.actions.receiveLoginToken({data :{user: ""}})
+			sessionStorage.removeItem("token");
 		}
+	}
+
+	requestRegister(credentials){
+		var self = this;
+		this.dispatch();
+		if(credentials.pass.length < 6){
+			this.actions.receiveRegisterStatus({ok: false, error: "Паролате е по-къса от 6 сивмвола"})
+
+			return;
+		}
+
+		if(credentials.pass == credentials.passAgain){
+			delete credentials.passAgain;
+			UserApi.register(credentials,this.actions.receiveRegisterStatus);
+		}else{
+			this.actions.receiveRegisterStatus({ok: false, error: "Различни пароли, паролите трябва съвпадат"})
+		}
+
 	}
 
 	requestLogIn(credentials) {

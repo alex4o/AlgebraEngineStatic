@@ -9,6 +9,10 @@ import Katex from './katex';
 
 import {Col,Button,SplitButton,Grid,ButtonToolbar,Panel,DropdownButton,MenuItem} from 'react-bootstrap';
 
+import GeneratorStore from "./stores/generator"
+import GeneratorActions from "./actions/generator"
+
+
 String.prototype.format = function() {
 	var str = this.toString();
 	if (!arguments.length){
@@ -38,12 +42,19 @@ export default class Generator extends React.Component
 	{
 		super(props)
 		this.state = {
-			math: [{problem: "", solution: ""}],
+			math: {problem: "", solution: ""},
 			sv: false,
 			list: [],
 			cor:1
 		}
-	}
+
+		this.generated = ((data) => {
+			
+			this.setState(GeneratorStore.getState().results);
+
+		}).bind(this)
+	
+	 }
 
 	submit(){
 		var name = this.context.router.getCurrentPath();
@@ -51,23 +62,27 @@ export default class Generator extends React.Component
 		model = window.model
 		self = this
 		localStorage[model.addres] = JSON.stringify(model.data)
-		var update = (val) => {
-			self.setState({math: val})
-		}
-		if(this.state.cor > 1){
-			update = (val) => {
-				self.setState({list: val})
-			}
-		}
 
-		http.post("/api" + model.addres).send(model.data).send({cor: this.state.cor, token: sessionStorage.getItem("token")}).end(function(err, res){
-			if(res.status == 200){
-				model.res = JSON.parse(res.text)
-				update(model.res)
-			}else{
-				self.setState({math: [{problem: "error",solution:" --- "}] })
-			}
-		});
+		GeneratorActions.requestGenerate(model.addres,model.data,this.state.cor);
+	}
+
+	componentDidMount(){
+		GeneratorStore.listen(this.generated);
+	}
+
+	componentWillUnmount(){
+		GeneratorStore.unlisten(this.generated);
+	}
+
+	print(){
+		if(this.state.list.length > 1){
+			var shit = window.open()
+			let stringRenered =  React.renderToString(<PrintListComponent res={this.state.list}/>);
+			console.log(stringRenered)
+			shit.document.head.innerHTML = '<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.css">'
+			shit.document.body.innerHTML = stringRenered
+			shit.print()
+		}
 	}
 
 	show(){
@@ -92,7 +107,17 @@ export default class Generator extends React.Component
 								<MenuItem eventKey={10}>10</MenuItem>
 								<MenuItem eventKey={25}>25</MenuItem>
 							</SplitButton>
+
 							<ToggleButton action={this.show.bind(this)} on="Скрий" off="Покажи">{'{0} отговорите'}</ToggleButton>
+							<Button onClick={this.print.bind(this)}>Принтирай</Button>
+							<SplitButton title={"Настройки"}>
+								<MenuItem>Лесно  <Button>Изтрий</Button></MenuItem>
+								<MenuItem>Средно <Button>Изтрий</Button></MenuItem>
+								<MenuItem>Трудно <Button>Изтрий</Button></MenuItem>
+								<MenuItem>Създай нова</MenuItem>
+							</SplitButton>
+
+
 						</ButtonToolbar>
 					</div>
 
@@ -121,10 +146,11 @@ var MathComponent = React.createClass({
 		React.findDOMNode(this.refs.problem).innerHTML = "За да създадете задача натиснете генерирай"
 	},
 	render: function(){
+		console.log(this.props)
 		return (
 			<Panel>
-				<Katex ref="problem" id="result" problem={this.props.math[0].problem}/>
-				<Katex style={{display:this.props.solutionVisable ? "block" : "none"}} problem={this.props.math[0].solution}/>
+				<Katex ref="problem" id="result" problem={this.props.math.problem}/>
+				<Katex style={{display:this.props.solutionVisable ? "block" : "none"}} problem={this.props.math.solution}/>
 			</Panel>)
 	}
 })

@@ -4,7 +4,12 @@ import UserActions from "../actions/user"
 class UserStore
 {
 	constructor(){
-		this.bindActions({onReceiveLogin: UserActions.receiveLoginToken})
+		this.bindActions(
+			{
+				onReceiveLogin: UserActions.receiveLoginToken,
+				onReceiveRegisterStatus: UserActions.receiveRegisterStatus
+			}
+		)
 		this.data = {};
 	}
 
@@ -16,6 +21,11 @@ class UserStore
 		console.log("update store")
 	}
 
+	onReceiveRegisterStatus(status){
+		this.err = status.err
+
+	}
+
 	static tokenValid(){
 		if(this.exp == undefined){
 			return false;
@@ -24,6 +34,10 @@ class UserStore
 			return false;
 		}
 		return true;
+	}
+
+	static getToken(){
+		return this.token;
 	}
 }
 

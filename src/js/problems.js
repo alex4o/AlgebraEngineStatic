@@ -1,7 +1,8 @@
 import React from 'react';
 import http from 'superagent';
 import Katex from "./katex";
-
+import UserStore from "./stores/user"
+import UserActions from "./actions/user"
 
 export default class Problems extends React.Component
 {
@@ -17,8 +18,13 @@ export default class Problems extends React.Component
 
 	componentDidMount() 
 	{
-		self = this;
-		http.get("/api/data/problems/").query({token: JSON.parse(sessionStorage.getItem("token")).token}).end(this.update.bind(this));
+		self = this;	
+		UserStore.listen((data) => {
+			let state = UserStore.getState();
+			this.setState(state.data)
+			http.get("/api/data/problems/").query({token: state.token}).end(this.update.bind(this));
+		})
+		UserActions.checkLogIn();
 	}
 
 	update(err,res)
@@ -78,11 +84,20 @@ class ProblemList extends React.Component
 class ProblemListItem extends React.Component
 {
     render() {
+ 		let controls = <div></div>
+ 		if(this.props.controls){
+ 			controls = (
+ 				<div>
+ 					<span className="control">Любима</span>
+					<span className="control">Изтрий</span>
+				</div>
+			)
+ 		}   
+
         return (
             <div className="gen-item" style={{lineHeight:this.props.height}}>
 				<Katex problem={this.props.latex}/>
-				<span className="control">Любима</span>
-				<span className="control">Изтрий</span>
+				{controls}
 			</div>
         );
     }

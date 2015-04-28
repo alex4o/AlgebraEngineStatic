@@ -1,5 +1,5 @@
 import React from 'react';
-import Router, {Route,DefaultRoute,NotFoundRoute,RouteHandler} from "react-router";
+import Router, {Route,DefaultRoute,NotFoundRoute,RouteHandler,Transition} from "react-router";
 
 import {Alert,Button,Navbar,Grid,NavItem,Nav,DropdownButton,Input,ModalTrigger} from 'react-bootstrap';
 
@@ -53,6 +53,7 @@ var ViewChanger = React.createClass({
 class App extends React.Component
 {
 	constructor(props){
+		console.log(Route)
 		super(props)
 		this.state = {
 			user: ""
@@ -103,9 +104,9 @@ class App extends React.Component
 			
 				<Nav left>
 					<NavItem eventKey={1} href='#'>Начало</NavItem>
-					<DropdownButton eventKey={2} href='#/Problem' navItem={true} title="Генератор">
-						<NavItem eventKey="2.1" href='#/Problem/EquivalentExpressions'>Tъждествени изрази</NavItem>
-						<NavItem eventKey="2.2" href='#/Problem/Equation'>Уравнения</NavItem>
+					<DropdownButton eventKey={2} onSelect={(href) => {window.location.hash = href}} navItem={true} title="Генератор">
+						<NavItem eventKey='#/Problem/EquivalentExpressions'>Tъждествени изрази</NavItem>
+						<NavItem eventKey='#/Problem/Equation'>Уравнения</NavItem>
 					</DropdownButton>
 					<NavItem eventKey={3} href='#/Problems'>Задачи</NavItem>
 				</Nav>
