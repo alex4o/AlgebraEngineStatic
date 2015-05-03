@@ -77,9 +77,9 @@ export default class Generator extends React.Component
 	print(){
 		if(this.state.list.length > 1){
 			var shit = window.open()
-			let stringRenered =  React.renderToString(<PrintListComponent res={this.state.list}/>);
-			console.log(stringRenered)
-			shit.document.head.innerHTML = '<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.css">'
+			let stringRenered =  React.renderToString(<PrintableList res={this.state.list}/>);
+
+			shit.document.head.innerHTML = '<link rel="stylesheet" href="http://math4all.mgberon.com/css/main.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">'
 			shit.document.body.innerHTML = stringRenered
 			shit.print()
 		}
@@ -125,8 +125,9 @@ export default class Generator extends React.Component
 						<RouteHandler model={window.model} key={window,model.addres} check={checkStorageForDataOrReturnDefault}/>
 					</ReactTransitionGroup>
 				</div>		
-			</Col>
 				<PrintListComponent res={this.state.list}/>
+
+			</Col>
 
 			</div>
 		);
@@ -155,10 +156,42 @@ var MathComponent = React.createClass({
 	}
 })
 
+class PrintableList extends React.Component
+{
+	render() {
+		let problems = this.props.res.map(function(result,iter){
+			return (<div className="items">
+				<span className="num">{iter+1}</span>
+				<Katex problem={result.problem} />
+				</div>)
+		})
+
+		let solution = this.props.res.map(function(result,iter){
+			return (<div className="items">
+				<span className="num">{iter+1}</span>
+				<Katex problem={result.solution} />
+				</div>)
+		})
+
+
+		return (
+
+			<div className="list">
+				Задачи:
+				{problems}
+				<br />
+				Отговори:
+				{solution}
+			</div>
+		)
+	}
+}
+
 var PrintListComponent = React.createClass({
 	componentDidUpdate: function(){
-		let ofset = document.getElementById("anchor").offsetTop;
-		scrollTo(0,ofset)
+		let anchor = document.getElementById("jumppos");
+		console.log(anchor)
+		scrollTo(0,anchor.offsetTop)
 	},
 	shouldComponentUpdate: function(nextProps, nextState) {
 		return nextProps.res !== this.props.res;
@@ -190,7 +223,7 @@ var PrintListComponent = React.createClass({
 
 		return (
 
-			<div id="anchor" style={st} className="list">
+			<div id="jumppos" style={st} className="list">
 				Задачи:
 				{problems}
 				<br />

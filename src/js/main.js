@@ -12,6 +12,8 @@ import Generator from "./generator"
 
 import EquivalentExpressions from"./view/EquivalentExpressions.js"
 import Equation from "./view/Equation.js"
+import Inequation from "./view/Inequation.js"
+
 import Katex from "./katex.js"
 import katex from "katex"
 
@@ -107,6 +109,8 @@ class App extends React.Component
 					<DropdownButton eventKey={2} onSelect={(href) => {window.location.hash = href}} navItem={true} title="Генератор">
 						<NavItem eventKey='#/Problem/EquivalentExpressions'>Tъждествени изрази</NavItem>
 						<NavItem eventKey='#/Problem/Equation'>Уравнения</NavItem>
+						<NavItem eventKey='#/Problem/Inequation'>Неравенства</NavItem>
+
 					</DropdownButton>
 					<NavItem eventKey={3} href='#/Problems'>Задачи</NavItem>
 				</Nav>
@@ -128,7 +132,6 @@ class App extends React.Component
 	}
 }
 
-
 var routes = (
   <Route handler={App} path="/">
     <DefaultRoute handler={Home} />
@@ -137,6 +140,9 @@ var routes = (
     <Route name="problems" handler={Generator}>
       <Route name="" path="/Problem/Equation" handler={Equation} />
       <Route name="" path="/Problem/EquivalentExpressions" handler={EquivalentExpressions} />
+      <Route name="" path="/Problem/Inequation" handler={Inequation} />
+
+
     </Route>
   </Route>
 );
