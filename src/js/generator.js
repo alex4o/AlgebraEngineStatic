@@ -7,11 +7,13 @@ import http from 'superagent';
 import katex from 'katex';
 import Katex from './katex';
 
-import {Col,Button,SplitButton,Grid,ButtonToolbar,Panel,DropdownButton,MenuItem} from 'react-bootstrap';
+import {Col,Button,SplitButton,Grid,ButtonToolbar,Panel,DropdownButton,MenuItem,Modal,ModalTrigger,Table,ListGroupItem} from 'react-bootstrap';
 
 import GeneratorStore from "./stores/generator"
 import GeneratorActions from "./actions/generator"
 
+import SettingsActions from "./actions/settings"
+import SettingsStore from "./stores/settings"
 
 String.prototype.format = function() {
 	var str = this.toString();
@@ -32,6 +34,66 @@ function checkStorageForDataOrReturnDefault(def){
 		return JSON.parse(localStorage[window.model.addres]);
 	}else{
 		return def
+	}
+}
+
+
+class SettingsModal extends React.Component
+{
+	constructor(props){
+		super(props)
+		console.log(SettingsActions);
+		SettingsActions.getSettings();
+		this.state = SettingsStore.getState();
+	}
+
+
+
+	new(){
+		SettingsActions.createSetting();
+		this.setState(SettingsStore.getState())
+	}
+
+	render(){
+		return (<Modal>
+			<div className='modal-body' bsStyle='primary' title='Вход'>
+				Настройки
+				<Table responsive>
+					<thead>
+						<tr>
+						<th>#</th>
+						<th>Име на настройка</th>
+						<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						{this.state.settings.map((item,index) => {return <SettingsItem index={index} name={item.name}/>})}
+					</tbody>
+				</Table>
+				<Button onClick={this.save.bind(this)}>Запази текуща</Button>
+
+				
+				<div className='modal-footer'>
+					<Button onClick={this.props.onRequestHide}>Затвори</Button>
+
+					<Button onClick={this.new.bind(this)}>Нова</Button>
+
+
+				</div>
+			</div>
+			</Modal>
+		)
+	}
+}
+
+class SettingsItem extends React.Component
+{
+	render(){
+		return(<tr>
+		<td>{this.props.index}</td>
+		<td>{this.props.name}</td>
+		<td><a>Изтрий</a></td>
+		</tr>)
 	}
 }
 
@@ -76,12 +138,21 @@ export default class Generator extends React.Component
 
 	print(){
 		if(this.state.list.length > 1){
-			var shit = window.open()
-			let stringRenered =  React.renderToString(<PrintableList res={this.state.list}/>);
 
-			shit.document.head.innerHTML = '<link rel="stylesheet" href="http://math4all.mgberon.com/css/main.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">'
-			shit.document.body.innerHTML = stringRenered
-			shit.print()
+			let page =
+			`
+			<!DOCTYPE html>
+			<head>
+				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">
+				<link rel="stylesheet" type="text/css" href="/css/main.css">
+			</head>
+			<body>
+				${React.renderToString(<PrintableList res={this.state.list}/>)}
+			</body>`;
+
+			var w = window.open();
+			w.document.write(page);
+			w.print()
 		}
 	}
 
@@ -104,18 +175,17 @@ export default class Generator extends React.Component
 						<ButtonToolbar>
 							<SplitButton bsStyle='primary' onSelect={this.change.bind(this)} onClick={this.submit.bind(this)} title={"Генерирай " + this.state.cor}>
 								<MenuItem eventKey={1}>1</MenuItem>
+								<MenuItem eventKey={5}>5</MenuItem>
 								<MenuItem eventKey={10}>10</MenuItem>
-								<MenuItem eventKey={25}>25</MenuItem>
+								<MenuItem eventKey={20}>20</MenuItem>
+
 							</SplitButton>
 
 							<ToggleButton action={this.show.bind(this)} on="Скрий" off="Покажи">{'{0} отговорите'}</ToggleButton>
 							<Button onClick={this.print.bind(this)}>Принтирай</Button>
-							<SplitButton title={"Настройки"}>
-								<MenuItem>Лесно  <Button>Изтрий</Button></MenuItem>
-								<MenuItem>Средно <Button>Изтрий</Button></MenuItem>
-								<MenuItem>Трудно <Button>Изтрий</Button></MenuItem>
-								<MenuItem>Създай нова</MenuItem>
-							</SplitButton>
+							<ModalTrigger modal={<SettingsModal />}>
+								<SplitButton title={"Настройки"}></SplitButton>	
+							</ModalTrigger>
 
 
 						</ButtonToolbar>
@@ -149,7 +219,7 @@ var MathComponent = React.createClass({
 	render: function(){
 		console.log(this.props)
 		return (
-			<Panel>
+			<Panel id="resCont">
 				<Katex ref="problem" id="result" problem={this.props.math.problem}/>
 				<Katex style={{display:this.props.solutionVisable ? "block" : "none"}} problem={this.props.math.solution}/>
 			</Panel>)

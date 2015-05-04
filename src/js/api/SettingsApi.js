@@ -8,4 +8,13 @@ export default class SettingsApi{
 	static saveSetting(credentials,callback){
 
 	}
+
+	static getSettings(token){
+		return [
+				{name: "Лесно"},
+				{name: "Трудно"},
+				{name: "Невъзможно"}
+			]
+
+	}
 }

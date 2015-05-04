@@ -27,10 +27,6 @@ window.model = {
 
 	},
 	addres: "",
-	user: {
-		name: "",
-		pass: ""
-	},
 	res :{
 
 	}
@@ -55,7 +51,6 @@ var ViewChanger = React.createClass({
 class App extends React.Component
 {
 	constructor(props){
-		console.log(Route)
 		super(props)
 		this.state = {
 			user: ""
@@ -103,7 +98,7 @@ class App extends React.Component
 		<div>
 
 		<Navbar inverse staticTop brand='Математика за всички' toggleNavKey={0}>
-			
+
 				<Nav left>
 					<NavItem eventKey={1} href='#'>Начало</NavItem>
 					<DropdownButton eventKey={2} onSelect={(href) => {window.location.hash = href}} navItem={true} title="Генератор">
@@ -121,9 +116,9 @@ class App extends React.Component
 
 		<Grid>
 			<RouteHandler/>
-		</Grid>					
-				
-			
+		</Grid>
+
+
 
 		</div>
 
@@ -152,4 +147,3 @@ Router.run(routes, function (Handler,state) {
 });
 
 //React.render(<App/>,document.body)
-

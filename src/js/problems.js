@@ -4,31 +4,40 @@ import Katex from "./katex";
 import UserStore from "./stores/user"
 import UserActions from "./actions/user"
 
+
+import katex from 'katex';
+
 export default class Problems extends React.Component
 {
 	constructor(props)
 	{
-		
 		super(props);
 		this.state = {
 		  list: [],
+		  fullyloaded: false,
 		  starlist: []
 		};
-	}
 
-	componentDidMount() 
-	{
-		self = this;	
-		UserStore.listen((data) => {
+		this.listen = (data) => {
 			let state = UserStore.getState();
 			this.setState(state.data)
 			http.get("/api/data/problems/").query({token: state.token}).end(this.update.bind(this));
-		})
-		UserActions.checkLogIn();
+		}.bind(this);
 	}
 
-	update(err,res)
-	{
+	componentDidMount() {
+		self = this;	
+		UserStore.listen(this.listen)
+		UserActions.checkLogIn();
+
+
+	}
+
+	componentWillUnmount() {
+		UserStore.unlisten(this.listen)
+	}
+
+	update(err,res)	{
 		let out = JSON.parse(res.text);
 
 		this.setState({
@@ -36,8 +45,8 @@ export default class Problems extends React.Component
 		});
 	}
 
-	render()
-	{return (
+	render(){
+	return (
 		<div>
 			<h1>Генерирани задачи</h1>
 			<ProblemList list={this.state.list}/>
@@ -48,41 +57,83 @@ export default class Problems extends React.Component
 
 class ProblemList extends React.Component
 {
+	constructor(props)
+	{
+		
+		super(props);
+		this.state = {
+			loaded: 0
+		};
+	}
+
 	componentDidMount(){
 		this.scrollb = this.scroll.bind(this); //binded scrol function
 		window.addEventListener("scroll", this.scrollb);
-		this.setState({offset: this.refs.list.getDOMNode().offsetTop});
+		this.offset = React.findDOMNode(this.refs.list).getBoundingClientRect().top;
+		console.log(this.refs)
+
+
+		//this.scrollb();
+	}
+
+	componentWillReceiveProps(nextProps){
+	
+	}
+
+	componentDidUpdate(nextProps, nextState){
+		if(this.refs[0] == null) return;
+		for(let i = 0; i <= 25; i++){
+			this.refs[i].show();
+		}
 	}
 
 	scroll(one){
-		var offset = scrollY - this.state.offset;
-		if(offset < 0){
-			offset = 0;
+		var offset =  window.scrollY - (this.offset);
+		var offset = offset < 0 ? 0 : offset;
+		var offsetEnd = offset + window.innerHeight;
+		let start = Math.ceil(offset/50);
+		let end = Math.ceil(offsetEnd/50);
+
+
+		for(let i = start; i <= end; i++){
+			this.refs[i].show();
 		}
-		console.log(offset/50)
+		//console.log(offset/50)
 	}
 
 	componentWillUnmount() {
+		console.log("Problems unmouned")
 		window.removeEventListener("scroll",this.scrollb)
 	}
 
 	render(){
-
-		let ListItems = this.props.list.map(function(item,index){
-			return (<ProblemListItem height="49px" key={index} latex={item.t1}/>)
-		})
-
 		return(
 			<div ref="list" style={{height: this.props.list.length*50}} className="gen-list">
-				{ListItems}
+				{this.props.list.map((item,index) => {
+					return <ProblemListItem key={index} ref={index} latex={item.t1}/>
+				})}
 			</div>
 		)
-
 	}
 }
 
 class ProblemListItem extends React.Component
 {
+	constructor(props){
+		super(props)
+		//this.state = {content: <div></div>};
+		this.show = this.exec;
+	}
+
+	exec() {
+		this.setState({__html: katex.renderToString(this.props.latex)});
+		this.show = () => {};
+	}
+
+	componentWillReceiveProps(nextProps){
+		this.show = this.exec;
+	}
+
     render() {
  		let controls = <div></div>
  		if(this.props.controls){
@@ -95,8 +146,9 @@ class ProblemListItem extends React.Component
  		}   
 
         return (
-            <div className="gen-item" style={{lineHeight:this.props.height}}>
-				<Katex problem={this.props.latex}/>
+            <div className="gen-item">
+            	<span dangerouslySetInnerHTML={this.state}></span>
+            	
 				{controls}
 			</div>
         );

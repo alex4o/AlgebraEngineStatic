@@ -12,12 +12,7 @@ module.exports = {
 	        	test: /\.js$/,
 	        	exclude: /node_modules/,
 	        	loader: 'babel?cacheDirectory=true'
-	        },
-	        {
-	        	test: /\.sass?$/,
-
-	        	loader: "style!css!sass?indentedSyntax"
-	    	}
+	        }
 	    ]
 	},
 	plugins: [

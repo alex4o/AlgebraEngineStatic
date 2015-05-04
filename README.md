@@ -1,7 +1,12 @@
 AlgebraEngineStatic
 ==================
 
- - React.js as views
- - Supaeragent for easy ajax
- - Used compass to compile sass and scss
- - KaTeX used for displaying math expressions
+ - React.js тове е основната библиотека използвахме я за целия дизайн
+ - Superagent - за лесни заявки със ajax и изплозване на promises
+ - compass - това не е библиотека ами това което използвам за компилиране на sass
+ - KaTeX - за преобразуване на LaTex в html основно
+ - react-router - за това на коя страница кое view да се покзава 
+ - webpack - за да компилирам всичко и да го събера в един файл за по бързо зареждане на страницата
+ - babel - за да пиша es6 с jsx извиквам го через webpack
+ - alt - за ло използванe на flux архитектурата
+ - react-bootstrap - за да пиша направо html тагове вместо стилове така изглежда по добре

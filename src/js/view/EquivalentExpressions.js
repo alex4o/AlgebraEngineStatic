@@ -25,7 +25,7 @@ module.exports = React.createClass({
 				max:3
 			},
 			coef:
-			{			
+			{
 				type : [50,50],
 				up	: {low:1 ,high:10},
 				down: {low:1 ,high:10}
@@ -87,7 +87,7 @@ module.exports = React.createClass({
 						Дробни
 					</Col>
 					</Panel>
-						
+
 					<Panel header="Числител" >
 						<Col md={6}>
 							максимум <Input.Number value={data.coef.up} bind="high"/>
@@ -96,7 +96,7 @@ module.exports = React.createClass({
 							минимум <Input.Number value={data.coef.up} bind="low"/>
 						</Col>
 					</Panel>
-					
+
 					<Panel header="Знаменател" >
 						<Col md={6}>
 							максимум <Input.Number value={data.coef.down} bind="high"/>
@@ -106,7 +106,7 @@ module.exports = React.createClass({
 						</Col>
 					</Panel>
 				</Panel>
-				
+
 				<Panel header="Коефициенти пред скобите" >
 					<Panel header="Вид " >
 						<Col md={2} xs={1}>
@@ -119,7 +119,7 @@ module.exports = React.createClass({
 							Дробни
 						</Col>
 					</Panel>
-						
+
 					<Panel header="Числител" >
 						<Col md={6}>
 							максимум <Input.Number value={data.tcoef.up} bind="high"/>
@@ -128,7 +128,7 @@ module.exports = React.createClass({
 							минимум <Input.Number value={data.tcoef.up} bind="low"/>
 						</Col>
 					</Panel>
-					
+
 					<Panel header="Знаменател" >
 						<Col md={6}>
 							максимум <Input.Number value={data.tcoef.down} bind="high"/>

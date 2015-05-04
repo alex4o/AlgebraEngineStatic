@@ -13,7 +13,7 @@ module.exports = React.createClass({
 	componentWillMount: function(){
 		this.props.model.addres = "/gen/Equation/"
 
-		
+
 		this.props.model.data = this.props.check({
 			pow : 2,
 			powTerm: 2,
@@ -28,8 +28,19 @@ module.exports = React.createClass({
 			{
 				min:1,
 				max:3
+			},
+			coef:
+			{
+				type : [50,50],
+				up	: {low:1 ,high:10},
+				down: {low:1 ,high:10}
+			},
+			tcoef:
+			{
+				type : [50,50],
+				up	: {low:1 ,high:7},
+				down: {low:1 ,high:10}
 			}
-			
 		});
 
 	},
@@ -89,13 +100,77 @@ module.exports = React.createClass({
 							минимум <Input.Number value={data.root.up} bind="low"/>
 						</Col>
 					</Panel>
-					
+
 					<Panel header="Знаменател" >
 						<Col md={6}>
 							максимум <Input.Number value={data.root.down} bind="high"/>
 						</Col>
 						<Col md={6}>
 							минимум <Input.Number value={data.root.down} bind="low"/>
+						</Col>
+					</Panel>
+				</Panel>
+
+								<Panel header="Коефициенти пред променливите" >
+					<Panel header="Вид" >
+					<Col md={2} xs={1}>
+						Цели
+					</Col>
+					<Col md={8} xs={10}>
+						<Input.Range value={data.coef} bind="type" min="0" max="100" />
+					</Col>
+					<Col md={2} xs={1}>
+						Дробни
+					</Col>
+					</Panel>
+						
+					<Panel header="Числител" >
+						<Col md={6}>
+							максимум <Input.Number value={data.coef.up} bind="high"/>
+						</Col>
+						<Col md={6}>
+							минимум <Input.Number value={data.coef.up} bind="low"/>
+						</Col>
+					</Panel>
+					
+					<Panel header="Знаменател" >
+						<Col md={6}>
+							максимум <Input.Number value={data.coef.down} bind="high"/>
+						</Col>
+						<Col md={6}>
+							минимум <Input.Number value={data.coef.down} bind="low"/>
+						</Col>
+					</Panel>
+				</Panel>
+				
+				<Panel header="Коефициенти пред скобите" >
+					<Panel header="Вид " >
+						<Col md={2} xs={1}>
+							Цели
+						</Col>
+						<Col md={8} xs={10}>
+							<Input.Range value={data.tcoef} bind="type" min="0" max="100" />
+						</Col>
+						<Col md={2} xs={1}>
+							Дробни
+						</Col>
+					</Panel>
+						
+					<Panel header="Числител" >
+						<Col md={6}>
+							максимум <Input.Number value={data.tcoef.up} bind="high"/>
+						</Col>
+						<Col md={6}>
+							минимум <Input.Number value={data.tcoef.up} bind="low"/>
+						</Col>
+					</Panel>
+					
+					<Panel header="Знаменател" >
+						<Col md={6}>
+							максимум <Input.Number value={data.tcoef.down} bind="high"/>
+						</Col>
+						<Col md={6}>
+							минимум <Input.Number value={data.tcoef.down} bind="low"/>
 						</Col>
 					</Panel>
 				</Panel>
