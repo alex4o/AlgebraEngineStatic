@@ -1,6 +1,8 @@
-import React from 'react/addons';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-var ReactTransitionGroup = React.addons.CSSTransitionGroup
+import Addons from "react-addons"
+var ReactTransitionGroup = Addons.CSSTransitionGroup
 
 import {RouteHandler} from "react-router";
 import http from 'superagent';
@@ -28,75 +30,19 @@ String.prototype.format = function() {
 }
 
 
-//will be replaced by Flux architectur soon
+//will be replaced by Flux architectur soon. Or just integrate flux in this.
 function checkStorageForDataOrReturnDefault(def){
-	if(localStorage[window.model.addres] != null && localStorage[window.model.addres] != ""){
-		return JSON.parse(localStorage[window.model.addres]);
-	}else{
+	let state = SettingsStore.getState()
+	if(state.settings[state.selectedType] == null || state.settings[state.selectedType].length == 0){
+		console.log("Settings: using default")
+		SettingsActions.add(state.selectedType, def, "Стандартна")
+		SettingsActions.select(0);
 		return def
+	}else{
+		console.log("Settings: using saved")
+		return state.settings[state.selectedType][0].setting;
 	}
 }
-
-
-class SettingsModal extends React.Component
-{
-	constructor(props){
-		super(props)
-		console.log(SettingsActions);
-		SettingsActions.getSettings();
-		this.state = SettingsStore.getState();
-	}
-
-
-
-	new(){
-		SettingsActions.createSetting();
-		this.setState(SettingsStore.getState())
-	}
-
-	render(){
-		return (<Modal>
-			<div className='modal-body' bsStyle='primary' title='Вход'>
-				Настройки
-				<Table responsive>
-					<thead>
-						<tr>
-						<th>#</th>
-						<th>Име на настройка</th>
-						<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						{this.state.settings.map((item,index) => {return <SettingsItem index={index} name={item.name}/>})}
-					</tbody>
-				</Table>
-				<Button onClick={this.save.bind(this)}>Запази текуща</Button>
-
-				
-				<div className='modal-footer'>
-					<Button onClick={this.props.onRequestHide}>Затвори</Button>
-
-					<Button onClick={this.new.bind(this)}>Нова</Button>
-
-
-				</div>
-			</div>
-			</Modal>
-		)
-	}
-}
-
-class SettingsItem extends React.Component
-{
-	render(){
-		return(<tr>
-		<td>{this.props.index}</td>
-		<td>{this.props.name}</td>
-		<td><a>Изтрий</a></td>
-		</tr>)
-	}
-}
-
 
 export default class Generator extends React.Component
 {
@@ -105,35 +51,78 @@ export default class Generator extends React.Component
 		super(props)
 		this.state = {
 			math: {problem: "", solution: ""},
-			sv: false,
 			list: [],
-			cor:1
+			cor:1,
+			settings: [],
+			selectedSetting: {},
+			selectedSettingIndex: 0,
+			path: "",
+			error: false
 		}
 
-		this.generated = ((data) => {
-			
-			this.setState(GeneratorStore.getState().results);
-
+		this.settings = ((data) => {
+			console.log("Settings: updated")
+			this.setState(SettingsStore.getState());
 		}).bind(this)
+
+		this.generated = ((data) => {
+			this.setState(GeneratorStore.getState());
+		})
 	
-	 }
+	}
+
+
+	errorCheck(isErrorPresent,error,callback,value){
+		if(isErrorPresent){
+			this.setState({error: true});
+			error();
+
+		}else{
+			this.setState({error: false});
+			callback(value);
+		}
+	}
+
+	numberTransform(value,callback,error){
+		let res = parseInt(value.trim(),10);
+		this.errorCheck(isNaN(value) || res == NaN || value.trim() == "",error,callback,res);
+	}
+
+	charCheck(value,callback,error){
+		this.errorCheck(value.length != 1 || value.match(/[a-zA-Z]/i) == null,error,callback,value);
+	}
+
+	stringCheck(value,callback,error){
+		this.errorCheck(!(/^[a-zA-Z]*$/ .test(value)),error,callback,value);
+	}
 
 	submit(){
-		var name = this.context.router.getCurrentPath();
 		console.log(name)
-		model = window.model
-		self = this
-		localStorage[model.addres] = JSON.stringify(model.data)
+		SettingsActions.save(this.state.selectedType, this.state.selectedSetting, this.state.selectedSettingIndex)
+		GeneratorActions.generate(this.state.selectedType, this.state.selectedSetting, this.state.cor);
+	}
 
-		GeneratorActions.requestGenerate(model.addres,model.data,this.state.cor);
+
+
+	componentWillMount(){
+		console.log("Generator: mounting")
+		SettingsStore.listen(this.settings);
+		GeneratorStore.listen(this.generated);
 	}
 
 	componentDidMount(){
-		GeneratorStore.listen(this.generated);
+		console.log("Generator: mounted")
 	}
 
 	componentWillUnmount(){
 		GeneratorStore.unlisten(this.generated);
+		SettingsStore.unlisten(this.settings);
+	}
+
+	subViewChanged(path){
+		console.log("Subview: changed")
+		SettingsActions.load(path);
+		//this.setState({path: path});
 	}
 
 	print(){
@@ -157,44 +146,98 @@ export default class Generator extends React.Component
 	}
 
 	show(){
-		this.setState({sv: !this.state.sv});
+		this.refs.math.toggle();
+
+		
 	}
 
-	change(event){
-		this.setState({cor: event});
+	settingSelected(event, key){
+		if(key != null){
+			console.log("Settings: selected (" + key + ")")
+			SettingsActions.select(key)
+			this.setState({selectedSettingIndex: key})
+		}
+	}
+
+	settingNew(event){
+		alert("New setting will be crated. Please stand by.")
+		var name = prompt("Name:")
+		if(name == null || name.length == 0){
+			return;
+		}
+		SettingsActions.add(this.state.selectedType, this.state.selectedSetting, name)
+	}
+
+//cor == count of return
+	changeCor(event,key){
+		console.log(event, key)
+		this.setState({cor: key})
+	}
+
+	renderSettingsMenu(){
+		let settings = this.state.settings[this.state.selectedType]
+		if(settings == null){
+			return(<span />)
+		}
+		if(settings.length == 0){
+			return(<span />)
+		}
+
+		return(
+			<SplitButton id="settings-dropdown" title={"Настройки"} onSelect={this.settingSelected.bind(this)}>
+				{settings.map((item,index) => {
+					return <MenuItem key={index} eventKey={index}>{item.name}<Button eventKey={null} onClick={(event) => { event.preventDefault();SettingsActions.remove(this.state.selectedType, index) }} bsStyle="link" bsSize="xsmall">X</Button></MenuItem>
+				})}
+				<MenuItem divider />
+				<MenuItem onSelect={this.settingNew.bind(this)}>Нова настройка</MenuItem>
+			</SplitButton>
+			)
 	}
 
 	render() {
+		
 		return (
 			<div>
 			<Col md={12}>
-				<MathComponent math={this.state.math} solutionVisable={this.state.sv}/>
+				<MathComponent math={this.state.math} ref="math"/>
 
 				<div>
 					<div>
 						<ButtonToolbar>
-							<SplitButton bsStyle='primary' onSelect={this.change.bind(this)} onClick={this.submit.bind(this)} title={"Генерирай " + this.state.cor}>
+							<SplitButton  disabled={this.state.error} bsStyle='primary' onSelect={this.changeCor.bind(this)} onClick={this.submit.bind(this)} title={"Генерирай " + this.state.cor} id="dropdown-count">
 								<MenuItem eventKey={1}>1</MenuItem>
 								<MenuItem eventKey={5}>5</MenuItem>
 								<MenuItem eventKey={10}>10</MenuItem>
-								<MenuItem eventKey={20}>20</MenuItem>
 
 							</SplitButton>
 
 							<ToggleButton action={this.show.bind(this)} on="Скрий" off="Покажи">{'{0} отговорите'}</ToggleButton>
-							<Button onClick={this.print.bind(this)}>Принтирай</Button>
-							<ModalTrigger modal={<SettingsModal />}>
-								<SplitButton title={"Настройки"}></SplitButton>	
-							</ModalTrigger>
+							{this.renderSettingsMenu()}
+							
+
+							{/*<ModalTrigger modal={<SettingsModal />}>
+								
+							</ModalTrigger>*/}
 
 
 						</ButtonToolbar>
 					</div>
 
-					<ReactTransitionGroup transitionLeave={false} component="div" transitionName="example">
-						<RouteHandler model={window.model} key={window,model.addres} check={checkStorageForDataOrReturnDefault}/>
-					</ReactTransitionGroup>
-				</div>		
+					
+					<RouteHandler 
+						setting={this.state.selectedSetting} 
+						onChange={this.subViewChanged.bind(this)} 
+						key={this.context.router.getCurrentPath() + this.state.selectedSettingIndex} 
+						validator={
+							{
+								charCheck: this.charCheck.bind(this),
+								numberTransform: this.numberTransform.bind(this),
+								stringCheck: this.stringCheck.bind(this)
+							}} 
+						check={checkStorageForDataOrReturnDefault}/>
+				
+				</div>	
+				<Button onClick={this.print.bind(this)}>Принтирай</Button>	
 				<PrintListComponent res={this.state.list}/>
 
 			</Col>
@@ -208,23 +251,49 @@ Generator.contextTypes = {
 	router: React.PropTypes.func
 };
 
-var MathComponent = React.createClass({
-	shouldComponentUpdate: function(nextProps, nextState) {
-		return nextProps.math !== this.props.math || nextProps.solutionVisable !== this.props.solutionVisable;
-	},
-	componentDidMount: function() {
-		console.log(React.findDOMNode(this.refs.problem))
-		React.findDOMNode(this.refs.problem).innerHTML = "За да създадете задача натиснете генерирай"
-	},
-	render: function(){
-		console.log(this.props)
+class MathComponent extends React.Component
+{
+	constructor(props){
+		super(props)
+		this.state = {
+			solution: "hidden"
+		}
+	}
+
+	update(){
+		this.shouldComponentUpdate = () => {
+			this.shouldComponentUpdate = () => false;
+			return true;
+		};
+
+	}
+
+	componentWillReceiveProps(nextProps){
+		this.update();
+	}
+
+	componentDidMount() {
+		ReactDOM.findDOMNode(this.refs.problem).innerHTML = "За да създадете задача натиснете генерирай"
+	}
+
+	toggle(){
+		this.update();
+		
+		if(this.state.solution == "hidden"){
+			this.setState({solution: "visible"});
+		}else{
+			this.setState({solution: "hidden"});
+		}
+	} 
+
+	render(){
 		return (
 			<Panel id="resCont">
 				<Katex ref="problem" id="result" problem={this.props.math.problem}/>
-				<Katex style={{display:this.props.solutionVisable ? "block" : "none"}} problem={this.props.math.solution}/>
+				<Katex style={{visibility: this.state.solution}} problem={this.props.math.solution}/>
 			</Panel>)
 	}
-})
+}
 
 class PrintableList extends React.Component
 {
@@ -260,7 +329,6 @@ class PrintableList extends React.Component
 var PrintListComponent = React.createClass({
 	componentDidUpdate: function(){
 		let anchor = document.getElementById("jumppos");
-		console.log(anchor)
 		scrollTo(0,anchor.offsetTop)
 	},
 	shouldComponentUpdate: function(nextProps, nextState) {
@@ -284,11 +352,11 @@ var PrintListComponent = React.createClass({
 		})
 		var st = {}
 		if(this.props.res.length > 0){
-			st["display"] = "block"
+			st.display = "block"
 
 
 		}else{
-			st["display"] = "none"
+			st.display = "none"
 		}
 
 		return (

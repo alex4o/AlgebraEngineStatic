@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Math</title>
+		<title>Math4All</title>
 		<meta charset="UTF-8"/>
+		<meta name="description" content="Online Math Tasks Generator">
 
 		<meta name="viewport" content="width=device-width, minimum-scale=.75, maximum-scale=1.0" />
 		
@@ -20,6 +21,9 @@
 		<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700" rel="stylesheet" type="text/css">
 	</head>
 	<body>
+		<div id="app">
+			
+		</div>
 	</body>
 	{% for (var chunk in o.htmlWebpackPlugin.files.chunks) { %}
 	<script src="{%=o.htmlWebpackPlugin.files.chunks[chunk].entry.split('/').reverse()[0]%}"></script>

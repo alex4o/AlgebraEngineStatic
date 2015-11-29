@@ -1,28 +1,25 @@
-import http from "superagent"
+import http from "axios"
 
 
 // cor == count of return 
 // or the count of fileds to return
 
 export default class GeneratorApi{
-	static generate(address,descriptor,cor,token,callback){
+	static generate(address, descriptor, cor, token){
 
-		http.post("/api" + address).send(descriptor).send({cor:cor, token: token}).end(function(err, res){
-			console.log(err == null)
+		descriptor.cor = cor;
+		descriptor.token = token;
+
+		return http.post("/api" + address, descriptor)
+
+		/*.then(function(response){
+		
 			if(err == null){
-				let out = JSON.parse(res.text)
-				console.log(out);
-				if(cor > 1){
-					callback({list: out });
-
-				}else{
-					callback({math: out[0] });
-
-				}
+				
 			}else{
 				callback(null,err);
 			}
 		});
-
+*/
 	}
 }

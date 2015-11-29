@@ -104,60 +104,17 @@ body
 
 
 #result
+	padding-bottom: 10px
 	+tablet
 		font-size: 1em
+		display: block
+
 
 	+desktop
 		font-size: 1.5em
 		font-family: 'Roboto Slab', ff-tisa-web-pro, Georgia, Arial, sans-serif
 		display: block
 		height: 50px
-
-#select
-	height: $menu_heigth
-	
-	display: block
-	
-	margin-left: auto
-	margin-right: auto
-
-	>#user
-		width: 45%
-		float: right
-		height: $menu_heigth
-		text-align: right
-		+tablet
-			display: none
-		
-		line-height: $menu_heigth
-		display: inline-block
-		margin-right: 15px
-		input
-			margin-right: 10px
-		>span
-			margin-right: 10px 
-		.myButton
-			margin-right: 10px 
-
-		button:active
-			position: relative
-
-.minInput
-	margin-right: 0px
-	padding-right: 0px
-	padding-left: 0px
-	margin-left: 10px
-	width: 30px
-	border-radius: 5px 0px 0px 5px !important
-
-.maxInput
-	padding-left: 0px
-	margin-left: 0px
-	width: 30px
-	border-radius: 0px 5px 5px 0px !important
-
-
-
 
 .column
 	display: inline-block
@@ -333,7 +290,6 @@ input[type=url]
 .panel-body 
 	padding: 2% !important
 	> div.col-md-12
-		display: inline-block
 		text-align: center
 	
 	> div.col-xs-1
@@ -350,28 +306,9 @@ input[type=url]
 	> div.col-md-2
 		text-align: center
 	> div.col-md-6
-		display: inline-block
+
 		text-align: center
 
 .btn-toolbar
 	margin: 20px
 
-.example-enter
-	opacity: 0.01
-	transition: opacity 0.4s ease-in
-
-
-.example-enter.example-enter-active
-	opacity: 1
-
-
-.example-leave
-	opacity: 1
-	transition: opacity 0.1s ease-in
-
-
-.example-leave.example-leave-active
-	opacity: 0.01
-
-#resCont
-	height: 117px

@@ -1,15 +1,16 @@
 import React from 'react';
 import Input from '../input';
-import {Row,Button,Navbar,Grid,Col,Panel,DropdownButton} from 'react-bootstrap';
+import {Row,Button,Grid,Col,Panel,DropdownButton} from 'react-bootstrap';
 
 export default class Inequation extends React.Component
-{
-	componentWillMount() {
-		this.props.model.addres = "/gen/Inequation/"
+{	
 
-		this.props.model.data = this.props.check({
+	componentWillMount() {
+		this.props.onChange("/gen/Inequation/");
+		this.default = {
 			powTerm:2,
 			let:"x",
+			nice: true,
 			Letters:
 			{
 				min:2,
@@ -38,35 +39,50 @@ export default class Inequation extends React.Component
 				up	: {low:1 ,high:7},
 				down: {low:1 ,high:10}
 			}
-		})
+		}
+		this.props.check(this.default)
+
+		let {numberTransform,charCheck} = this.props.validator
+
+		this.numberTransform = numberTransform;
+		this.charCheck = charCheck;
+	
 	}
 
 	render() 
 	{
-		var data = this.props.model.data
+		let data = this.props.setting
 
+		if(Object.keys(this.props.setting).length == 0){
+			data = this.default
+		}
 		return (
 			<Row>
-				<Panel header="Степен на скобите" >
-					<Col md={12}>
-						Максимална <Input.Number value={data} bind="powTerm"/>
-					</Col>
-				</Panel>
+				<Col md={6} lg={4}>
+					<Panel header="Максимална степен на скобите" >
+						 <Input.CustomText transform={this.numberTransform} value={data} bind="powTerm"/>
+					</Panel>
+				</Col>
 
-				<Panel header="Променлива" >
-					<Col md={12}>
-						<Input.String value={data} bind="let"/>
-					</Col>
+				<Col md={6} lg={4}>
+				<Panel header="Променлива" >				
+						<Input.CustomText transform={this.charCheck} value={data} bind="let"/>
 				</Panel>
+				</Col>
+
+				<Col md={12} lg={4}>
 
 				<Panel header="Брой на скобите" >
 					<Col md={6}>
-						Минимум <Input.Number value={data.Term} bind="min"/>
+						Минимум <Input.CustomText transform={this.numberTransform} value={data.Term} bind="min"/>
 					</Col>
 					<Col md={6}>
-						Максимум <Input.Number value={data.Term} bind="max"/>
+						Максимум <Input.CustomText transform={this.numberTransform} value={data.Term} bind="max"/>
 					</Col>
 				</Panel>
+				</Col>
+
+				<Col md={12} lg={12}>
 
 				<Panel header="Коефициенти пред променливите" >
 					<Panel header="Вид" >
@@ -80,24 +96,29 @@ export default class Inequation extends React.Component
 						Дробни
 					</Col>
 					</Panel>
-						
+
+					<Col md={12} lg={6}>	
 					<Panel header="Числител" >
 						<Col md={6}>
-							максимум <Input.Number value={data.coef.up} bind="high"/>
+							максимум <Input.CustomText transform={this.numTrans} value={data.coef.up} bind="high"/>
 						</Col>
 						<Col md={6}>
-							минимум <Input.Number value={data.coef.up} bind="low"/>
+							минимум <Input.CustomText transform={this.numTrans} value={data.coef.up} bind="low"/>
 						</Col>
 					</Panel>
-					
+					</Col>
+
+					<Col md={12} lg={6}>
 					<Panel header="Знаменател" >
 						<Col md={6}>
-							максимум <Input.Number value={data.coef.down} bind="high"/>
+							максимум <Input.CustomText transform={this.numTrans} value={data.coef.down} bind="high"/>
 						</Col>
 						<Col md={6}>
-							минимум <Input.Number value={data.coef.down} bind="low"/>
+							минимум <Input.CustomText transform={this.numTrans} value={data.coef.down} bind="low"/>
 						</Col>
 					</Panel>
+					</Col>
+
 				</Panel>
 				
 				<Panel header="Коефициенти пред скобите" >
@@ -112,24 +133,32 @@ export default class Inequation extends React.Component
 							Дробни
 						</Col>
 					</Panel>
+
+					<Col md={12} lg={6}>
 						
 					<Panel header="Числител" >
 						<Col md={6}>
-							максимум <Input.Number value={data.tcoef.up} bind="high"/>
+							максимум <Input.CustomText transform={this.numTrans} value={data.tcoef.up} bind="high"/>
 						</Col>
 						<Col md={6}>
-							минимум <Input.Number value={data.tcoef.up} bind="low"/>
+							минимум <Input.CustomText transform={this.numTrans} value={data.tcoef.up} bind="low"/>
 						</Col>
 					</Panel>
+					</Col>
 					
+					<Col md={12} lg={6}>
+
 					<Panel header="Знаменател" >
 						<Col md={6}>
-							максимум <Input.Number value={data.tcoef.down} bind="high"/>
+							максимум <Input.CustomText transform={this.numTrans} value={data.tcoef.down} bind="high"/>
 						</Col>
 						<Col md={6}>
-							минимум <Input.Number value={data.tcoef.down} bind="low"/>
+							минимум <Input.CustomText transform={this.numTrans} value={data.tcoef.down} bind="low"/>
 						</Col>
 					</Panel>
+					</Col>
+
+
 				</Panel>
 
 				<Panel header="Корени" >
@@ -145,24 +174,33 @@ export default class Inequation extends React.Component
 						</Col>
 					</Panel>
 
-					<Panel header="Числител" >
+					<Col md={12} lg={6}>	
+
+					<Panel header="Числител">
 						<Col md={6}>
-							максимум <Input.Number value={data.root.up} bind="high"/>
+							максимум <Input.CustomText transform={this.numTrans} value={data.root.up} bind="high"/>
 						</Col>
 						<Col md={6}>
-							минимум <Input.Number value={data.root.up} bind="low"/>
+							минимум <Input.CustomText transform={this.numTrans} value={data.root.up} bind="low"/>
 						</Col>
 					</Panel>
-					
+					</Col>
+
+
+					<Col md={12} lg={6}>	
 					<Panel header="Знаменател" >
 						<Col md={6}>
-							максимум <Input.Number value={data.root.down} bind="high"/>
+							максимум <Input.CustomText transform={this.numTrans} value={data.root.down} bind="high"/>
 						</Col>
 						<Col md={6}>
-							минимум <Input.Number value={data.root.down} bind="low"/>
+							минимум <Input.CustomText transform={this.numTrans} value={data.root.down} bind="low"/>
 						</Col>
 					</Panel>
+					</Col>
+
 				</Panel>
+				</Col>
+
 			</Row>
 		);
 	}

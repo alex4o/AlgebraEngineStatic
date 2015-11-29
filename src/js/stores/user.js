@@ -6,24 +6,25 @@ class UserStore
 	constructor(){
 		this.bindActions(
 			{
-				onReceiveLogin: UserActions.receiveLoginToken,
-				onReceiveRegisterStatus: UserActions.receiveRegisterStatus
+				onReceiveLogin: UserActions.loginToken,
+				onError: UserActions.loginError
 			}
 		)
-		this.data = {};
+		
+		this.data = {}
 	}
 
 	onReceiveLogin(res){
-		this.data = res.data;
+		this.error = null
+		this.user = res.data.user;
 		this.exp = new Date(res.data.exp*1000)
 		this.nbf = new Date(res.data.nbf*1000)
 		this.token = res.token;
-		console.log("update store")
 	}
 
-	onReceiveRegisterStatus(status){
-		this.err = status.err
-
+	onError(error){
+		this.error = error
+		this.user = null
 	}
 
 	static tokenValid(){
@@ -34,10 +35,6 @@ class UserStore
 			return false;
 		}
 		return true;
-	}
-
-	static getToken(){
-		return this.token;
 	}
 }
 

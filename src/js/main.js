@@ -1,7 +1,11 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+
 import Router, {Route,DefaultRoute,NotFoundRoute,RouteHandler,Transition} from "react-router";
 
-import {Alert,Button,Navbar,Grid,NavItem,Nav,DropdownButton,Input,ModalTrigger} from 'react-bootstrap';
+
+
+import {Alert,Button,Navbar,Grid,NavItem,Nav,DropdownButton,Input,ModalTrigger,NavBrand,NavDropdown,MenuItem} from 'react-bootstrap';
 
 //components
 import {LoginModal,RegisterModal} from "./user";
@@ -26,34 +30,17 @@ window.model = {
 	data: {
 
 	},
-	addres: "",
-	res :{
-
-	}
+	addres: ""
 }
-
-/*
-unused router may develop in future
-
-var ViewChanger = React.createClass({
-
-	render: function () {
-		console.log(this.props)
-		if(this.props.id < this.props.views.length){
-			return (React.createElement(this.props.views[this.props.id],{model:model}));
-		}else{
-			return <div></div>
-		}
-	}
-});
-*/
 
 class App extends React.Component
 {
 	constructor(props){
 		super(props)
 		this.state = {
-			user: ""
+			showLogin: false,
+			showRegister: false,
+			login: UserStore.getState()
 		}
 	}
 
@@ -61,13 +48,43 @@ class App extends React.Component
 		this.refs.menu.show()
 	}
 
-	componentDidMount(){
-		self = this
+	showLogin(){
+		this.refs.login.show()
+	}
+
+	showRegister(){
+		this.refs.register.show()
+	}
+
+	componentWillMount(){
 		UserStore.listen((data) => {
 			console.log("update view");
-			this.setState(UserStore.getState().data)
+			this.setState({login: UserStore.getState()})
 		})
-		UserActions.checkLogIn();
+
+
+	}
+
+	renderUserPane(){
+		if(this.state.login.user != null){
+			return (<Nav right eventKey={0}>
+						<NavDropdown id="user-logged-dropdown" navItem={true} title={this.state.login.user.name}>
+							<li onClick={this.exit}><a>Изход</a></li>
+						</NavDropdown>
+					</Nav>
+				)
+		}else{
+			return(<Nav right eventKey={0}>
+						<NavItem onClick={this.showLogin.bind(this)}>Вход</NavItem>
+						<NavItem onClick={this.showRegister.bind(this)}>Регистрация</NavItem>
+					</Nav>
+				)
+		}
+
+	}
+
+	componentDidMount(){
+		
 	}
 
 	exit(){
@@ -75,54 +92,31 @@ class App extends React.Component
 	}
 
 	render() {
-		let user;
-		if(this.state.user == ""){
-			user = (<Nav right eventKey={0}>
-					<ModalTrigger modal={<LoginModal />}>
-						<li><a>Вход</a></li>
-					</ModalTrigger>
-					<ModalTrigger modal={<RegisterModal />}>
-						<li><a>Регистрация</a></li>
-					</ModalTrigger>
-				</Nav>
-				)
-		}else{
-			user = (<Nav right eventKey={0}>
-				<DropdownButton navItem={true} title={this.state.user}>
-					<li onClick={this.exit}><a>Изход</a></li>
-				</DropdownButton>
-				</Nav>
-				)
-		}
 		return (
 		<div>
+			<Navbar inverse staticTop toggleNavKey={0}>
+				<NavBrand>Мат&Sigma;матика за всички</NavBrand>
+					<Nav left>
+						<NavItem eventKey={1} href='#'>Начало</NavItem>
+						<NavDropdown eventKey={2} onSelect={(ev, href) => {window.location.hash = href}} title="Генератор" id="nav-dropdown-type">
+							<MenuItem eventKey='#/Problem/EquivalentExpressions'>Tъждествени изрази</MenuItem>
+							<MenuItem eventKey='#/Problem/Equation'>Уравнения</MenuItem>
+							<MenuItem eventKey='#/Problem/Inequation'>Неравенства</MenuItem>
 
-		<Navbar inverse staticTop brand='Математика за всички' toggleNavKey={0}>
+						</NavDropdown>
+						<NavItem eventKey={3} href='#/Problems'>Задачи</NavItem>
+					</Nav>
+					{ this.renderUserPane() }
 
-				<Nav left>
-					<NavItem eventKey={1} href='#'>Начало</NavItem>
-					<DropdownButton eventKey={2} onSelect={(href) => {window.location.hash = href}} navItem={true} title="Генератор">
-						<NavItem eventKey='#/Problem/EquivalentExpressions'>Tъждествени изрази</NavItem>
-						<NavItem eventKey='#/Problem/Equation'>Уравнения</NavItem>
-						<NavItem eventKey='#/Problem/Inequation'>Неравенства</NavItem>
-
-					</DropdownButton>
-					<NavItem eventKey={3} href='#/Problems'>Задачи</NavItem>
-				</Nav>
-				{user}
-		</Navbar>
-
-
-
-		<Grid>
-			<RouteHandler/>
-		</Grid>
-
+			</Navbar>
+			<Grid>
+				<RouteHandler/>
+			</Grid>
+			<LoginModal ref="login" show={this.state.showLogin} />
+			<RegisterModal ref="register" show={this.state.showRegister} />
 
 
 		</div>
-
-
 		);
 	}
 }
@@ -143,7 +137,9 @@ var routes = (
 );
 
 Router.run(routes, function (Handler,state) {
-	React.render(<Handler/>, document.body);
+	//console.log("Router:",Handler, state)
+	UserActions.checkLogin();
+	ReactDOM.render(<Handler/>, document.getElementById("app"));
 });
 
 //React.render(<App/>,document.body)

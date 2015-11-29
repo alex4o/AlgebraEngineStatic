@@ -1,31 +1,36 @@
 import alt from "../alt"
 import UserActions from "../actions/user"
-
-class UserErrorStore
+import ErrorActions from "../actions/error"
+class ErrorStore
 {
 	constructor(){
 		this.bindActions(
 			{
-				onReceiveRegisterStatus: UserActions.receiveRegisterStatus,
-				onReceiveLoginError: UserActions.receiveLoginError
+				onRegisterError: UserActions.registerStatus,
+				onLoginError: UserActions.loginError,
+				onConsumeError: ErrorActions.consume
 			}
 		)
-		this.data = {};
+		this.error = {};
+		this.ok = true;
 	}
 
-	onReceiveLoginError(err){
-		console.log(err);
-		this.error = err;
+	onRegisterError(error){
+		this.error = error
+		this.ok = false
 	}
 
-	onReceiveRegisterStatus(status){
-		this.ok = status.ok;
-		if(!status.ok){
-
-			this.error = status.error
-		}
-
+	onLoginError(error){
+		this.error = error
+		this.ok = false
 	}
+
+	onConsumeError(error){
+		this.error = null
+		this.ok = true
+	}
+
+	
 }
 
-export default alt.createStore(UserErrorStore);
+export default alt.createStore(ErrorStore);

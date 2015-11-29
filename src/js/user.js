@@ -1,31 +1,60 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {Modal,Input,Button,Alert} from "react-bootstrap"
 import UserActions from "./actions/user"
 import alt from "./alt"
-import UserErrorStore from "./stores/error"
-
-
+import UserStore from "./stores/user"
+import UserRegisterStore from "./stores/userRegister"
 
 class LoginModal extends React.Component
 {
 	componentDidMount() {
-		this.refs.name.getInputDOMNode().focus();
+
+	}
+
+	show() {
+		this.setState({show: true});
+		UserStore.listen(this.change)
+
+	}
+
+	hide() {
+		this.setState({show: false});
+		UserStore.unlisten(this.change)
+	}
+
+	change(){
+		let state = UserStore.getState()
+		console.log(state)
+		if(state.error == null){
+			this.hide()
+		}else{
+			this.setState({ok: false, error: state.error})
+		}
+	}
+
+	error(error){
+		console.log(error.error)
+		this.setState(error)
+	}
+
+	componentDidUpdate(pProps, pState){
+		if(this.refs.name != undefined) this.refs.name.getInputDOMNode().focus()
 
 	}
 
 	constructor(props){
 		super(props);
-		this.error = () => {
-			let state = UserErrorStore.getState();
-			console.log(state);
-			this.setState(state);
+		this.state = {
+			show: false,
+			ok: true
+		}
 
-		}.bind(this)
-
+		this.change = this.change.bind(this)
 	}
 
-	componentWillUnmount(){
-		UserErrorStore.unlisten(this.error)
+	onHide(){
+
 	}
 
 	login(){
@@ -34,20 +63,22 @@ class LoginModal extends React.Component
 			pass: this.refs.pass.getInputDOMNode().value
 		}
 		console.log(credentials)
-		UserActions.requestLogIn(credentials);
+		UserActions.login(credentials);
+	}
 
-		UserErrorStore.listen(this.error);
+	handleAlertDismiss(){
+		this.setState({ok: true})
 	}
 
 	render(){
 		let alert;
-		if(this.state != null){
-			alert = <AlertDismissable>{this.state["error"]}</AlertDismissable>
+		if(!this.state.ok){
+			alert = <Alert bsStyle='danger' onDismiss={this.handleAlertDismiss}>{this.state["error"]}</Alert>
 		}
 
 
 		return (
-		<Modal>
+		<Modal show={this.state.show} onHide={this.onHide.bind(this)}>
 			<div className='modal-body' bsStyle='primary' title='Вход'>
 				<form className=''>
 					<Input ref="name" type="text" label="Потребителско име"/>
@@ -55,7 +86,7 @@ class LoginModal extends React.Component
 				</form>
 				{alert}
 				<div className='modal-footer'>
-					<Button onClick={this.props.onRequestHide}>Затвори</Button>
+					<Button onClick={this.hide.bind(this)}>Затвори</Button>
 					<Button bsStyle='primary' onClick={this.login.bind(this)}>Влез</Button>
 				</div>
 			</div>
@@ -68,12 +99,13 @@ class RegisterModal extends React.Component
 {
 	constructor(props){
 		super(props);
-		this.error = () => {
-			let state = UserErrorStore.getState();
-			if(state.ok){
-				this.props.onRequestHide();
+		this.change = () => {
+			let state = UserStore.getState();
+			console.log(state)
+			if(state.error == null){
+				this.hide();
 			}else{
-				this.setState(state);
+				this.setState({ok: false, error: state.error})
 			}
 		}.bind(this)
 		this.state = {
@@ -82,15 +114,26 @@ class RegisterModal extends React.Component
 
 	}
 
-	componentDidMount() {
-		this.refs.name.getInputDOMNode().focus();
-		UserErrorStore.listen(this.error);
+	show() {
+		this.setState({show: true});
+		UserRegisterStore.listen(this.change)
 
-		//actionListener.addActionListener(UserActions)
+	}
+
+	hide() {
+		this.setState({show: false});
+		UserRegisterStore.unlisten(this.change)
+	}
+
+	componentDidMount() {
+
 	}
 
 	componentWillUnmount(){
-		UserErrorStore.unlisten(this.error)
+	}
+
+	componentDidUpdate(pProps, pState){
+		if(this.refs.name != undefined) this.refs.name.getInputDOMNode().focus()
 	}
 
 
@@ -100,17 +143,25 @@ class RegisterModal extends React.Component
 			pass: this.refs.pass.getInputDOMNode().value,
 			passAgain: this.refs.passAgain.getInputDOMNode().value
 		}
-		UserActions.requestRegister(credentials);
+		UserActions.register(credentials)
 
+	}
+
+	onHide(){
+		ErrorStore.unlisten(this.error)
+	}
+
+	handleAlertDismiss(){
+		this.setState({ok: true})
 	}
 
 	render(){
 		console.log(this.state)
 		let alert;
 		if(!this.state.ok){
-			alert = <AlertDismissable>{this.state.error}</AlertDismissable>
+			alert = <Alert bsStyle='danger' onDismiss={this.handleAlertDismiss}>{this.state.error}</Alert>
 		}
-		return(<Modal>
+		return(<Modal show={this.state.show} onHide={this.onHide.bind(this)}>
 			<div className='modal-body' bsStyle='primary' title='Вход'>
 				<form className=''>
 					<Input ref="name" type="text" label="Потребителско име"/>
@@ -120,44 +171,12 @@ class RegisterModal extends React.Component
 				</form>
 				{alert}
 				<div className='modal-footer'>
-					<Button onClick={this.props.onRequestHide}>Затвори</Button>
+					<Button onClick={this.hide.bind(this)}>Затвори</Button>
 					<Button bsStyle='primary' onClick={this.register.bind(this)}>Регистрация</Button>
 				</div>
 			</div>
 		</Modal>)
 	}
 }
-
-const AlertDismissable = React.createClass({
-	getInitialState() {
-		return {
-			alertVisible: true
-		};
-	},
-
-	render() {
-		if (this.state.alertVisible) {
-			return (
-				<Alert bsStyle='danger' onDismiss={this.handleAlertDismiss}>
-					{this.props.children}
-				</Alert>
-			);
-		}else{
-			return (
-				<div></div>
-			)
-		}
-	},
-
-	handleAlertDismiss() {
-		this.setState({alertVisible: false});
-	},
-
-	handleAlertShow() {
-		this.setState({alertVisible: true});
-	}
-});
-
-
 
 export {RegisterModal,LoginModal}

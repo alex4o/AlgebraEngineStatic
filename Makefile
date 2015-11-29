@@ -1,16 +1,15 @@
 build:
 	compass compile
-	webpack
-
+	node_modules/webpack/bin/webpack.js
 
 watch_sass:
 	compass watch
 
 watch_js:
-	webpack --watch
+	node_modules/webpack/bin/webpack.js --watch
 
 watch_js_dev:
-	webpack --watch --devtool sourcemap
+	node_modules/webpack/bin/webpack.js --watch --devtool sourcemap
 
-watch_sync lsyncd.conf:
-	lsyncd -nodaemon lsyncd.conf
+watch_sync ./config/lsyncd.conf:
+	lsyncd -nodaemon ./config/lsyncd.conf

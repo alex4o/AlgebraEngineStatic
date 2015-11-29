@@ -10,7 +10,11 @@ class GeneratorStore
 	}
 
 	onGenerated(res){
-		this.results = res;
+		if(res.length > 1){
+			this.list = res
+		}else{
+			this.math = res[0]
+		}
 	}
 }
 

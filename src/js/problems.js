@@ -1,8 +1,9 @@
 import React from 'react';
-import http from 'superagent';
+import http from 'axios';
 import Katex from "./katex";
 import UserStore from "./stores/user"
 import UserActions from "./actions/user"
+import ReactDOM from 'react-dom';
 
 
 import katex from 'katex';
@@ -28,9 +29,6 @@ export default class Problems extends React.Component
 	componentDidMount() {
 		self = this;	
 		UserStore.listen(this.listen)
-		UserActions.checkLogIn();
-
-
 	}
 
 	componentWillUnmount() {
@@ -69,7 +67,7 @@ class ProblemList extends React.Component
 	componentDidMount(){
 		this.scrollb = this.scroll.bind(this); //binded scrol function
 		window.addEventListener("scroll", this.scrollb);
-		this.offset = React.findDOMNode(this.refs.list).getBoundingClientRect().top;
+		this.offset = ReactDOM.findDOMNode(this.refs.list).getBoundingClientRect().top;
 		console.log(this.refs)
 
 
@@ -82,7 +80,11 @@ class ProblemList extends React.Component
 
 	componentDidUpdate(nextProps, nextState){
 		if(this.refs[0] == null) return;
+
 		for(let i = 0; i <= 25; i++){
+			if(this.refs[i] == null){
+				return;
+			}
 			this.refs[i].show();
 		}
 	}
@@ -102,7 +104,6 @@ class ProblemList extends React.Component
 	}
 
 	componentWillUnmount() {
-		console.log("Problems unmouned")
 		window.removeEventListener("scroll",this.scrollb)
 	}
 
@@ -110,7 +111,7 @@ class ProblemList extends React.Component
 		return(
 			<div ref="list" style={{height: this.props.list.length*50}} className="gen-list">
 				{this.props.list.map((item,index) => {
-					return <ProblemListItem key={index} ref={index} latex={item.t1}/>
+					return <ProblemListItem key={index} ref={index} latex={item.problem}/>
 				})}
 			</div>
 		)

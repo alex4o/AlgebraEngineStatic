@@ -7,20 +7,25 @@ import GeneratorApi from "../api/GeneratorApi"
 
 class GeneratorActions
 {
-	generated(gen){
-		this.dispatch(gen);
+	generated(res){
+		this.dispatch(res.data)
 	}
 
-	requestGenerate(adress,descriptor,cor){
+	error(error){
+		this.dispatch(error)
+	}
+
+	generate(adress,descriptor,cor){
 
 		this.dispatch({adress,descriptor,cor});
 
-		UserActions.checkLogIn();
+		 
 
 		var userData = UserStore.getState();
-		GeneratorApi.generate(adress,descriptor,cor,userData.token,(gen,err) => {
-			this.actions.generated(gen);
-		});
+
+		return GeneratorApi.generate(adress,descriptor,cor,userData.token)
+			.then(this.actions.generated)
+			.catch(this.actions.error)
 	}
 }
 
